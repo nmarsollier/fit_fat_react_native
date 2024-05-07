@@ -1,8 +1,8 @@
+import {ColorSchema} from '../common/ui/ColorSchema';
 import {Text, View} from 'react-native';
-import {ColorSchema} from '../ui/ColorSchema';
 import * as React from 'react';
 
-export default function ErrorView(props: {text: string}) {
+export default function StatsScreen() {
   return (
     <View
       style={{
@@ -10,7 +10,7 @@ export default function ErrorView(props: {text: string}) {
         backgroundColor: ColorSchema.background,
         justifyContent: 'center',
       }}>
-      <Text>{props.text}</Text>
+      <Text>Stats</Text>
     </View>
   );
 }

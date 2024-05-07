@@ -4,4 +4,7 @@ export const ImageAssets = {
   empty: require('../../assets/img/ic_empty.png'),
   next: require('../../assets/img/ic_next.png'),
   reload: require('../../assets/img/ic_reload.png'),
+  stats: require('../../assets/img/ic_stats.png'),
+  home: require('../../assets/img/ic_home.png'),
+  settings: require('../../assets/img/ic_settings.png'),
 };

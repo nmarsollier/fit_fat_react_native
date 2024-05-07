@@ -1,6 +1,6 @@
-import React, { PropsWithChildren } from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
-import { ColorSchema } from '../styles/ColorSchema';
+import React, {PropsWithChildren} from 'react';
+import {StyleProp, View, ViewStyle} from 'react-native';
+import {ColorSchema} from '../ui/ColorSchema';
 
 export function Card(
   props: PropsWithChildren<{
@@ -11,14 +11,13 @@ export function Card(
     <View
       style={[
         {
-          backgroundColor: ColorSchema.blueCardBackground,
+          backgroundColor: ColorSchema.background,
           justifyContent: 'center',
           alignItems: 'center',
           borderRadius: 10,
         },
         props.style,
-      ]}
-    >
+      ]}>
       {props.children}
     </View>
   );
@@ -37,8 +36,7 @@ export function ColumnLayout(
           flex: 1,
           flexDirection: 'column',
         },
-      ]}
-    >
+      ]}>
       {props.children}
     </View>
   );
@@ -57,8 +55,7 @@ export function RowLayout(
           flex: 1,
           flexDirection: 'row',
         },
-      ]}
-    >
+      ]}>
       {props.children}
     </View>
   );

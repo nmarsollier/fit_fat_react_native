@@ -10,32 +10,37 @@ import {
   SafeAreaView,
   StatusBar
 } from 'react-native';
-
+import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { PaperProvider } from 'react-native-paper';
 import { RootStackParamList } from './react/common/navigation/Navigation';
 import { ColorSchema } from './react/common/ui/ColorSchema';
-import MainScreen from './react/mainScreen/DatesList';
+import { AppTheme } from './react/common/ui/Themes';
+import MainScreen from './react/mainScreen/MainScreen';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { preferencesReducer } from './react/preferences/PreferencesState';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+export const sotore = configureStore({
+  reducer: combineReducers({ preferencesReducer })
+})
+
 export default function App() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar
-        backgroundColor={ColorSchema.lightBlueBackground}
-      />
-
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="MainScreen"
-            component={MainScreen}
-            options={{ headerShown: false }}
+    <Provider store={sotore} >
+      <PaperProvider theme={AppTheme}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <StatusBar
+            backgroundColor={ColorSchema.onSecondary}
           />
 
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
+          <NavigationContainer>
+            <MainScreen />
+          </NavigationContainer>
+        </SafeAreaView>
+      </PaperProvider>
+    </Provider>
   );
 }
