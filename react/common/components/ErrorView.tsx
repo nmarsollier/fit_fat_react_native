@@ -1,6 +1,6 @@
+import * as React from 'react';
 import {Text, View} from 'react-native';
 import {ColorSchema} from '../ui/ColorSchema';
-import * as React from 'react';
 
 export default function ErrorView(props: {text: string}) {
   return (

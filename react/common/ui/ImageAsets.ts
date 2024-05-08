@@ -7,4 +7,5 @@ export const ImageAssets = {
   stats: require('../../assets/img/ic_stats.png'),
   home: require('../../assets/img/ic_home.png'),
   settings: require('../../assets/img/ic_settings.png'),
+  new: require('../../assets/img/ic_new.png'),
 };

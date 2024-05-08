@@ -28,6 +28,7 @@ export default function Toolbar(props: PropsWithChildren<{}>) {
           <Image
             style={{height: 24, width: 24, marginEnd: 10, marginBottom: 1}}
             source={ImageAssets.back}
+            tintColor={ColorSchema.secondary}
           />
         </TouchableOpacity>
       )}

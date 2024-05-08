@@ -1,38 +1,42 @@
-import { useFocusEffect } from '@react-navigation/native';
-import { createSelector, Dispatch } from '@reduxjs/toolkit';
-import React, { useCallback, useEffect, useState } from 'react';
-import { ScrollView, TouchableOpacity } from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
+import {Dispatch} from '@reduxjs/toolkit';
+import React, {useCallback, useState} from 'react';
+import {ScrollView, TouchableOpacity} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import { Text, TextInput } from 'react-native-paper';
-import { useDispatch, useSelector } from 'react-redux';
-import { LabeledRadioButton } from '../common/components/LabeledRadioButton';
-import { ColumnLayout, RowLayout } from '../common/components/Layouts';
+import {Text, TextInput} from 'react-native-paper';
+import {useDispatch, useSelector} from 'react-redux';
+import {LabeledRadioButton} from '../common/components/LabeledRadioButton';
+import {ColumnLayout, RowLayout} from '../common/components/Layouts';
 import LoadingView from '../common/components/LoadingView';
 import Toolbar from '../common/components/Toolbar';
-import { dateToString, displayDate, stringToDate } from '../common/libs/DateLibs';
-import { ColorSchema } from '../common/ui/ColorSchema';
+import {dateToString, displayDate, stringToDate} from '../common/libs/DateLibs';
+import {ColorSchema} from '../common/ui/ColorSchema';
 import {
   measureHeight,
+  measureMessageId,
   MeasureType,
-  measureTypeName,
-  measureWeight,
+  measureTypeMessageId,
   PreferencesData,
   Sex,
-  sexName,
+  sexMessageId,
 } from './PreferencesModel';
-import { loadPreferences, PreferencesState, savePreferences, updateBirthDate, updateDisplayName, updateHeight, updateMeasureSystem, updateSex, updateWeight } from './PreferencesState';
-
-const preferencesSelect = createSelector<any, PreferencesState>(
-  (state: any) => state.preferencesReducer,
-  (preferencesReducer) => {
-    return { ...preferencesReducer };
-  },
-);
+import {
+  loadPreferences,
+  preferencesSelector,
+  savePreferences,
+  updateBirthDate,
+  updateDisplayName,
+  updateHeight,
+  updateMeasureSystem,
+  updateSex,
+  updateWeight,
+} from './PreferencesState';
+import {FormattedMessage, useIntl} from 'react-intl';
 
 export default function PreferencesScreen() {
   const dispatch = useDispatch<Dispatch<any>>();
 
-  const preferencesState = useSelector(preferencesSelect);
+  const preferencesState = useSelector(preferencesSelector);
 
   useFocusEffect(
     useCallback(() => {
@@ -40,12 +44,12 @@ export default function PreferencesScreen() {
 
       return () => {
         dispatch(savePreferences());
-      }
+      };
     }, []),
   );
 
   if (!preferencesState?.preferences || preferencesState.isLoading) {
-    return LoadingView();
+    return <LoadingView />;
   }
 
   return (
@@ -55,24 +59,28 @@ export default function PreferencesScreen() {
       }}>
       <Toolbar>
         <Text
+          variant="titleMedium"
           style={{
             color: ColorSchema.secondary,
-            fontSize: 24,
           }}>
-          Preferences
+          <FormattedMessage id="homeOptionsTitle" />
         </Text>
       </Toolbar>
 
-      <PreferencesContent dispatch={dispatch} userData={preferencesState.preferences!} />
+      <PreferencesContent
+        dispatch={dispatch}
+        userData={preferencesState.preferences!}
+      />
     </ColumnLayout>
   );
 }
 
 function PreferencesContent(props: {
-  dispatch: Dispatch<any>,
-  userData: PreferencesData
+  dispatch: Dispatch<any>;
+  userData: PreferencesData;
 }) {
-  const [openDatePicker, setOpenDatePicker] = useState(false)
+  const [openDatePicker, setOpenDatePicker] = useState(false);
+  const intl = useIntl();
 
   return (
     <ScrollView>
@@ -85,10 +93,10 @@ function PreferencesContent(props: {
           style={{
             paddingHorizontal: 0,
           }}
-          label="Display Name"
+          label={intl.formatMessage({id: 'optionsDisplayName'})}
           value={props.userData.displayName}
           onChangeText={(val: string) => {
-            props.dispatch(updateDisplayName(val))
+            props.dispatch(updateDisplayName(val));
           }}
         />
 
@@ -97,33 +105,40 @@ function PreferencesContent(props: {
             style={{
               paddingHorizontal: 0,
             }}
-            label="Birth Date"
+            label={intl.formatMessage({id: 'optionsBirthDate'})}
             editable={false}
             value={displayDate(props.userData.birthDate)}
           />
         </TouchableOpacity>
 
         <LabeledRadioButton
-          style={{ paddingTop: 8 }}
-          label="Metric System"
+          style={{paddingTop: 8}}
+          label={intl.formatMessage({id: 'optionsSystemOfMeasurement'})}
           labels={[
-            measureTypeName(MeasureType.METRIC),
-            measureTypeName(MeasureType.IMPERIAL),
+            intl.formatMessage({id: measureTypeMessageId(MeasureType.METRIC)}),
+            intl.formatMessage({
+              id: measureTypeMessageId(MeasureType.IMPERIAL),
+            }),
           ]}
           options={[MeasureType.METRIC, MeasureType.IMPERIAL]}
           selected={MeasureType[props.userData.measureSystem]}
           onChange={(val: string) => {
-            props.dispatch(updateMeasureSystem(MeasureType[val as keyof typeof MeasureType]))
+            props.dispatch(
+              updateMeasureSystem(MeasureType[val as keyof typeof MeasureType]),
+            );
           }}
         />
 
         <LabeledRadioButton
-          label="Sex"
-          labels={[sexName(Sex.MALE), sexName(Sex.FEMALE)]}
+          label={intl.formatMessage({id: 'optionsSex'})}
+          labels={[
+            intl.formatMessage({id: sexMessageId(Sex.MALE)}),
+            intl.formatMessage({id: sexMessageId(Sex.FEMALE)}),
+          ]}
           options={[Sex.MALE, Sex.FEMALE]}
           selected={props.userData.sex}
           onChange={(val: string) => {
-            props.dispatch(updateSex(Sex[val as keyof typeof Sex]))
+            props.dispatch(updateSex(Sex[val as keyof typeof Sex]));
           }}
         />
 
@@ -132,10 +147,10 @@ function PreferencesContent(props: {
             style={{
               paddingHorizontal: 0,
             }}
-            label="Weight"
+            label={intl.formatMessage({id: 'optionsWeight'})}
             value={props.userData.weight.toString()}
             onChangeText={(val: string) => {
-              props.dispatch(updateWeight(Number(val)))
+              props.dispatch(updateWeight(Number(val)));
             }}
           />
 
@@ -146,7 +161,9 @@ function PreferencesContent(props: {
               paddingBottom: 5,
               alignSelf: 'flex-end',
             }}>
-            {measureWeight(props.userData.measureSystem)}
+            <FormattedMessage
+              id={measureMessageId(props.userData.measureSystem)}
+            />
           </Text>
         </RowLayout>
 
@@ -155,10 +172,10 @@ function PreferencesContent(props: {
             style={{
               paddingHorizontal: 0,
             }}
-            label="Height"
+            label={intl.formatMessage({id: 'optionsHeight'})}
             value={props.userData.height.toString()}
             onChangeText={(val: string) => {
-              props.dispatch(updateHeight(Number(val)))
+              props.dispatch(updateHeight(Number(val)));
             }}
           />
 
@@ -175,16 +192,16 @@ function PreferencesContent(props: {
       </ColumnLayout>
 
       <DatePicker
-        modal
+        modal={true}
         open={openDatePicker}
         date={stringToDate(props.userData.birthDate)}
         mode="date"
-        onConfirm={(date) => {
-          setOpenDatePicker(false)
-          props.dispatch(updateBirthDate(dateToString(date)))
+        onConfirm={date => {
+          setOpenDatePicker(false);
+          props.dispatch(updateBirthDate(dateToString(date)));
         }}
         onCancel={() => {
-          setOpenDatePicker(false)
+          setOpenDatePicker(false);
         }}
       />
     </ScrollView>

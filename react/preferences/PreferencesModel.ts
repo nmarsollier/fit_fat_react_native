@@ -1,4 +1,3 @@
-
 export interface PreferencesData {
   uid: string;
   displayName: string;
@@ -10,47 +9,47 @@ export interface PreferencesData {
 }
 
 export enum Sex {
-  MALE = "MALE",
-  FEMALE = "FEMALE",
+  MALE = 'MALE',
+  FEMALE = 'FEMALE',
 }
 
 export enum MeasureType {
-  METRIC = "METRIC",
-  IMPERIAL = "IMPERIAL",
+  METRIC = 'METRIC',
+  IMPERIAL = 'IMPERIAL',
 }
 
-export function measureWeight(measureType: MeasureType) {
+export function measureMessageId(measureType: MeasureType | undefined) {
   switch (measureType) {
     case MeasureType.IMPERIAL:
-      return 'lb';
+      return 'unitLb';
     default:
-      return 'kg';
+      return 'unitKg';
   }
 }
 
 export function measureHeight(measureType: MeasureType) {
   switch (measureType) {
     case MeasureType.IMPERIAL:
-      return 'in';
+      return 'unitIn';
     default:
-      return 'cm';
+      return 'unitCm';
   }
 }
 
-export function measureTypeName(measureType: MeasureType) {
+export function measureTypeMessageId(measureType: MeasureType) {
   switch (measureType) {
     case MeasureType.IMPERIAL:
-      return 'Imperial';
+      return 'optionsSystemOfMeasurementImperial';
     default:
-      return 'Metric';
+      return 'optionsSystemOfMeasurementMetric';
   }
 }
 
-export function sexName(sex: Sex) {
+export function sexMessageId(sex: Sex) {
   switch (sex) {
     case Sex.FEMALE:
-      return 'Female';
+      return 'optionsSexFemale';
     default:
-      return 'Male';
+      return 'optionsSexMale';
   }
 }

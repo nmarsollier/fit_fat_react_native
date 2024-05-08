@@ -1,22 +1,58 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import * as React from 'react';
+import {Image} from 'react-native';
+import {MainScreenProps} from '../common/navigation/Navigation';
 import {ColorSchema} from '../common/ui/ColorSchema';
 import {ImageAssets} from '../common/ui/ImageAsets';
-import MeasuresScreen from '../measuresScreen/MeasuresScreen';
+import MeasuresListScreen from '../measures/list/MeasuresListScreen';
 import PreferencesScreen from '../preferences/PreferencesScreen';
-import StatsScreen from '../statsScreen/StatsScreen';
-import {Image} from 'react-native';
+import StatsScreen from '../stats/StatsScreen';
+import {Text} from 'react-native-paper';
+import {FormattedMessage} from 'react-intl';
 
 const Tab = createBottomTabNavigator();
 
-export default function MainScreen() {
+export default function MainScreen(props: MainScreenProps) {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
         headerShown: false,
         tabBarActiveTintColor: ColorSchema.primary,
         tabBarInactiveTintColor: ColorSchema.secondaryVariant,
-        tabBarIcon: ({focused, color, size}) => {
+        tabBarLabel: ({focused}) => {
+          let textColor = ColorSchema.secondaryVariant;
+          if (focused) {
+            textColor = ColorSchema.primary;
+          }
+
+          let textResource;
+
+          switch (route.name) {
+            case 'Options': {
+              textResource = 'homeMenuOptions';
+              break;
+            }
+            case 'Measures': {
+              textResource = 'homeMeasureTitle';
+              break;
+            }
+            case 'Stats': {
+              textResource = 'homeMenuProgress';
+              break;
+            }
+          }
+
+          return (
+            <Text
+              variant="labelSmall"
+              style={{
+                color: textColor,
+              }}>
+              <FormattedMessage id={textResource} />
+            </Text>
+          );
+        },
+        tabBarIcon: ({color, size}) => {
           let iconName;
 
           switch (route.name) {
@@ -44,7 +80,7 @@ export default function MainScreen() {
         },
       })}>
       <Tab.Screen name="Options" component={PreferencesScreen} />
-      <Tab.Screen name="Measures" component={MeasuresScreen} />
+      <Tab.Screen name="Measures" component={MeasuresListScreen} />
       <Tab.Screen name="Stats" component={StatsScreen} />
     </Tab.Navigator>
   );

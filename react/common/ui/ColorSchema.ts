@@ -5,10 +5,8 @@ export const ColorSchema = {
   onSecondary: '#5B68FF',
   secondaryVariant: '#AAAAAA',
   background: '#FFFFFF',
+  backgroundVariant: '#DDDDDD',
   onBackground: '#000000',
   surface: '#FFFFFF',
   error: '#B00020',
-  onPrimary: '#FFFFFF',
-  onSurface: '#FFFFFF',
-  onError: '#B00020',
 };

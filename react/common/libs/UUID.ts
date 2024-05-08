@@ -1,7 +1,5 @@
 export function uuid(): string {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (char) => {
-        let random = Math.random() * 16 | 0; // Nachkommastellen abschneiden
-        let value = char === "x" ? random : (random % 4 + 8); // Bei x Random 0-15 (0-F), bei y Random 0-3 + 8 = 8-11 (8-b) gemäss RFC 4122
-        return value.toString(16); // Hexadezimales Zeichen zurückgeben
-    });
+  const timestamp = new Date().getTime();
+  const randomNum = Math.floor(Math.random() * 1000000);
+  return `${timestamp}-${randomNum}`;
 }
