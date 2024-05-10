@@ -1,14 +1,14 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import * as React from 'react';
+import {FormattedMessage} from 'react-intl';
 import {Image} from 'react-native';
+import {Text} from 'react-native-paper';
 import {MainScreenProps} from '../common/navigation/Navigation';
 import {ColorSchema} from '../common/ui/ColorSchema';
 import {ImageAssets} from '../common/ui/ImageAsets';
 import MeasuresListScreen from '../measures/list/MeasuresListScreen';
 import PreferencesScreen from '../preferences/PreferencesScreen';
 import StatsScreen from '../stats/StatsScreen';
-import {Text} from 'react-native-paper';
-import {FormattedMessage} from 'react-intl';
 
 const Tab = createBottomTabNavigator();
 

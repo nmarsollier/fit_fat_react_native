@@ -14,6 +14,7 @@ import React, {
   StatusBar
 } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import { getLocale } from './react/common/libs/SystemTools';
 import { RootStackParamList } from './react/common/navigation/Navigation';
@@ -33,32 +34,34 @@ export const sotore = configureStore({
 export default function App() {
   const locale = getLocale()
   return (
-    <IntlProvider locale={locale} messages={messages.get(locale)} defaultLocale='en' >
-      <Provider store={sotore} >
-        <PaperProvider theme={AppTheme}>
-          <SafeAreaView style={{ flex: 1 }}>
-            <StatusBar
-              backgroundColor={ColorSchema.onSecondary}
-            />
+    <SafeAreaProvider>
+      <IntlProvider locale={locale} messages={messages.get(locale)} defaultLocale='en' >
+        <Provider store={sotore} >
+          <PaperProvider theme={AppTheme}>
+            <SafeAreaView style={{ flex: 1 }}>
+              <StatusBar
+                backgroundColor={ColorSchema.onSecondary}
+              />
 
-            <NavigationContainer>
-              <Stack.Navigator>
-                <Stack.Screen
-                  name="MainScreen"
-                  component={MainScreen}
-                  options={{ headerShown: false }}
-                />
+              <NavigationContainer>
+                <Stack.Navigator>
+                  <Stack.Screen
+                    name="MainScreen"
+                    component={MainScreen}
+                    options={{ headerShown: false }}
+                  />
 
-                <Stack.Screen
-                  name="EditMeasureScreen"
-                  component={EditMeasureScreen}
-                  options={{ headerShown: false }}
-                />
-              </Stack.Navigator>
-            </NavigationContainer>
-          </SafeAreaView>
-        </PaperProvider>
-      </Provider>
-    </IntlProvider>
+                  <Stack.Screen
+                    name="EditMeasureScreen"
+                    component={EditMeasureScreen}
+                    options={{ headerShown: false }}
+                  />
+                </Stack.Navigator>
+              </NavigationContainer>
+            </SafeAreaView>
+          </PaperProvider>
+        </Provider>
+      </IntlProvider>
+    </SafeAreaProvider>
   );
 }
