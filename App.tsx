@@ -33,12 +33,13 @@ export const sotore = configureStore({
 
 export default function App() {
   const locale = getLocale()
+
   return (
     <SafeAreaProvider>
       <IntlProvider locale={locale} messages={messages.get(locale)} defaultLocale='en' >
         <Provider store={sotore} >
           <PaperProvider theme={AppTheme}>
-            <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: ColorSchema.onSecondary }}>
               <StatusBar
                 backgroundColor={ColorSchema.onSecondary}
               />

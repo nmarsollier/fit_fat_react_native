@@ -10,6 +10,7 @@
     "test": "jest",
     "format": "prettier --write 'react/**/*.{ts,tsx}'",
     "format:check": "prettier -c 'react/**/*.{ts,tsx}'",
+    "pod-install": "cd ios && RCT_NEW_ARCH_ENABLED=1 bundle exec pod install",
     "prettier": "prettier --write 'react/**/*.{ts,tsx}' && tslint --fix --project ."
   },
   "dependencies": {
@@ -25,9 +26,11 @@
     "react-native": "0.73.6",
     "react-native-date-picker": "^5.0.2",
     "react-native-element-dropdown": "^2.12.0",
+    "react-native-localize": "^3.1.0",
     "react-native-paper": "^5.12.3",
     "react-native-safe-area-context": "4.8.2",
     "react-native-screens": "~3.29.0",
+    "react-native-vector-icons": "^10.1.0",
     "react-redux": "^9.1.1",
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0",

@@ -75,7 +75,9 @@ export function useEditMeasureState(measureIdParam: string | undefined) {
 
     setState(s => {
       storeMeasure(s.measure).then(() => {
-        onEvent(GoBack);
+        emitEvent(GoBack);
+      }).catch((e) => {
+        console.log(e)
       });
 
       return s;

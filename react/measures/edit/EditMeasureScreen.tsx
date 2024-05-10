@@ -39,14 +39,14 @@ export default function EditMeasureScreen(props: EditMeasureScreenProps) {
   });
 
   if (!state || state.isLoading) {
-    return <LoadingView />;
+    return <LoadingView />
   }
 
   if (state.isError) {
-    return <ErrorView text="Error Loading Measure" />;
+    return <ErrorView text="Error Loading Measure" />
   }
 
-  return <EditMeasureDetails state={state} reducer={reducer} />;
+  return <EditMeasureDetails state={state} reducer={reducer} />
 }
 
 function EditMeasureDetails(props: {

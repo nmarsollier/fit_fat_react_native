@@ -186,7 +186,7 @@ function PreferencesContent(props: {
               paddingBottom: 5,
               alignSelf: 'flex-end',
             }}>
-            {measureHeight(props.userData.measureSystem)}
+            <FormattedMessage id={measureHeight(props.userData.measureSystem)}/>
           </Text>
         </RowLayout>
       </ColumnLayout>

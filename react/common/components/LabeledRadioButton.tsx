@@ -26,7 +26,7 @@ export function LabeledRadioButton(props: {
           style={{
             paddingStart: 16,
           }}>
-          {props.options.map((value, index) => {
+          {props.options.map((_, index) => {
             return (
               <RowLayout key={index}>
                 <Text
@@ -36,7 +36,7 @@ export function LabeledRadioButton(props: {
                   {props.labels[index]}
                 </Text>
 
-                <RadioButton
+                <RadioButton.Android
                   color={ColorSchema.primary}
                   uncheckedColor={ColorSchema.primary}
                   value={props.options[index]}
