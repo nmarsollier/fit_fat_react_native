@@ -1,7 +1,7 @@
-import {PayloadAction, createSelector, createSlice} from '@reduxjs/toolkit';
-import {uuid} from '../common/libs/UUID';
-import {MeasureType, PreferencesData, Sex} from './PreferencesModel';
-import {findPreferences, storePreferences} from './PreferencesRepository';
+import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
+import { uuid } from '../common/libs/UUID';
+import { MeasureType, PreferencesData, Sex } from './PreferencesModel';
+import { findPreferences, storePreferences } from './PreferencesRepository';
 
 export interface PreferencesState {
   isLoading: boolean;
@@ -94,7 +94,7 @@ export const loadPreferences = () => {
 export const savePreferences = () => {
   return async (
     dispatch: (action: PayloadAction<PreferencesState>) => void,
-    getState: () => {preferencesReducer: PreferencesState},
+    getState: () => { preferencesReducer: PreferencesState },
   ) => {
     const prefs = getState().preferencesReducer.preferences;
     if (prefs) {
@@ -117,6 +117,6 @@ export const {
 export const preferencesSelector = createSelector<any, PreferencesState>(
   (state: any) => state.preferencesReducer,
   reducer => {
-    return {...reducer};
+    return { ...reducer };
   },
 );

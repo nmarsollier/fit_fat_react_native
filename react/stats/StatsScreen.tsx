@@ -1,5 +1,5 @@
-import {ColorSchema} from '../common/ui/ColorSchema';
-import {Text, View} from 'react-native';
+import { ColorSchema } from '../common/ui/ColorSchema';
+import { Text, View } from 'react-native';
 import * as React from 'react';
 
 export default function StatsScreen() {

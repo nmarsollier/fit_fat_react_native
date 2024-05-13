@@ -1,10 +1,10 @@
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import {PropsWithChildren} from 'react';
-import {Image, TouchableOpacity} from 'react-native';
-import {ColorSchema} from '../ui/ColorSchema';
-import {ImageAssets} from '../ui/ImageAsets';
-import {RowLayout} from './Layouts';
+import { PropsWithChildren } from 'react';
+import { Image, TouchableOpacity } from 'react-native';
+import { ColorSchema } from '../ui/ColorSchema';
+import { ImageAssets } from '../ui/ImageAsets';
+import { RowLayout } from './Layouts';
 
 export default function Toolbar(props: PropsWithChildren<{}>) {
   const navigation = useNavigation();
@@ -26,7 +26,7 @@ export default function Toolbar(props: PropsWithChildren<{}>) {
             navigation.goBack();
           }}>
           <Image
-            style={{height: 24, width: 24, marginEnd: 10, marginBottom: 1}}
+            style={{ height: 24, width: 24, marginEnd: 10, marginBottom: 1 }}
             source={ImageAssets.back}
             tintColor={ColorSchema.secondary}
           />

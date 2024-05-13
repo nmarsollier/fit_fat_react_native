@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {StyleProp, ViewStyle} from 'react-native';
-import {RadioButton, Text} from 'react-native-paper';
-import {ColorSchema} from '../ui/ColorSchema';
-import {LabelTheme} from '../ui/Themes';
-import {ColumnLayout, RowLayout} from './Layouts';
+import { StyleProp, ViewStyle } from 'react-native';
+import { RadioButton, Text } from 'react-native-paper';
+import { ColorSchema } from '../ui/ColorSchema';
+import { LabelTheme } from '../ui/Themes';
+import { ColumnLayout, RowLayout } from './Layouts';
 
 export function LabeledRadioButton(props: {
   label: string;

@@ -4,8 +4,8 @@
  *
  * @format
  */
-import {DefaultTheme} from 'react-native-paper';
-import {ColorSchema} from './ColorSchema';
+import { DefaultTheme } from 'react-native-paper';
+import { ColorSchema } from './ColorSchema';
 
 export const AppTheme = {
   ...DefaultTheme,

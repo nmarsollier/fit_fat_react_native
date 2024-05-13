@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {ActivityIndicator} from 'react-native';
-import {ColorSchema} from '../ui/ColorSchema';
-import {ColumnLayout} from './Layouts';
-import {Stretch} from './Stretch';
+import { ActivityIndicator } from 'react-native';
+import { ColorSchema } from '../ui/ColorSchema';
+import { ColumnLayout } from './Layouts';
+import { Stretch } from './Stretch';
 
 export default function LoadingView() {
   return (
@@ -10,7 +10,7 @@ export default function LoadingView() {
       style={{
         backgroundColor: ColorSchema.background,
       }}>
-      <ActivityIndicator size="large" style={{flex: 1}} />
+      <ActivityIndicator size="large" style={{ flex: 1 }} />
 
       <Stretch />
     </ColumnLayout>

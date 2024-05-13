@@ -1,6 +1,6 @@
-import {useMemo} from 'react';
+import { useMemo } from 'react';
 
-import {Subject} from 'rxjs';
+import { Subject } from 'rxjs';
 interface LastSubscription {
   last: any | undefined;
 }

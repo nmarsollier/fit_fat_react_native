@@ -1,18 +1,18 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React, {useEffect} from 'react';
-import {FormattedMessage} from 'react-intl';
-import {FlatList, Image, TouchableOpacity, View} from 'react-native';
-import {Divider, Text} from 'react-native-paper';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import React, { useEffect } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { FlatList, Image, TouchableOpacity, View } from 'react-native';
+import { Divider, Text } from 'react-native-paper';
 import ErrorView from '../../common/components/ErrorView';
-import {ColumnLayout, RowLayout} from '../../common/components/Layouts';
+import { ColumnLayout, RowLayout } from '../../common/components/Layouts';
 import LoadingView from '../../common/components/LoadingView';
-import {Stretch} from '../../common/components/Stretch';
+import { Stretch } from '../../common/components/Stretch';
 import Toolbar from '../../common/components/Toolbar';
-import {displayDatetime} from '../../common/libs/DateLibs';
-import {RootStackParamList} from '../../common/navigation/Navigation';
-import {ColorSchema} from '../../common/ui/ColorSchema';
-import {ImageAssets} from '../../common/ui/ImageAsets';
-import {LabelTheme} from '../../common/ui/Themes';
+import { displayDatetime } from '../../common/libs/DateLibs';
+import { RootStackParamList } from '../../common/navigation/Navigation';
+import { ColorSchema } from '../../common/ui/ColorSchema';
+import { ImageAssets } from '../../common/ui/ImageAsets';
+import { LabelTheme } from '../../common/ui/Themes';
 import {
   measureMessageId,
   PreferencesData,
@@ -34,7 +34,7 @@ import {
 export default function MeasuresListScreen(
   props: NativeStackScreenProps<RootStackParamList>,
 ) {
-  const {state, onEvent, reducer, preferences} = useMeasuresListState();
+  const { state, onEvent, reducer, preferences } = useMeasuresListState();
 
   useEffect(
     () =>
@@ -96,7 +96,7 @@ function MeasuresListDetails(props: {
           }}>
           <Image
             source={ImageAssets.new}
-            style={{height: 18, width: 18, marginEnd: 16}}
+            style={{ height: 18, width: 18, marginEnd: 16 }}
             tintColor={ColorSchema.secondary}
           />
         </TouchableOpacity>
@@ -107,7 +107,7 @@ function MeasuresListDetails(props: {
           margin: 8,
         }}
         data={props.imageState.measures}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <MeasureCard
             data={item}
             preferences={props.preferences}
@@ -157,7 +157,7 @@ function MeasureCard(props: {
           </Text>
         </RowLayout>
 
-        <RowLayout style={{width: '100%'}}>
+        <RowLayout style={{ width: '100%' }}>
           <View
             style={{
               flexDirection: 'row',
@@ -167,7 +167,9 @@ function MeasureCard(props: {
             <Text theme={LabelTheme} variant="labelSmall">
               <FormattedMessage id="measureWeight" /> :
             </Text>
-            <Text variant="bodySmall" style={{paddingStart: 5, paddingEnd: 3}}>
+            <Text
+              variant="bodySmall"
+              style={{ paddingStart: 5, paddingEnd: 3 }}>
               {props.data.bodyWeight}
             </Text>
             <Text theme={LabelTheme} variant="labelSmall">
@@ -186,7 +188,9 @@ function MeasureCard(props: {
             <Text theme={LabelTheme} variant="labelSmall">
               <FormattedMessage id="measureFat" /> :
             </Text>
-            <Text variant="bodySmall" style={{paddingStart: 5, paddingEnd: 3}}>
+            <Text
+              variant="bodySmall"
+              style={{ paddingStart: 5, paddingEnd: 3 }}>
               {props.data.fatPercent}
             </Text>
             <Text theme={LabelTheme} variant="labelSmall">
@@ -208,7 +212,9 @@ function MeasureCard(props: {
             <Text theme={LabelTheme} variant="labelSmall">
               <FormattedMessage id="freeFatMass" /> :
             </Text>
-            <Text variant="bodySmall" style={{paddingStart: 5, paddingEnd: 3}}>
+            <Text
+              variant="bodySmall"
+              style={{ paddingStart: 5, paddingEnd: 3 }}>
               {bodyFatMass(props.data).toFixed(2)}
             </Text>
             <Text theme={LabelTheme} variant="labelSmall">
@@ -226,7 +232,7 @@ function MeasureCard(props: {
             <Text theme={LabelTheme} variant="labelSmall">
               <FormattedMessage id="fmmi" /> :
             </Text>
-            <Text variant="bodySmall" style={{paddingStart: 5}}>
+            <Text variant="bodySmall" style={{ paddingStart: 5 }}>
               {freeFatMassIndex(props.data)}
             </Text>
           </View>

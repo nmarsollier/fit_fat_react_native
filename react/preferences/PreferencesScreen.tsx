@@ -1,16 +1,20 @@
-import {useFocusEffect} from '@react-navigation/native';
-import {Dispatch} from '@reduxjs/toolkit';
-import React, {useCallback, useState} from 'react';
-import {ScrollView, TouchableOpacity} from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import { Dispatch } from '@reduxjs/toolkit';
+import React, { useCallback, useState } from 'react';
+import { ScrollView, TouchableOpacity } from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import {Text, TextInput} from 'react-native-paper';
-import {useDispatch, useSelector} from 'react-redux';
-import {LabeledRadioButton} from '../common/components/LabeledRadioButton';
-import {ColumnLayout, RowLayout} from '../common/components/Layouts';
+import { Text, TextInput } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { LabeledRadioButton } from '../common/components/LabeledRadioButton';
+import { ColumnLayout, RowLayout } from '../common/components/Layouts';
 import LoadingView from '../common/components/LoadingView';
 import Toolbar from '../common/components/Toolbar';
-import {dateToString, displayDate, stringToDate} from '../common/libs/DateLibs';
-import {ColorSchema} from '../common/ui/ColorSchema';
+import {
+  dateToString,
+  displayDate,
+  stringToDate,
+} from '../common/libs/DateLibs';
+import { ColorSchema } from '../common/ui/ColorSchema';
 import {
   measureHeight,
   measureMessageId,
@@ -31,7 +35,7 @@ import {
   updateSex,
   updateWeight,
 } from './PreferencesState';
-import {FormattedMessage, useIntl} from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 export default function PreferencesScreen() {
   const dispatch = useDispatch<Dispatch<any>>();
@@ -93,7 +97,7 @@ function PreferencesContent(props: {
           style={{
             paddingHorizontal: 0,
           }}
-          label={intl.formatMessage({id: 'optionsDisplayName'})}
+          label={intl.formatMessage({ id: 'optionsDisplayName' })}
           value={props.userData.displayName}
           onChangeText={(val: string) => {
             props.dispatch(updateDisplayName(val));
@@ -105,17 +109,19 @@ function PreferencesContent(props: {
             style={{
               paddingHorizontal: 0,
             }}
-            label={intl.formatMessage({id: 'optionsBirthDate'})}
+            label={intl.formatMessage({ id: 'optionsBirthDate' })}
             editable={false}
             value={displayDate(props.userData.birthDate)}
           />
         </TouchableOpacity>
 
         <LabeledRadioButton
-          style={{paddingTop: 8}}
-          label={intl.formatMessage({id: 'optionsSystemOfMeasurement'})}
+          style={{ paddingTop: 8 }}
+          label={intl.formatMessage({ id: 'optionsSystemOfMeasurement' })}
           labels={[
-            intl.formatMessage({id: measureTypeMessageId(MeasureType.METRIC)}),
+            intl.formatMessage({
+              id: measureTypeMessageId(MeasureType.METRIC),
+            }),
             intl.formatMessage({
               id: measureTypeMessageId(MeasureType.IMPERIAL),
             }),
@@ -130,10 +136,10 @@ function PreferencesContent(props: {
         />
 
         <LabeledRadioButton
-          label={intl.formatMessage({id: 'optionsSex'})}
+          label={intl.formatMessage({ id: 'optionsSex' })}
           labels={[
-            intl.formatMessage({id: sexMessageId(Sex.MALE)}),
-            intl.formatMessage({id: sexMessageId(Sex.FEMALE)}),
+            intl.formatMessage({ id: sexMessageId(Sex.MALE) }),
+            intl.formatMessage({ id: sexMessageId(Sex.FEMALE) }),
           ]}
           options={[Sex.MALE, Sex.FEMALE]}
           selected={props.userData.sex}
@@ -147,7 +153,7 @@ function PreferencesContent(props: {
             style={{
               paddingHorizontal: 0,
             }}
-            label={intl.formatMessage({id: 'optionsWeight'})}
+            label={intl.formatMessage({ id: 'optionsWeight' })}
             value={props.userData.weight.toString()}
             onChangeText={(val: string) => {
               props.dispatch(updateWeight(Number(val)));
@@ -172,7 +178,7 @@ function PreferencesContent(props: {
             style={{
               paddingHorizontal: 0,
             }}
-            label={intl.formatMessage({id: 'optionsHeight'})}
+            label={intl.formatMessage({ id: 'optionsHeight' })}
             value={props.userData.height.toString()}
             onChangeText={(val: string) => {
               props.dispatch(updateHeight(Number(val)));
@@ -186,7 +192,9 @@ function PreferencesContent(props: {
               paddingBottom: 5,
               alignSelf: 'flex-end',
             }}>
-            <FormattedMessage id={measureHeight(props.userData.measureSystem)}/>
+            <FormattedMessage
+              id={measureHeight(props.userData.measureSystem)}
+            />
           </Text>
         </RowLayout>
       </ColumnLayout>

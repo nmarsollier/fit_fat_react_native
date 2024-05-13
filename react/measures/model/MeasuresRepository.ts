@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {MeasuresData} from './MeassuresModel';
+import { MeasuresData } from './MeassuresModel';
 
 export async function storeMeasure(measure: MeasuresData) {
   try {

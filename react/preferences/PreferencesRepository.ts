@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {PreferencesData} from './PreferencesModel';
+import { PreferencesData } from './PreferencesModel';
 
 export async function storePreferences(prefs: PreferencesData) {
   try {

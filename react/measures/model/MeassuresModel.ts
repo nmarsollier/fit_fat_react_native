@@ -1,6 +1,6 @@
-import {datetimeToString} from '../../common/libs/DateLibs';
-import {uuid} from '../../common/libs/UUID';
-import {Sex} from '../../preferences/PreferencesModel';
+import { datetimeToString } from '../../common/libs/DateLibs';
+import { uuid } from '../../common/libs/UUID';
+import { Sex } from '../../preferences/PreferencesModel';
 
 export interface MeasuresData {
   uid: string;

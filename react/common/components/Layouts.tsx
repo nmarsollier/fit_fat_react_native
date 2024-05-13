@@ -1,6 +1,6 @@
-import React, {PropsWithChildren} from 'react';
-import {StyleProp, View, ViewStyle} from 'react-native';
-import {ColorSchema} from '../ui/ColorSchema';
+import React, { PropsWithChildren } from 'react';
+import { StyleProp, View, ViewStyle } from 'react-native';
+import { ColorSchema } from '../ui/ColorSchema';
 
 export function Card(
   props: PropsWithChildren<{

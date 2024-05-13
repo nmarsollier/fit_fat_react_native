@@ -1,24 +1,28 @@
-import {Slider} from '@miblanchard/react-native-slider';
-import React, {useState} from 'react';
-import {FormattedMessage, useIntl} from 'react-intl';
-import {ScrollView, TouchableOpacity, View} from 'react-native';
+import { Slider } from '@miblanchard/react-native-slider';
+import React, { useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import {Dropdown} from 'react-native-element-dropdown';
-import {Text, TextInput} from 'react-native-paper';
+import { Dropdown } from 'react-native-element-dropdown';
+import { Text, TextInput } from 'react-native-paper';
 import ErrorView from '../../common/components/ErrorView';
-import {ColumnLayout, RowLayout} from '../../common/components/Layouts';
+import { ColumnLayout, RowLayout } from '../../common/components/Layouts';
 import LoadingView from '../../common/components/LoadingView';
-import {Stretch} from '../../common/components/Stretch';
+import { Stretch } from '../../common/components/Stretch';
 import Toolbar from '../../common/components/Toolbar';
 import {
   datetimeToString,
   displayDatetime,
   stringToDate,
 } from '../../common/libs/DateLibs';
-import {EditMeasureScreenProps} from '../../common/navigation/Navigation';
-import {ColorSchema} from '../../common/ui/ColorSchema';
-import {LabelTheme, MenuTextTheme} from '../../common/ui/Themes';
-import {InputType, MeasureMethod, unitTypeLabel} from '../model/MeassuresModel';
+import { EditMeasureScreenProps } from '../../common/navigation/Navigation';
+import { ColorSchema } from '../../common/ui/ColorSchema';
+import { LabelTheme, MenuTextTheme } from '../../common/ui/Themes';
+import {
+  InputType,
+  MeasureMethod,
+  unitTypeLabel,
+} from '../model/MeassuresModel';
 import {
   EditMeasureReducer,
   EditMeasureState,
@@ -28,7 +32,7 @@ import {
 } from './EditMeasureState';
 
 export default function EditMeasureScreen(props: EditMeasureScreenProps) {
-  const {state, onEvent, reducer} = useEditMeasureState(
+  const { state, onEvent, reducer } = useEditMeasureState(
     props.route.params.measureId,
   );
 
@@ -39,21 +43,21 @@ export default function EditMeasureScreen(props: EditMeasureScreenProps) {
   });
 
   if (!state || state.isLoading) {
-    return <LoadingView />
+    return <LoadingView />;
   }
 
   if (state.isError) {
-    return <ErrorView text="Error Loading Measure" />
+    return <ErrorView text="Error Loading Measure" />;
   }
 
-  return <EditMeasureDetails state={state} reducer={reducer} />
+  return <EditMeasureDetails state={state} reducer={reducer} />;
 }
 
 function EditMeasureDetails(props: {
   state: EditMeasureState;
   reducer: EditMeasureReducer;
 }) {
-  const {state, reducer} = props;
+  const { state, reducer } = props;
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const intl = useIntl();
 
@@ -81,14 +85,14 @@ function EditMeasureDetails(props: {
             <Text
               variant="bodyMedium"
               theme={MenuTextTheme}
-              style={{marginEnd: 24}}>
+              style={{ marginEnd: 24 }}>
               <FormattedMessage id="saveDialogTitle" />
             </Text>
           </TouchableOpacity>
         )}
       </Toolbar>
 
-      <ScrollView style={{margin: 16}}>
+      <ScrollView style={{ margin: 16 }}>
         <RowLayout>
           <Dropdown
             style={{
@@ -107,7 +111,7 @@ function EditMeasureDetails(props: {
           />
         </RowLayout>
 
-        <RowLayout style={{marginBottom: 16}}>
+        <RowLayout style={{ marginBottom: 16 }}>
           <TouchableOpacity
             disabled={!state.isNew}
             onPress={() => setOpenDatePicker(true)}>
@@ -116,7 +120,7 @@ function EditMeasureDetails(props: {
                 paddingHorizontal: 0,
                 alignItems: 'center',
               }}
-              label={intl.formatMessage({id: 'newMeasureDate'})}
+              label={intl.formatMessage({ id: 'newMeasureDate' })}
               editable={false}
               value={displayDatetime(state.measure.date)}
             />
@@ -133,7 +137,9 @@ function EditMeasureDetails(props: {
               <FormattedMessage id="measureFat" /> :
             </Text>
 
-            <Text variant="bodyMedium" style={{paddingStart: 5, paddingEnd: 5}}>
+            <Text
+              variant="bodyMedium"
+              style={{ paddingStart: 5, paddingEnd: 5 }}>
               {state.measure.fatPercent}
             </Text>
 
@@ -210,7 +216,7 @@ function IntMeasureInput(props: {
           <FormattedMessage id={props.data.measureValue.title} /> :
         </Text>
 
-        <Text variant="bodyMedium" style={{paddingStart: 5, paddingEnd: 5}}>
+        <Text variant="bodyMedium" style={{ paddingStart: 5, paddingEnd: 5 }}>
           {props.data.value}
         </Text>
 
@@ -221,8 +227,8 @@ function IntMeasureInput(props: {
 
       {props.state.isNew && (
         <Slider
-          thumbStyle={{height: 12, width: 12}}
-          trackStyle={{borderRadius: 2, height: 2}}
+          thumbStyle={{ height: 12, width: 12 }}
+          trackStyle={{ borderRadius: 2, height: 2 }}
           thumbTintColor={ColorSchema.primary}
           minimumTrackTintColor={ColorSchema.secondaryVariant}
           maximumTrackTintColor={ColorSchema.secondaryVariant}
@@ -259,7 +265,7 @@ function DoubleMeasureInput(props: {
           <FormattedMessage id={props.data.measureValue.title} /> :
         </Text>
 
-        <Text variant="bodyMedium" style={{paddingStart: 5, paddingEnd: 5}}>
+        <Text variant="bodyMedium" style={{ paddingStart: 5, paddingEnd: 5 }}>
           {props.data.value}
         </Text>
 
@@ -270,8 +276,8 @@ function DoubleMeasureInput(props: {
 
       {props.state.isNew && (
         <Slider
-          thumbStyle={{height: 12, width: 12}}
-          trackStyle={{borderRadius: 2, height: 2}}
+          thumbStyle={{ height: 12, width: 12 }}
+          trackStyle={{ borderRadius: 2, height: 2 }}
           thumbTintColor={ColorSchema.primary}
           minimumTrackTintColor={ColorSchema.secondaryVariant}
           maximumTrackTintColor={ColorSchema.secondaryVariant}
@@ -290,8 +296,8 @@ function DoubleMeasureInput(props: {
 
       {props.state.isNew && (
         <Slider
-          thumbStyle={{height: 12, width: 12}}
-          trackStyle={{borderRadius: 2, height: 2}}
+          thumbStyle={{ height: 12, width: 12 }}
+          trackStyle={{ borderRadius: 2, height: 2 }}
           thumbTintColor={ColorSchema.primary}
           minimumTrackTintColor={ColorSchema.secondaryVariant}
           maximumTrackTintColor={ColorSchema.secondaryVariant}
@@ -317,31 +323,31 @@ function measureMethods(): MeasureMethodElement[] {
   return [
     {
       method: MeasureMethod.JACKSON_POLLOCK_7,
-      label: intl.formatMessage({id: 'measureMethodJacksonPollock7'}),
+      label: intl.formatMessage({ id: 'measureMethodJacksonPollock7' }),
     },
     {
       method: MeasureMethod.JACKSON_POLLOCK_3,
-      label: intl.formatMessage({id: 'measureMethodJacksonPollock3'}),
+      label: intl.formatMessage({ id: 'measureMethodJacksonPollock3' }),
     },
     {
       method: MeasureMethod.JACKSON_POLLOCK_4,
-      label: intl.formatMessage({id: 'measureMethodJacksonPollock4'}),
+      label: intl.formatMessage({ id: 'measureMethodJacksonPollock4' }),
     },
     {
       method: MeasureMethod.PARRILLO,
-      label: intl.formatMessage({id: 'measureMethodParrillo'}),
+      label: intl.formatMessage({ id: 'measureMethodParrillo' }),
     },
     {
       method: MeasureMethod.DURNIN_WOMERSLEY,
-      label: intl.formatMessage({id: 'measureMethodDurninWomersley'}),
+      label: intl.formatMessage({ id: 'measureMethodDurninWomersley' }),
     },
     {
       method: MeasureMethod.FROM_SCALE,
-      label: intl.formatMessage({id: 'measureMethodManualScale'}),
+      label: intl.formatMessage({ id: 'measureMethodManualScale' }),
     },
     {
       method: MeasureMethod.WEIGHT_ONLY,
-      label: intl.formatMessage({id: 'measureMethodWeight'}),
+      label: intl.formatMessage({ id: 'measureMethodWeight' }),
     },
   ];
 }

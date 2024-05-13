@@ -1,7 +1,7 @@
-import {useEffect, useState} from 'react';
-import {useOnStateEvent} from '../../common/components/OnStateEvent';
-import {datetimeToString} from '../../common/libs/DateLibs';
-import {uuid} from '../../common/libs/UUID';
+import { useEffect, useState } from 'react';
+import { useOnStateEvent } from '../../common/components/OnStateEvent';
+import { datetimeToString } from '../../common/libs/DateLibs';
+import { uuid } from '../../common/libs/UUID';
 import {
   Abdominal,
   Bicep,
@@ -74,11 +74,13 @@ export function useEditMeasureState(measureIdParam: string | undefined) {
     });
 
     setState(s => {
-      storeMeasure(s.measure).then(() => {
-        emitEvent(GoBack);
-      }).catch((e) => {
-        console.log(e)
-      });
+      storeMeasure(s.measure)
+        .then(() => {
+          emitEvent(GoBack);
+        })
+        .catch(e => {
+          console.log(e);
+        });
 
       return s;
     });
@@ -242,7 +244,7 @@ export function useEditMeasureState(measureIdParam: string | undefined) {
     save,
   };
 
-  return {state, onEvent, reducer};
+  return { state, onEvent, reducer };
 }
 
 function measureValues(method: MeasureMethod): MeasureValue[] {

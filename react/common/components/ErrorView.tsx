@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
-import {ColorSchema} from '../ui/ColorSchema';
+import { Text, View } from 'react-native';
+import { ColorSchema } from '../ui/ColorSchema';
 
-export default function ErrorView(props: {text: string}) {
+export default function ErrorView(props: { text: string }) {
   return (
     <View
       style={{
