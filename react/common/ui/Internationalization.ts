@@ -1,4 +1,5 @@
-export const messages = new Map<string, {}>([
+
+export const messages = new Map<string, Record<string, string>>([
   [
     'en',
     {

@@ -21,7 +21,7 @@ export interface MeasuresListReducer {
 // Events
 export const GoNewMeasure = {};
 export class GoViewMeasure {
-  constructor(public uuid: string) {}
+  constructor(public uuid: string) { }
 }
 
 export function useMeasuresListState() {
@@ -64,7 +64,7 @@ export function useMeasuresListState() {
 
   useFocusEffect(
     useCallback(() => {
-      loadMeasures();
+      void loadMeasures();
     }, []),
   );
 

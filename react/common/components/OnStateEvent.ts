@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 interface LastSubscription {
-  last: any | undefined;
+  last: Subscription | undefined;
 }
 
 export function useOnStateEvent(): [
@@ -18,6 +18,7 @@ export function useOnStateEvent(): [
     if (subscription.last) {
       subscription.last.unsubscribe();
     }
+
     subscription.last = subject.subscribe({
       next: v => f(v),
     });

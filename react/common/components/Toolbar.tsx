@@ -6,7 +6,7 @@ import { ColorSchema } from '../ui/ColorSchema';
 import { ImageAssets } from '../ui/ImageAsets';
 import { RowLayout } from './Layouts';
 
-export default function Toolbar(props: PropsWithChildren<{}>) {
+export default function Toolbar(props: PropsWithChildren<object>) {
   const navigation = useNavigation();
 
   return (

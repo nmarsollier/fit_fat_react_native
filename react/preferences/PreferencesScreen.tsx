@@ -73,7 +73,7 @@ export default function PreferencesScreen() {
 
       <PreferencesContent
         dispatch={dispatch}
-        userData={preferencesState.preferences!}
+        userData={preferencesState.preferences}
       />
     </ColumnLayout>
   );
@@ -200,7 +200,7 @@ function PreferencesContent(props: {
       </ColumnLayout>
 
       <DatePicker
-        modal={true}
+        modal
         open={openDatePicker}
         date={stringToDate(props.userData.birthDate)}
         mode="date"

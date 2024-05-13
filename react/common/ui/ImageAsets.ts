@@ -1,11 +1,20 @@
+import { ImageSourcePropType } from "react-native";
+
+/* eslint-disable */
+
+const imgBack = require('../../assets/img/ic_back.png')
+const imgStats = require('../../assets/img/ic_stats.png')
+const imgHome = require('../../assets/img/ic_home.png')
+const imgSettings = require('../../assets/img/ic_settings.png')
+const imgNew = require('../../assets/img/ic_new.png')
+
+
 export const ImageAssets = {
-  back: require('../../assets/img/ic_back.png'),
-  check: require('../../assets/img/ic_check.png'),
-  empty: require('../../assets/img/ic_empty.png'),
-  next: require('../../assets/img/ic_next.png'),
-  reload: require('../../assets/img/ic_reload.png'),
-  stats: require('../../assets/img/ic_stats.png'),
-  home: require('../../assets/img/ic_home.png'),
-  settings: require('../../assets/img/ic_settings.png'),
-  new: require('../../assets/img/ic_new.png'),
+  back: imgBack as ImageSourcePropType,
+  stats: imgStats as ImageSourcePropType,
+  home: imgHome as ImageSourcePropType,
+  settings: imgSettings as ImageSourcePropType,
+  new: imgNew as ImageSourcePropType,
 };
+
+/* eslint-enable */

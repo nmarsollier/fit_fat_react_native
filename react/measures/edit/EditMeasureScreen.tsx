@@ -149,7 +149,7 @@ function EditMeasureDetails(props: {
           </View>
         </RowLayout>
 
-        {state.measureValues.map((data, index) => {
+        {state.measureValues.map((data) => {
           switch (data.measureValue.inputType) {
             case InputType.INT: {
               return (
@@ -178,7 +178,7 @@ function EditMeasureDetails(props: {
       </ScrollView>
 
       <DatePicker
-        modal={true}
+        modal
         open={openDatePicker}
         date={stringToDate(state.measure.date)}
         mode="datetime"

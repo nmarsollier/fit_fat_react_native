@@ -2,6 +2,7 @@ import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import { uuid } from '../common/libs/UUID';
 import { MeasureType, PreferencesData, Sex } from './PreferencesModel';
 import { findPreferences, storePreferences } from './PreferencesRepository';
+import { CombinedReducerState } from '../../App';
 
 export interface PreferencesState {
   isLoading: boolean;
@@ -61,7 +62,8 @@ const preferencesSlice = createSlice({
 export const loadPreferences = () => {
   return async (
     dispatch: (action: PayloadAction<PreferencesState>) => void,
-    getState: () => void,
+    // eslint-disable-next-line
+    getState: () => CombinedReducerState,
   ) => {
     const preferences = await findPreferences();
 
@@ -93,12 +95,12 @@ export const loadPreferences = () => {
 
 export const savePreferences = () => {
   return async (
-    dispatch: (action: PayloadAction<PreferencesState>) => void,
-    getState: () => { preferencesReducer: PreferencesState },
+    _: (action: PayloadAction<PreferencesState>) => void,
+    getState: () => CombinedReducerState,
   ) => {
     const prefs = getState().preferencesReducer.preferences;
     if (prefs) {
-      storePreferences(prefs);
+      await storePreferences(prefs);
     }
   };
 };
@@ -114,9 +116,11 @@ export const {
   updateMeasureSystem,
 } = preferencesSlice.actions;
 
+// eslint-disable-next-line
 export const preferencesSelector = createSelector<any, PreferencesState>(
-  (state: any) => state.preferencesReducer,
+  (state: CombinedReducerState) => state.preferencesReducer,
   reducer => {
+    // eslint-disable-next-line
     return { ...reducer };
   },
 );

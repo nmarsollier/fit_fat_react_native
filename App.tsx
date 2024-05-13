@@ -1,3 +1,4 @@
+
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -10,7 +11,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { IntlProvider } from 'react-intl';
 import React, {
-  SafeAreaView,
   StatusBar,
   View
 } from 'react-native';
@@ -24,13 +24,17 @@ import { messages } from './react/common/ui/Internationalization';
 import { AppTheme } from './react/common/ui/Themes';
 import MainScreen from './react/mainScreen/MainScreen';
 import EditMeasureScreen from './react/measures/edit/EditMeasureScreen';
-import { preferencesReducer } from './react/preferences/PreferencesState';
+import { preferencesReducer, PreferencesState } from './react/preferences/PreferencesState';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const sotore = configureStore({
   reducer: combineReducers({ preferencesReducer })
 })
+
+export interface CombinedReducerState {
+  preferencesReducer: PreferencesState
+}
 
 function AppContent() {
   const insets = useSafeAreaInsets();

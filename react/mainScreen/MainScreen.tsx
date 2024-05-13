@@ -3,7 +3,6 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Image } from 'react-native';
 import { Text } from 'react-native-paper';
-import { MainScreenProps } from '../common/navigation/Navigation';
 import { ColorSchema } from '../common/ui/ColorSchema';
 import { ImageAssets } from '../common/ui/ImageAsets';
 import MeasuresListScreen from '../measures/list/MeasuresListScreen';
@@ -12,7 +11,7 @@ import StatsScreen from '../stats/StatsScreen';
 
 const Tab = createBottomTabNavigator();
 
-export default function MainScreen(props: MainScreenProps) {
+export default function MainScreen() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({

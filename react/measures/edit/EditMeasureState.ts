@@ -65,7 +65,7 @@ export function useEditMeasureState(measureIdParam: string | undefined) {
 
   const [onEvent, emitEvent] = useOnStateEvent();
 
-  const save = async () => {
+  const save = () => {
     setState(s => {
       return {
         ...s,
@@ -234,7 +234,7 @@ export function useEditMeasureState(measureIdParam: string | undefined) {
   };
 
   useEffect(() => {
-    initialize();
+    void initialize();
   }, []);
 
   const reducer: EditMeasureReducer = {
@@ -255,7 +255,7 @@ function fillValues(
   measure: MeasuresData,
   measuresValues: MeasureValue[],
 ): MeasureValueData[] {
-  return measuresValues.map((measureValue, index) => {
+  return measuresValues.map((measureValue) => {
     const value = measureValueForMethod(measure, measureValue) || 0;
     return {
       measureValue,
