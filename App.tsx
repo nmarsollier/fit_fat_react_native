@@ -11,10 +11,11 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { IntlProvider } from 'react-intl';
 import React, {
   SafeAreaView,
-  StatusBar
+  StatusBar,
+  View
 } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import { getLocale } from './react/common/libs/SystemTools';
 import { RootStackParamList } from './react/common/navigation/Navigation';
@@ -31,37 +32,44 @@ export const sotore = configureStore({
   reducer: combineReducers({ preferencesReducer })
 })
 
+function AppContent() {
+  const insets = useSafeAreaInsets();
+  return (
+    <View style={{ flex: 1, backgroundColor: ColorSchema.onSecondary, paddingTop: insets.top }}>
+      <StatusBar
+        backgroundColor={ColorSchema.onSecondary}
+      />
+
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="MainScreen"
+            component={MainScreen}
+            options={{ headerShown: false }}
+          />
+
+          <Stack.Screen
+            name="EditMeasureScreen"
+            component={EditMeasureScreen}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </View>
+  )
+}
+
 export default function App() {
   const locale = getLocale()
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider >
       <IntlProvider locale={locale} messages={messages.get(locale)} defaultLocale='en' >
-        <Provider store={sotore} >
-          <PaperProvider theme={AppTheme}>
-            <SafeAreaView style={{ flex: 1, backgroundColor: ColorSchema.onSecondary }}>
-              <StatusBar
-                backgroundColor={ColorSchema.onSecondary}
-              />
-
-              <NavigationContainer>
-                <Stack.Navigator>
-                  <Stack.Screen
-                    name="MainScreen"
-                    component={MainScreen}
-                    options={{ headerShown: false }}
-                  />
-
-                  <Stack.Screen
-                    name="EditMeasureScreen"
-                    component={EditMeasureScreen}
-                    options={{ headerShown: false }}
-                  />
-                </Stack.Navigator>
-              </NavigationContainer>
-            </SafeAreaView>
-          </PaperProvider>
-        </Provider>
+        <PaperProvider theme={AppTheme}>
+          <Provider store={sotore} >
+            <AppContent />
+          </Provider>
+        </PaperProvider>
       </IntlProvider>
     </SafeAreaProvider>
   );
