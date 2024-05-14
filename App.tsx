@@ -28,12 +28,28 @@ import { preferencesReducer, PreferencesState } from './react/preferences/Prefer
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-export const sotore = configureStore({
+const appStore = configureStore({
   reducer: combineReducers({ preferencesReducer })
 })
 
 export interface CombinedReducerState {
   preferencesReducer: PreferencesState
+}
+
+export default function App() {
+  const locale = getLocale()
+
+  return (
+    <SafeAreaProvider >
+      <IntlProvider locale={locale} messages={messages.get(locale)} defaultLocale='en' >
+        <PaperProvider theme={AppTheme}>
+          <Provider store={appStore} >
+            <AppContent />
+          </Provider>
+        </PaperProvider>
+      </IntlProvider>
+    </SafeAreaProvider>
+  );
 }
 
 function AppContent() {
@@ -61,20 +77,4 @@ function AppContent() {
       </NavigationContainer>
     </View>
   )
-}
-
-export default function App() {
-  const locale = getLocale()
-
-  return (
-    <SafeAreaProvider >
-      <IntlProvider locale={locale} messages={messages.get(locale)} defaultLocale='en' >
-        <PaperProvider theme={AppTheme}>
-          <Provider store={sotore} >
-            <AppContent />
-          </Provider>
-        </PaperProvider>
-      </IntlProvider>
-    </SafeAreaProvider>
-  );
 }

@@ -10,7 +10,7 @@ export interface PreferencesState {
 }
 
 const preferencesSlice = createSlice({
-  name: 'datesList',
+  name: 'preferences',
   initialState: {
     isLoading: true,
   } satisfies PreferencesState as PreferencesState,
