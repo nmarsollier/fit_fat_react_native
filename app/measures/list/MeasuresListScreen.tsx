@@ -77,11 +77,11 @@ function MeasuresListDetails(props: {
   return (
     <ColumnLayout
       style={{
-        backgroundColor: ColorSchema.backgroundVariant,
+        backgroundColor: ColorSchema.onPrimaryVariant,
       }}>
       <Toolbar>
         <Text
-          variant="titleMedium"
+          variant="titleLarge"
           style={{
             color: ColorSchema.secondary,
           }}>
@@ -96,7 +96,7 @@ function MeasuresListDetails(props: {
           }}>
           <Image
             source={ImageAssets.new}
-            style={{ height: 18, width: 18, marginEnd: 16 }}
+            style={{ height: 16, width: 16, marginEnd: 16 }}
             tintColor={ColorSchema.secondary}
           />
         </TouchableOpacity>
@@ -131,7 +131,7 @@ function MeasureCard(props: {
       }}>
       <ColumnLayout
         style={{
-          backgroundColor: ColorSchema.background,
+          backgroundColor: ColorSchema.secondary,
           width: '100%',
         }}>
         <RowLayout
@@ -139,7 +139,7 @@ function MeasureCard(props: {
             paddingTop: 8,
           }}>
           <Text
-            variant="bodySmall"
+            variant="bodyMedium"
             style={{
               flex: 1,
               textAlign: 'center',
@@ -148,7 +148,7 @@ function MeasureCard(props: {
           </Text>
 
           <Text
-            variant="bodySmall"
+            variant="bodyMedium"
             style={{
               flex: 1,
               textAlign: 'center',
@@ -164,15 +164,15 @@ function MeasureCard(props: {
               flex: 1,
               justifyContent: 'center',
             }}>
-            <Text theme={LabelTheme} variant="labelSmall">
+            <Text theme={LabelTheme} variant="bodyMedium">
               <FormattedMessage id="measureWeight" /> :
             </Text>
             <Text
-              variant="bodySmall"
+              variant="bodyMedium"
               style={{ paddingStart: 5, paddingEnd: 3 }}>
               {props.data.bodyWeight}
             </Text>
-            <Text theme={LabelTheme} variant="labelSmall">
+            <Text theme={LabelTheme} variant="bodyMedium">
               <FormattedMessage
                 id={measureMessageId(props.preferences?.measureSystem)}
               />
@@ -185,15 +185,15 @@ function MeasureCard(props: {
               flex: 1,
               justifyContent: 'center',
             }}>
-            <Text theme={LabelTheme} variant="labelSmall">
+            <Text theme={LabelTheme} variant="bodyMedium">
               <FormattedMessage id="measureFat" /> :
             </Text>
             <Text
-              variant="bodySmall"
+              variant="bodyMedium"
               style={{ paddingStart: 5, paddingEnd: 3 }}>
               {props.data.fatPercent}
             </Text>
-            <Text theme={LabelTheme} variant="labelSmall">
+            <Text theme={LabelTheme} variant="bodyMedium">
               %
             </Text>
           </View>
@@ -209,15 +209,15 @@ function MeasureCard(props: {
               flex: 1,
               justifyContent: 'center',
             }}>
-            <Text theme={LabelTheme} variant="labelSmall">
+            <Text theme={LabelTheme} variant="bodyMedium">
               <FormattedMessage id="freeFatMass" /> :
             </Text>
             <Text
-              variant="bodySmall"
+              variant="bodyMedium"
               style={{ paddingStart: 5, paddingEnd: 3 }}>
               {bodyFatMass(props.data).toFixed(2)}
             </Text>
-            <Text theme={LabelTheme} variant="labelSmall">
+            <Text theme={LabelTheme} variant="bodyMedium">
               <FormattedMessage
                 id={measureMessageId(props.preferences?.measureSystem)}
               />
@@ -229,10 +229,10 @@ function MeasureCard(props: {
               flex: 1,
               justifyContent: 'center',
             }}>
-            <Text theme={LabelTheme} variant="labelSmall">
+            <Text theme={LabelTheme} variant="bodyMedium">
               <FormattedMessage id="fmmi" /> :
             </Text>
-            <Text variant="bodySmall" style={{ paddingStart: 5 }}>
+            <Text variant="bodyMedium" style={{ paddingStart: 5 }}>
               {freeFatMassIndex(props.data)}
             </Text>
           </View>

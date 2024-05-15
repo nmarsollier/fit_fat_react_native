@@ -1,8 +1,8 @@
 import { CallbackWithResult } from "@react-native-async-storage/async-storage/lib/typescript/types";
 import configureStore from "redux-mock-store";
 import { thunk } from 'redux-thunk';
-import { MeasureType, Sex } from "../react/preferences/PreferencesModel";
-import { loadPreferences, preferencesReducer, PreferencesState, updateBirthDate, updateDisplayName, updateHeight, updateMeasureSystem, updateSex, updateWeight } from "../react/preferences/PreferencesState";
+import { MeasureType, Sex } from "../app/preferences/PreferencesModel";
+import { loadPreferences, preferencesReducer, PreferencesState, updateBirthDate, updateDisplayName, updateHeight, updateMeasureSystem, updateSex, updateWeight } from "../app/preferences/PreferencesState";
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)

@@ -1,4 +1,3 @@
-import { Slider } from '@miblanchard/react-native-slider';
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
@@ -30,6 +29,7 @@ import {
   MeasureValueData,
   useEditMeasureState,
 } from './EditMeasureState';
+import Slider from '@react-native-community/slider';
 
 export default function EditMeasureScreen(props: EditMeasureScreenProps) {
   const { state, onEvent, reducer } = useEditMeasureState(
@@ -64,11 +64,11 @@ function EditMeasureDetails(props: {
   return (
     <ColumnLayout
       style={{
-        backgroundColor: ColorSchema.background,
+        backgroundColor: ColorSchema.secondary,
       }}>
       <Toolbar>
         <Text
-          variant="titleMedium"
+          variant="titleLarge"
           style={{
             color: ColorSchema.secondary,
           }}>
@@ -133,7 +133,7 @@ function EditMeasureDetails(props: {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Text theme={LabelTheme} variant="labelMedium">
+            <Text theme={LabelTheme} variant="bodyMedium">
               <FormattedMessage id="measureFat" /> :
             </Text>
 
@@ -143,7 +143,7 @@ function EditMeasureDetails(props: {
               {state.measure.fatPercent}
             </Text>
 
-            <Text theme={LabelTheme} variant="labelMedium">
+            <Text theme={LabelTheme} variant="bodyMedium">
               %
             </Text>
           </View>
@@ -212,7 +212,7 @@ function IntMeasureInput(props: {
           flex: 1,
           alignItems: 'center',
         }}>
-        <Text theme={LabelTheme} variant="labelMedium">
+        <Text theme={LabelTheme} variant="bodyMedium">
           <FormattedMessage id={props.data.measureValue.title} /> :
         </Text>
 
@@ -220,18 +220,16 @@ function IntMeasureInput(props: {
           {props.data.value}
         </Text>
 
-        <Text theme={LabelTheme} variant="labelMedium">
+        <Text theme={LabelTheme} variant="bodyMedium">
           {unitTypeLabel(props.data.measureValue.unitType)}
         </Text>
       </View>
 
       {props.state.isNew && (
         <Slider
-          thumbStyle={{ height: 12, width: 12 }}
-          trackStyle={{ borderRadius: 2, height: 2 }}
-          thumbTintColor={ColorSchema.primary}
-          minimumTrackTintColor={ColorSchema.secondaryVariant}
-          maximumTrackTintColor={ColorSchema.secondaryVariant}
+          thumbTintColor={ColorSchema.onSecondary}
+          minimumTrackTintColor={ColorSchema.primary}
+          maximumTrackTintColor={ColorSchema.primary}
           value={props.data.intValue}
           minimumValue={0}
           step={1}
@@ -239,7 +237,7 @@ function IntMeasureInput(props: {
           onValueChange={value => {
             props.reducer.setMeasureValueForMethod(
               props.data.measureValue,
-              value[0],
+              value,
             );
           }}
         />
@@ -261,7 +259,7 @@ function DoubleMeasureInput(props: {
           flex: 1,
           alignItems: 'center',
         }}>
-        <Text theme={LabelTheme} variant="labelMedium">
+        <Text theme={LabelTheme} variant="bodyMedium">
           <FormattedMessage id={props.data.measureValue.title} /> :
         </Text>
 
@@ -269,18 +267,16 @@ function DoubleMeasureInput(props: {
           {props.data.value}
         </Text>
 
-        <Text theme={LabelTheme} variant="labelMedium">
+        <Text theme={LabelTheme} variant="bodyMedium">
           {unitTypeLabel(props.data.measureValue.unitType)}
         </Text>
       </View>
 
       {props.state.isNew && (
         <Slider
-          thumbStyle={{ height: 12, width: 12 }}
-          trackStyle={{ borderRadius: 2, height: 2 }}
-          thumbTintColor={ColorSchema.primary}
-          minimumTrackTintColor={ColorSchema.secondaryVariant}
-          maximumTrackTintColor={ColorSchema.secondaryVariant}
+          thumbTintColor={ColorSchema.onSecondary}
+          minimumTrackTintColor={ColorSchema.primary}
+          maximumTrackTintColor={ColorSchema.primary}
           value={props.data.intValue}
           minimumValue={0}
           step={1}
@@ -288,7 +284,7 @@ function DoubleMeasureInput(props: {
           onValueChange={value => {
             props.reducer.setMeasureValueForMethod(
               props.data.measureValue,
-              value[0],
+              value,
             );
           }}
         />
@@ -296,11 +292,9 @@ function DoubleMeasureInput(props: {
 
       {props.state.isNew && (
         <Slider
-          thumbStyle={{ height: 12, width: 12 }}
-          trackStyle={{ borderRadius: 2, height: 2 }}
-          thumbTintColor={ColorSchema.primary}
-          minimumTrackTintColor={ColorSchema.secondaryVariant}
-          maximumTrackTintColor={ColorSchema.secondaryVariant}
+          thumbTintColor={ColorSchema.onSecondary}
+          minimumTrackTintColor={ColorSchema.primary}
+          maximumTrackTintColor={ColorSchema.primary}
           value={props.data.decimalValue * 100}
           minimumValue={0}
           step={1}
@@ -308,7 +302,7 @@ function DoubleMeasureInput(props: {
           onValueChange={value => {
             props.reducer.setMeasureValueForMethod(
               props.data.measureValue,
-              value[0] / 100,
+              value / 100,
             );
           }}
         />

@@ -10,7 +10,10 @@
     "**/.vscode": true,
     "**/node_modules": true,
     "**/.bundle": true,
-    "**/__tests__": false
+    "**/__tests__": false,
+    "**/android": true,
+    "**/.expo": true,
+    "**/ios": true
   },
   "explorerExclude.backup": {}
 }

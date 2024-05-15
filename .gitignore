@@ -82,3 +82,7 @@ lint/tmp/
 node_modules
 
 .history
+# Expo
+.expo
+dist/
+web-build/

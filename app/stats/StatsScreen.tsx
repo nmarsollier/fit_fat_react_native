@@ -7,7 +7,7 @@ export default function StatsScreen() {
     <View
       style={{
         flex: 1,
-        backgroundColor: ColorSchema.background,
+        backgroundColor: ColorSchema.secondary,
         justifyContent: 'center',
       }}>
       <Text>Stats</Text>

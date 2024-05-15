@@ -1,3 +1,62 @@
+export interface StringResource {
+  appName: string,
+  fmmi: string,
+  freeFatMass: string,
+  googleError: string,
+
+  homeMeasureTitle: string,
+  homeMenuMain: string,
+  homeMenuOptions: string,
+  homeMenuProgress: string,
+  homeOptionsTitle: string,
+  homeProgressTitle: string,
+
+  measureAbdominal: string,
+  measureBicep: string,
+  measureCalf: string,
+  measureChest: string,
+  measureFat: string,
+  measureLowerBack: string,
+  measureMethodManualScale: string,
+  measureMethodDurninWomersley: string,
+  measureMethodJacksonPollock3: string,
+  measureMethodJacksonPollock4: string,
+  measureMethodJacksonPollock7: string,
+  measureMethodParrillo: string,
+  measureMethodWeight: string,
+  measureMidaxillary: string,
+  measureSubscapular: string,
+  measureSuprailiac: string,
+  measureThigh: string,
+  measureTricep: string,
+  measureWeight: string,
+
+  newMeasureDate: string,
+  newMeasureError: string,
+  newMeasureTitle: string,
+
+  optionsBirthDate: string,
+  optionsDisplayName: string,
+  optionsHeight: string,
+  optionsSex: string,
+  optionsSexFemale: string,
+  optionsSexMale: string,
+  optionsSystemOfMeasurement: string,
+  optionsSystemOfMeasurementMetric: string,
+  optionsSystemOfMeasurementImperial: string,
+  optionsWeight: string,
+
+  saveDialogTitle: string,
+  saveMyDataInCloud: string,
+
+  unitCm: string,
+  unitIn: string,
+  unitKg: string,
+  unitLb: string,
+  unitMm: string,
+  unitPercent: string,
+}
+
 
 export const messages = new Map<string, Record<string, string>>([
   [

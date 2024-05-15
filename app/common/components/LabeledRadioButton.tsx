@@ -15,7 +15,7 @@ export function LabeledRadioButton(props: {
 }) {
   return (
     <ColumnLayout style={props.style}>
-      <Text variant="labelMedium" theme={LabelTheme}>
+      <Text variant="bodySmall" theme={LabelTheme}>
         {props.label}
       </Text>
 
@@ -37,8 +37,8 @@ export function LabeledRadioButton(props: {
                 </Text>
 
                 <RadioButton.Android
-                  color={ColorSchema.primary}
-                  uncheckedColor={ColorSchema.primary}
+                  color={ColorSchema.onSecondary}
+                  uncheckedColor={ColorSchema.onSecondary}
                   value={props.options[index]}
                 />
               </RowLayout>

@@ -9,22 +9,23 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { StatusBar } from 'expo-status-bar';
 import { IntlProvider } from 'react-intl';
 import React, {
-  StatusBar,
   View
 } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
-import { getLocale } from './react/common/libs/SystemTools';
-import { RootStackParamList } from './react/common/navigation/Navigation';
-import { ColorSchema } from './react/common/ui/ColorSchema';
-import { messages } from './react/common/ui/Internationalization';
-import { AppTheme } from './react/common/ui/Themes';
-import MainScreen from './react/mainScreen/MainScreen';
-import EditMeasureScreen from './react/measures/edit/EditMeasureScreen';
-import { preferencesReducer, PreferencesState } from './react/preferences/PreferencesState';
+import { getLocale } from './common/libs/SystemTools';
+import { RootStackParamList } from './common/navigation/Navigation';
+import { ColorSchema } from './common/ui/ColorSchema';
+import { messages } from './common/ui/Internationalization';
+import { AppTheme } from './common/ui/Themes';
+import MainScreen from './mainScreen/MainScreen';
+import EditMeasureScreen from './measures/edit/EditMeasureScreen';
+import { preferencesReducer, PreferencesState } from './preferences/PreferencesState';
+import { useMemo } from 'react';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -37,7 +38,7 @@ export interface CombinedReducerState {
 }
 
 export default function App() {
-  const locale = getLocale()
+  const locale = useMemo(() => getLocale(), [])
 
   return (
     <SafeAreaProvider >
@@ -55,8 +56,13 @@ export default function App() {
 function AppContent() {
   const insets = useSafeAreaInsets();
   return (
-    <View style={{ flex: 1, backgroundColor: ColorSchema.onSecondary, paddingTop: insets.top }}>
+    <View style={{
+      flex: 1,
+      backgroundColor: ColorSchema.onSecondary,
+      paddingTop: insets.top
+    }}>
       <StatusBar
+        style='light'
         backgroundColor={ColorSchema.onSecondary}
       />
 

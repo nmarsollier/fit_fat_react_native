@@ -7,7 +7,7 @@ export default function ErrorView(props: { text: string }) {
     <View
       style={{
         flex: 1,
-        backgroundColor: ColorSchema.background,
+        backgroundColor: ColorSchema.secondary,
         justifyContent: 'center',
       }}>
       <Text>{props.text}</Text>

@@ -1,4 +1,20 @@
 {
   "name": "FitFat",
-  "displayName": "FitFat"
+  "displayName": "FitFat",
+  "splash": {
+    "image": "./app/assets/img/splash.png",
+    "resizeMode": "contain"
+  },
+  "android": {
+    "adaptiveIcon": {
+      "foregroundImage": "./app/assets/img/splash.png",
+      "backgroundColor": "#ffffff"
+    }
+  },
+  "expo": {
+    "entryPoint": "./index.js",
+    "plugins": [
+      "expo-localization"
+    ]
+  }
 }

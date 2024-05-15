@@ -12,7 +12,7 @@ export default function Toolbar(props: PropsWithChildren<object>) {
   return (
     <RowLayout
       style={{
-        backgroundColor: ColorSchema.primary,
+        backgroundColor: ColorSchema.onSecondary,
         paddingStart: 16,
         paddingBottom: 5,
         alignItems: 'center',

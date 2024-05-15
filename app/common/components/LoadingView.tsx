@@ -8,7 +8,7 @@ export default function LoadingView() {
   return (
     <ColumnLayout
       style={{
-        backgroundColor: ColorSchema.background,
+        backgroundColor: ColorSchema.secondary,
       }}>
       <ActivityIndicator size="large" style={{ flex: 1 }} />
 

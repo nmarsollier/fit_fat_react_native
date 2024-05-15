@@ -59,11 +59,11 @@ export default function PreferencesScreen() {
   return (
     <ColumnLayout
       style={{
-        backgroundColor: ColorSchema.background,
+        backgroundColor: ColorSchema.secondary,
       }}>
       <Toolbar>
         <Text
-          variant="titleMedium"
+          variant="titleLarge"
           style={{
             color: ColorSchema.secondary,
           }}>
@@ -162,7 +162,7 @@ function PreferencesContent(props: {
 
           <Text
             style={{
-              color: ColorSchema.secondaryVariant,
+              color: ColorSchema.primary,
               paddingHorizontal: 16,
               paddingBottom: 5,
               alignSelf: 'flex-end',
@@ -187,7 +187,7 @@ function PreferencesContent(props: {
 
           <Text
             style={{
-              color: ColorSchema.secondaryVariant,
+              color: ColorSchema.primary,
               paddingHorizontal: 16,
               paddingBottom: 5,
               alignSelf: 'flex-end',

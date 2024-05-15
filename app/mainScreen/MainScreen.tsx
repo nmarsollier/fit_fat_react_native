@@ -12,16 +12,18 @@ import StatsScreen from '../stats/StatsScreen';
 const Tab = createBottomTabNavigator();
 
 export default function MainScreen() {
+
   return (
     <Tab.Navigator
+      initialRouteName='Measures'
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: ColorSchema.primary,
+        tabBarActiveTintColor: ColorSchema.onSecondary,
         tabBarInactiveTintColor: ColorSchema.secondaryVariant,
         tabBarLabel: ({ focused }) => {
           let textColor = ColorSchema.secondaryVariant;
           if (focused) {
-            textColor = ColorSchema.primary;
+            textColor = ColorSchema.onSecondary;
           }
 
           let textResource;
@@ -43,7 +45,7 @@ export default function MainScreen() {
 
           return (
             <Text
-              variant="labelSmall"
+              variant="bodySmall"
               style={{
                 color: textColor,
               }}>

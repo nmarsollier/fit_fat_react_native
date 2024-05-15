@@ -5,8 +5,8 @@
  * @format
  */
 
-import * as RNLocalize from 'react-native-localize';
+import { getLocales } from 'expo-localization';
 
 export function getLocale() {
-  return RNLocalize.getLocales()[0].languageCode;
+  return getLocales()[0].languageCode ?? "en";
 }

@@ -11,21 +11,21 @@ export const AppTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    surface: ColorSchema.background,
-    surfaceDisabled: ColorSchema.background,
-    onSurfaceVariant: ColorSchema.secondaryVariant,
-    inverseSurface: ColorSchema.secondaryVariant,
-    inverseOnSurface: ColorSchema.secondaryVariant,
-    surfaceVariant: ColorSchema.background,
+    surface: ColorSchema.secondary,
+    surfaceDisabled: ColorSchema.secondary,
+    onSurfaceVariant: ColorSchema.primary,
+    inverseSurface: ColorSchema.primary,
+    inverseOnSurface: ColorSchema.primary,
+    surfaceVariant: ColorSchema.secondary,
     onSurface: ColorSchema.primaryVariant,
-  },
+  }
 };
 
 export const LabelTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    onSurface: ColorSchema.secondaryVariant,
+    onSurface: ColorSchema.primary,
   },
 };
 
@@ -33,6 +33,6 @@ export const MenuTextTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    onSurface: ColorSchema.secondary,
+    onSurface: ColorSchema.onPrimary,
   },
 };

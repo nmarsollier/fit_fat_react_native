@@ -11,7 +11,7 @@ export function Card(
     <View
       style={[
         {
-          backgroundColor: ColorSchema.background,
+          backgroundColor: ColorSchema.secondary,
           justifyContent: 'center',
           alignItems: 'center',
           borderRadius: 10,
