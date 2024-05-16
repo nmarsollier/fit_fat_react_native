@@ -18,7 +18,7 @@ export enum MeasureType {
   IMPERIAL = 'IMPERIAL',
 }
 
-export function measureMessageId(measureType: MeasureType | undefined) {
+export function measureMessageId(measureType?: MeasureType) {
   switch (measureType) {
     case MeasureType.IMPERIAL:
       return 'unitLb';

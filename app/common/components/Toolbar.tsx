@@ -6,7 +6,7 @@ import { ColorSchema } from '../ui/ColorSchema';
 import { ImageAssets } from '../ui/ImageAsets';
 import { RowLayout } from './Layouts';
 
-export default function Toolbar(props: PropsWithChildren<object>) {
+export default function Toolbar({ children }: PropsWithChildren<object>) {
   const navigation = useNavigation();
 
   return (
@@ -32,7 +32,7 @@ export default function Toolbar(props: PropsWithChildren<object>) {
           />
         </TouchableOpacity>
       )}
-      {props.children}
+      {children}
     </RowLayout>
   );
 }

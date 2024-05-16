@@ -80,7 +80,7 @@ export default function PreferencesScreen() {
   );
 }
 
-function PreferencesContent(props: {
+function PreferencesContent({ dispatch, userData }: {
   dispatch: Dispatch<any>;
   userData: PreferencesData;
 }) {
@@ -99,9 +99,9 @@ function PreferencesContent(props: {
             paddingHorizontal: 0,
           }}
           label={intl.formatMessage({ id: 'optionsDisplayName' })}
-          value={props.userData.displayName}
+          value={userData.displayName}
           onChangeText={(val: string) => {
-            props.dispatch(updateDisplayName(val));
+            dispatch(updateDisplayName(val));
           }}
         />
 
@@ -112,7 +112,7 @@ function PreferencesContent(props: {
             }}
             label={intl.formatMessage({ id: 'optionsBirthDate' })}
             editable={false}
-            value={displayDate(props.userData.birthDate)}
+            value={displayDate(userData.birthDate)}
           />
         </TouchableOpacity>
 
@@ -128,9 +128,9 @@ function PreferencesContent(props: {
             }),
           ]}
           options={[MeasureType.METRIC, MeasureType.IMPERIAL]}
-          selected={MeasureType[props.userData.measureSystem]}
+          selected={MeasureType[userData.measureSystem]}
           onChange={(val: string) => {
-            props.dispatch(
+            dispatch(
               updateMeasureSystem(MeasureType[val as keyof typeof MeasureType]),
             );
           }}
@@ -143,9 +143,9 @@ function PreferencesContent(props: {
             intl.formatMessage({ id: sexMessageId(Sex.FEMALE) }),
           ]}
           options={[Sex.MALE, Sex.FEMALE]}
-          selected={props.userData.sex}
+          selected={userData.sex}
           onChange={(val: string) => {
-            props.dispatch(updateSex(Sex[val as keyof typeof Sex]));
+            dispatch(updateSex(Sex[val as keyof typeof Sex]));
           }}
         />
 
@@ -155,9 +155,9 @@ function PreferencesContent(props: {
               paddingHorizontal: 0,
             }}
             label={intl.formatMessage({ id: 'optionsWeight' })}
-            value={props.userData.weight.toString()}
+            value={userData.weight.toString()}
             onChangeText={(val: string) => {
-              props.dispatch(updateWeight(Number(val)));
+              dispatch(updateWeight(Number(val)));
             }}
           />
 
@@ -169,7 +169,7 @@ function PreferencesContent(props: {
               alignSelf: 'flex-end',
             }}>
             <FormattedMessage
-              id={measureMessageId(props.userData.measureSystem)}
+              id={measureMessageId(userData.measureSystem)}
             />
           </Text>
         </RowLayout>
@@ -180,9 +180,9 @@ function PreferencesContent(props: {
               paddingHorizontal: 0,
             }}
             label={intl.formatMessage({ id: 'optionsHeight' })}
-            value={props.userData.height.toString()}
+            value={userData.height.toString()}
             onChangeText={(val: string) => {
-              props.dispatch(updateHeight(Number(val)));
+              dispatch(updateHeight(Number(val)));
             }}
           />
 
@@ -194,7 +194,7 @@ function PreferencesContent(props: {
               alignSelf: 'flex-end',
             }}>
             <FormattedMessage
-              id={measureHeight(props.userData.measureSystem)}
+              id={measureHeight(userData.measureSystem)}
             />
           </Text>
         </RowLayout>
@@ -202,12 +202,12 @@ function PreferencesContent(props: {
 
       {openDatePicker &&
         <RNDateTimePicker
-          value={stringToDate(props.userData.birthDate)}
+          value={stringToDate(userData.birthDate)}
           mode="date"
           onChange={date => {
             setOpenDatePicker(false);
             if (date.type === 'set') {
-              props.dispatch(updateBirthDate(dateToString(new Date(date.nativeEvent.timestamp))));
+              dispatch(updateBirthDate(dateToString(new Date(date.nativeEvent.timestamp))));
             }
           }}
         />

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { ColorSchema } from '../ui/ColorSchema';
 
-export default function ErrorView(props: { text: string }) {
+export default function ErrorView({ text }: { text: string }) {
   return (
     <View
       style={{
@@ -10,7 +10,7 @@ export default function ErrorView(props: { text: string }) {
         backgroundColor: ColorSchema.secondary,
         justifyContent: 'center',
       }}>
-      <Text>{props.text}</Text>
+      <Text>{text}</Text>
     </View>
   );
 }

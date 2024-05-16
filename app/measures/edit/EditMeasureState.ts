@@ -15,7 +15,7 @@ import {
   MeasureMethod,
   MeasuresData,
   MeasureValue,
-  measureValueForMethod,
+  currentValueForMeasure,
   MeasureValues,
   Midaxilarity,
   newMeasuresData,
@@ -51,10 +51,10 @@ export interface EditMeasureReducer {
   save: () => void;
   updateMeasureDate: (date: string) => void;
   updateMeasureMethod: (method: MeasureMethod) => void;
-  setMeasureValueForMethod: (measureValue: MeasureValue, value: number) => void;
+  updateMeasureValueForMethod: (measureValue: MeasureValue, value: number) => void;
 }
 
-export function useEditMeasureState(measureIdParam: string | undefined) {
+export function useEditMeasureState(measureId: string | undefined) {
   const [state, setState] = useState<EditMeasureState>({
     isNew: true,
     isError: false,
@@ -90,7 +90,7 @@ export function useEditMeasureState(measureIdParam: string | undefined) {
     let measure = newMeasuresData();
 
     setState({
-      isNew: measureIdParam === undefined,
+      isNew: measureId === undefined,
       isError: false,
       isLoading: true,
       measure,
@@ -98,8 +98,8 @@ export function useEditMeasureState(measureIdParam: string | undefined) {
     });
 
     let last: MeasuresData | undefined;
-    if (measureIdParam) {
-      last = await findMeasure(measureIdParam);
+    if (measureId) {
+      last = await findMeasure(measureId);
     } else {
       last = await findLastMeasure();
     }
@@ -113,11 +113,11 @@ export function useEditMeasureState(measureIdParam: string | undefined) {
     }
 
     setState({
-      isNew: measureIdParam === undefined,
+      isNew: measureId === undefined,
       isError: false,
       isLoading: false,
       measure,
-      measureValues: fillValues(measure, measureValues(measure.measureMethod)),
+      measureValues: fillValues(measure, getMeasureValuesForMethod(measure.measureMethod)),
     });
   };
 
@@ -130,7 +130,7 @@ export function useEditMeasureState(measureIdParam: string | undefined) {
       newState.measure.measureMethod = method;
       newState.measureValues = fillValues(
         s.measure,
-        measureValues(s.measure.measureMethod),
+        getMeasureValuesForMethod(s.measure.measureMethod),
       );
 
       return newState;
@@ -149,22 +149,22 @@ export function useEditMeasureState(measureIdParam: string | undefined) {
     });
   };
 
-  const setMeasureValueForMethod = (
+  const updateMeasureValueForMethod = (
     measureValue: MeasureValue,
-    value: number,
+    newValue: number,
   ) => {
     setState(s => {
-      let newValue = measureValueForMethod(s.measure, measureValue) || 0;
-      const currentValue = newValue;
+      let assignValue = currentValueForMeasure({ measure: s.measure, value: measureValue }) || 0;
+      const currentValue = assignValue;
 
-      const intPart = Math.trunc(value);
-      const decimalPart = value % 1;
+      const intPart = Math.trunc(newValue);
+      const decimalPart = newValue % 1;
       if (intPart > 0) {
-        newValue = value + (newValue % 1);
+        assignValue = newValue + (assignValue % 1);
       } else if (decimalPart > 0) {
-        newValue = Math.trunc(newValue) + decimalPart;
+        assignValue = Math.trunc(assignValue) + decimalPart;
       }
-      if (newValue === currentValue) {
+      if (assignValue === currentValue) {
         return s;
       }
 
@@ -174,51 +174,51 @@ export function useEditMeasureState(measureIdParam: string | undefined) {
 
       switch (measureValue) {
         case BodyWeight: {
-          newState.measure.bodyWeight = newValue;
+          newState.measure.bodyWeight = assignValue;
           break;
         }
         case Chest: {
-          newState.measure.chest = newValue;
+          newState.measure.chest = assignValue;
           break;
         }
         case Abdominal: {
-          newState.measure.abdominal = newValue;
+          newState.measure.abdominal = assignValue;
           break;
         }
         case Thigh: {
-          newState.measure.thigh = newValue;
+          newState.measure.thigh = assignValue;
           break;
         }
         case Triceps: {
-          newState.measure.triceps = newValue;
+          newState.measure.triceps = assignValue;
           break;
         }
         case Subscapular: {
-          newState.measure.subscapular = newValue;
+          newState.measure.subscapular = assignValue;
           break;
         }
         case Suprailiac: {
-          newState.measure.suprailiac = newValue;
+          newState.measure.suprailiac = assignValue;
           break;
         }
         case Midaxilarity: {
-          newState.measure.midaxillary = newValue;
+          newState.measure.midaxillary = assignValue;
           break;
         }
         case Bicep: {
-          newState.measure.bicep = newValue;
+          newState.measure.bicep = assignValue;
           break;
         }
         case LowerBack: {
-          newState.measure.lowerBack = newValue;
+          newState.measure.lowerBack = assignValue;
           break;
         }
         case Calf: {
-          newState.measure.calf = newValue;
+          newState.measure.calf = assignValue;
           break;
         }
         case BodyFat: {
-          newState.measure.fatPercent = newValue;
+          newState.measure.fatPercent = assignValue;
           break;
         }
       }
@@ -227,7 +227,7 @@ export function useEditMeasureState(measureIdParam: string | undefined) {
 
       newState.measureValues = fillValues(
         newState.measure,
-        measureValues(newState.measure.measureMethod),
+        getMeasureValuesForMethod(newState.measure.measureMethod),
       );
       return newState;
     });
@@ -240,23 +240,23 @@ export function useEditMeasureState(measureIdParam: string | undefined) {
   const reducer: EditMeasureReducer = {
     updateMeasureMethod,
     updateMeasureDate,
-    setMeasureValueForMethod,
+    updateMeasureValueForMethod,
     save,
   };
 
   return { state, onEvent, reducer };
 }
 
-function measureValues(method: MeasureMethod): MeasureValue[] {
-  return MeasureValues.filter(v => isMeasureRequiredForMethod(v, method));
+function getMeasureValuesForMethod(method: MeasureMethod): MeasureValue[] {
+  return MeasureValues.filter(value => isMeasureRequiredForMethod({ value, method }));
 }
 
 function fillValues(
-  measure: MeasuresData,
+  data: MeasuresData,
   measuresValues: MeasureValue[],
 ): MeasureValueData[] {
   return measuresValues.map((measureValue) => {
-    const value = measureValueForMethod(measure, measureValue) || 0;
+    const value = currentValueForMeasure({ measure: data, value: measureValue }) || 0;
     return {
       measureValue,
       value,

@@ -56,7 +56,7 @@ export enum MeasureMethod {
   WEIGHT_ONLY = 'WEIGHT_ONLY',
 }
 
-export function methodMessageId(method: MeasureMethod | undefined): string {
+export function methodMessageId(method?: MeasureMethod): string {
   switch (method) {
     case MeasureMethod.JACKSON_POLLOCK_7:
       return 'measureMethodJacksonPollock7';
@@ -77,9 +77,10 @@ export function methodMessageId(method: MeasureMethod | undefined): string {
   }
 }
 
-export function isMeasureRequiredForMethod(
+export function isMeasureRequiredForMethod({ value, method }: {
   value: MeasureValue,
   method: MeasureMethod,
+}
 ): boolean {
   return value.requiredFor.some(e => e === method);
 }
@@ -106,9 +107,10 @@ export function unitTypeLabel(unitType: UnitType): string {
   }
 }
 
-export function measureValueForMethod(
+export function currentValueForMeasure({ measure, value }: {
   measure: MeasuresData,
   value: MeasureValue,
+}
 ) {
   switch (value) {
     case BodyWeight:

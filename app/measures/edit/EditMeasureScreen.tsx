@@ -31,14 +31,14 @@ import {
   useEditMeasureState,
 } from './EditMeasureState';
 
-export default function EditMeasureScreen(props: EditMeasureScreenProps) {
+export default function EditMeasureScreen({ route, navigation }: EditMeasureScreenProps) {
   const { state, onEvent, reducer } = useEditMeasureState(
-    props.route.params.measureId,
+    route.params.measureId,
   );
 
   onEvent((event: any) => {
     if (event === GoBack) {
-      props.navigation.goBack();
+      navigation.goBack();
     }
   });
 
@@ -53,11 +53,10 @@ export default function EditMeasureScreen(props: EditMeasureScreenProps) {
   return <EditMeasureDetails state={state} reducer={reducer} />;
 }
 
-function EditMeasureDetails(props: {
+function EditMeasureDetails({ state, reducer }: {
   state: EditMeasureState;
   reducer: EditMeasureReducer;
 }) {
-  const { state, reducer } = props;
   const [datePickerMode, setDatePickerMode] = useState<"date" | "time">("date");
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const intl = useIntl();
@@ -81,7 +80,7 @@ function EditMeasureDetails(props: {
         {state.isNew && (
           <TouchableOpacity
             onPress={() => {
-              props.reducer.save();
+              reducer.save();
             }}>
             <Text
               variant="bodyMedium"
@@ -187,7 +186,6 @@ function EditMeasureDetails(props: {
           value={stringToDatetime(state.measure.date)}
           mode={datePickerMode}
           onChange={date => {
-            console.log(JSON.stringify(date))
             if (date.type === 'set') {
               reducer.updateMeasureDate(datetimeToString(new Date(date.nativeEvent.timestamp)));
 
@@ -211,7 +209,7 @@ interface MeasureMethodElement {
   label: string;
 }
 
-function IntMeasureInput(props: {
+function IntMeasureInput({ data, state, reducer }: {
   data: MeasureValueData;
   state: EditMeasureState;
   reducer: EditMeasureReducer;
@@ -225,30 +223,30 @@ function IntMeasureInput(props: {
           alignItems: 'center',
         }}>
         <Text theme={LabelTheme} variant="bodyMedium">
-          <FormattedMessage id={props.data.measureValue.title} /> :
+          <FormattedMessage id={data.measureValue.title} /> :
         </Text>
 
         <Text variant="bodyMedium" style={{ paddingStart: 5, paddingEnd: 5 }}>
-          {props.data.value}
+          {data.value}
         </Text>
 
         <Text theme={LabelTheme} variant="bodyMedium">
-          {unitTypeLabel(props.data.measureValue.unitType)}
+          {unitTypeLabel(data.measureValue.unitType)}
         </Text>
       </View>
 
-      {props.state.isNew && (
+      {state.isNew && (
         <Slider
           thumbTintColor={ColorSchema.onSecondary}
           minimumTrackTintColor={ColorSchema.primary}
           maximumTrackTintColor={ColorSchema.primary}
-          value={props.data.intValue}
+          value={data.intValue}
           minimumValue={0}
           step={1}
-          maximumValue={props.data.measureValue.maxScale}
+          maximumValue={data.measureValue.maxScale}
           onValueChange={value => {
-            props.reducer.setMeasureValueForMethod(
-              props.data.measureValue,
+            reducer.updateMeasureValueForMethod(
+              data.measureValue,
               value,
             );
           }}
@@ -258,7 +256,7 @@ function IntMeasureInput(props: {
   );
 }
 
-function DoubleMeasureInput(props: {
+function DoubleMeasureInput({ data, state, reducer }: {
   data: MeasureValueData;
   state: EditMeasureState;
   reducer: EditMeasureReducer;
@@ -272,48 +270,48 @@ function DoubleMeasureInput(props: {
           alignItems: 'center',
         }}>
         <Text theme={LabelTheme} variant="bodyMedium">
-          <FormattedMessage id={props.data.measureValue.title} /> :
+          <FormattedMessage id={data.measureValue.title} /> :
         </Text>
 
         <Text variant="bodyMedium" style={{ paddingStart: 5, paddingEnd: 5 }}>
-          {props.data.value}
+          {data.value}
         </Text>
 
         <Text theme={LabelTheme} variant="bodyMedium">
-          {unitTypeLabel(props.data.measureValue.unitType)}
+          {unitTypeLabel(data.measureValue.unitType)}
         </Text>
       </View>
 
-      {props.state.isNew && (
+      {state.isNew && (
         <Slider
           thumbTintColor={ColorSchema.onSecondary}
           minimumTrackTintColor={ColorSchema.primary}
           maximumTrackTintColor={ColorSchema.primary}
-          value={props.data.intValue}
+          value={data.intValue}
           minimumValue={0}
           step={1}
-          maximumValue={props.data.measureValue.maxScale}
+          maximumValue={data.measureValue.maxScale}
           onValueChange={value => {
-            props.reducer.setMeasureValueForMethod(
-              props.data.measureValue,
+            reducer.updateMeasureValueForMethod(
+              data.measureValue,
               value,
             );
           }}
         />
       )}
 
-      {props.state.isNew && (
+      {state.isNew && (
         <Slider
           thumbTintColor={ColorSchema.onSecondary}
           minimumTrackTintColor={ColorSchema.primary}
           maximumTrackTintColor={ColorSchema.primary}
-          value={props.data.decimalValue * 100}
+          value={data.decimalValue * 100}
           minimumValue={0}
           step={1}
           maximumValue={99}
           onValueChange={value => {
-            props.reducer.setMeasureValueForMethod(
-              props.data.measureValue,
+            reducer.updateMeasureValueForMethod(
+              data.measureValue,
               value / 100,
             );
           }}

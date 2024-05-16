@@ -68,10 +68,13 @@ export function useMeasuresListState() {
     }, []),
   );
 
-  const reducer: MeasuresListReducer = {
-    openNewMeasure,
-    openViewMeasure,
+  return {
+    state,
+    onEvent,
+    preferences: preferencesState.preferences,
+    reducer: {
+      openNewMeasure,
+      openViewMeasure,
+    }
   };
-  const preferences = preferencesState.preferences;
-  return { state, onEvent, preferences, reducer };
 }

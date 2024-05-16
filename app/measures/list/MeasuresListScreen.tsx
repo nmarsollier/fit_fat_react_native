@@ -32,7 +32,7 @@ import {
 } from './MeasuresListState';
 
 export default function MeasuresListScreen(
-  props: NativeStackScreenProps<RootStackParamList>,
+  { navigation }: NativeStackScreenProps<RootStackParamList>,
 ) {
   const { state, onEvent, reducer, preferences } = useMeasuresListState();
 
@@ -40,11 +40,11 @@ export default function MeasuresListScreen(
     () =>
       onEvent((event: any) => {
         if (event === GoNewMeasure) {
-          props.navigation.navigate('EditMeasureScreen', {
+          navigation.navigate('EditMeasureScreen', {
             measureId: undefined,
           });
         } else if (event instanceof GoViewMeasure) {
-          props.navigation.navigate('EditMeasureScreen', {
+          navigation.navigate('EditMeasureScreen', {
             measureId: event.uuid,
           });
         }
@@ -69,7 +69,7 @@ export default function MeasuresListScreen(
   );
 }
 
-function MeasuresListDetails(props: {
+function MeasuresListDetails({ imageState, reducer, preferences }: {
   imageState: MeasuresListState;
   reducer: MeasuresListReducer;
   preferences: PreferencesData | undefined;
@@ -92,7 +92,7 @@ function MeasuresListDetails(props: {
 
         <TouchableOpacity
           onPress={() => {
-            props.reducer.openNewMeasure();
+            reducer.openNewMeasure();
           }}>
           <Image
             source={ImageAssets.new}
@@ -106,12 +106,12 @@ function MeasuresListDetails(props: {
         style={{
           margin: 8,
         }}
-        data={props.imageState.measures}
+        data={imageState.measures}
         renderItem={({ item }) => (
           <MeasureCard
             data={item}
-            preferences={props.preferences}
-            reducer={props.reducer}
+            preferences={preferences}
+            reducer={reducer}
           />
         )}
       />
@@ -119,7 +119,7 @@ function MeasuresListDetails(props: {
   );
 }
 
-function MeasureCard(props: {
+function MeasureCard({ data, reducer, preferences }: {
   data: MeasuresData;
   reducer: MeasuresListReducer;
   preferences: PreferencesData | undefined;
@@ -127,7 +127,7 @@ function MeasureCard(props: {
   return (
     <TouchableOpacity
       onPress={() => {
-        props.reducer.openViewMeasure(props.data.id);
+        reducer.openViewMeasure(data.id);
       }}>
       <ColumnLayout
         style={{
@@ -144,7 +144,7 @@ function MeasureCard(props: {
               flex: 1,
               textAlign: 'center',
             }}>
-            {displayDatetime(props.data.date)}
+            {displayDatetime(data.date)}
           </Text>
 
           <Text
@@ -153,7 +153,9 @@ function MeasureCard(props: {
               flex: 1,
               textAlign: 'center',
             }}>
-            <FormattedMessage id={methodMessageId(props.data.measureMethod)} />
+            <FormattedMessage id={
+              methodMessageId(data.measureMethod)
+            } />
           </Text>
         </RowLayout>
 
@@ -170,11 +172,11 @@ function MeasureCard(props: {
             <Text
               variant="bodyMedium"
               style={{ paddingStart: 5, paddingEnd: 3 }}>
-              {props.data.bodyWeight}
+              {data.bodyWeight}
             </Text>
             <Text theme={LabelTheme} variant="bodyMedium">
               <FormattedMessage
-                id={measureMessageId(props.preferences?.measureSystem)}
+                id={measureMessageId(preferences?.measureSystem)}
               />
             </Text>
           </View>
@@ -191,7 +193,7 @@ function MeasureCard(props: {
             <Text
               variant="bodyMedium"
               style={{ paddingStart: 5, paddingEnd: 3 }}>
-              {props.data.fatPercent}
+              {data.fatPercent}
             </Text>
             <Text theme={LabelTheme} variant="bodyMedium">
               %
@@ -215,11 +217,11 @@ function MeasureCard(props: {
             <Text
               variant="bodyMedium"
               style={{ paddingStart: 5, paddingEnd: 3 }}>
-              {bodyFatMass(props.data).toFixed(2)}
+              {bodyFatMass(data).toFixed(2)}
             </Text>
             <Text theme={LabelTheme} variant="bodyMedium">
               <FormattedMessage
-                id={measureMessageId(props.preferences?.measureSystem)}
+                id={measureMessageId(preferences?.measureSystem)}
               />
             </Text>
           </View>
@@ -233,7 +235,7 @@ function MeasureCard(props: {
               <FormattedMessage id="fmmi" /> :
             </Text>
             <Text variant="bodyMedium" style={{ paddingStart: 5 }}>
-              {freeFatMassIndex(props.data)}
+              {freeFatMassIndex(data)}
             </Text>
           </View>
         </RowLayout>

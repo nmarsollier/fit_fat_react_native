@@ -1,62 +1,40 @@
 import React, { PropsWithChildren } from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
-import { ColorSchema } from '../ui/ColorSchema';
 
-export function Card(
-  props: PropsWithChildren<{
+export function ColumnLayout({ style, children }:
+  PropsWithChildren<{
     style?: StyleProp<ViewStyle>;
   }>,
 ) {
   return (
     <View
       style={[
-        {
-          backgroundColor: ColorSchema.secondary,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 10,
-        },
-        props.style,
-      ]}>
-      {props.children}
-    </View>
-  );
-}
-
-export function ColumnLayout(
-  props: PropsWithChildren<{
-    style?: StyleProp<ViewStyle>;
-  }>,
-) {
-  return (
-    <View
-      style={[
-        props.style,
+        style,
         {
           flex: 1,
           flexDirection: 'column',
         },
       ]}>
-      {props.children}
+      {children}
     </View>
   );
 }
 
-export function RowLayout(
-  props: PropsWithChildren<{
+export function RowLayout({ style, children }:
+  PropsWithChildren<{
     style?: StyleProp<ViewStyle>;
   }>,
 ) {
   return (
     <View
       style={[
-        props.style,
+        style,
         {
           flex: 1,
           flexDirection: 'row',
         },
       ]}>
-      {props.children}
+      {children}
     </View>
   );
 }

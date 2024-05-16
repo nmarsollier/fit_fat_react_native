@@ -5,7 +5,7 @@ import { ColorSchema } from '../ui/ColorSchema';
 import { LabelTheme } from '../ui/Themes';
 import { ColumnLayout, RowLayout } from './Layouts';
 
-export function LabeledRadioButton(props: {
+export function LabeledRadioButton({ label, selected, options, labels, style, onChange }: {
   label: string;
   selected: string;
   options: string[];
@@ -14,32 +14,32 @@ export function LabeledRadioButton(props: {
   onChange: (newValue: string) => void;
 }) {
   return (
-    <ColumnLayout style={props.style}>
+    <ColumnLayout style={style}>
       <Text variant="bodySmall" theme={LabelTheme}>
-        {props.label}
+        {label}
       </Text>
 
       <RadioButton.Group
-        onValueChange={newValue => props.onChange(newValue)}
-        value={props.selected}>
+        onValueChange={newValue => onChange(newValue)}
+        value={selected}>
         <RowLayout
           style={{
             paddingStart: 16,
           }}>
-          {props.options.map((_, index) => {
+          {options.map((_, index) => {
             return (
               <RowLayout key={index}>
                 <Text
                   style={{
                     alignSelf: 'center',
                   }}>
-                  {props.labels[index]}
+                  {labels[index]}
                 </Text>
 
                 <RadioButton.Android
                   color={ColorSchema.onSecondary}
                   uncheckedColor={ColorSchema.onSecondary}
-                  value={props.options[index]}
+                  value={options[index]}
                 />
               </RowLayout>
             );
