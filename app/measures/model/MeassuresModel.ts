@@ -3,7 +3,7 @@ import { uuid } from '../../common/libs/UUID';
 import { Sex } from '../../preferences/PreferencesModel';
 
 export interface MeasuresData {
-  uid: string;
+  id: string;
   date: string;
   bodyWeight: number;
   bodyHeight: number;
@@ -25,7 +25,7 @@ export interface MeasuresData {
 
 export function newMeasuresData(): MeasuresData {
   return {
-    uid: uuid(),
+    id: uuid(),
     date: datetimeToString(new Date()),
     bodyWeight: 0,
     bodyHeight: 0,
@@ -373,9 +373,9 @@ export function calculateFatPercent(measureData: MeasuresData): number {
     case MeasureMethod.DURNIN_WOMERSLEY: {
       const logSum = Math.log10(
         measureData.bicep +
-          measureData.triceps +
-          measureData.subscapular +
-          measureData.suprailiac,
+        measureData.triceps +
+        measureData.subscapular +
+        measureData.suprailiac,
       );
 
       let density = 0;

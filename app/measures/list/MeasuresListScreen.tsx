@@ -127,7 +127,7 @@ function MeasureCard(props: {
   return (
     <TouchableOpacity
       onPress={() => {
-        props.reducer.openViewMeasure(props.data.uid);
+        props.reducer.openViewMeasure(props.data.id);
       }}>
       <ColumnLayout
         style={{

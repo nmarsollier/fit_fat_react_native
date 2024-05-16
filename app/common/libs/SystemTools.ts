@@ -7,6 +7,6 @@
 
 import { getLocales } from 'expo-localization';
 
-export function getLocale() {
+export function currentLocale() {
   return getLocales()[0].languageCode ?? "en";
 }

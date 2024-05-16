@@ -17,7 +17,7 @@ import React, {
 import { PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
-import { getLocale } from './common/libs/SystemTools';
+import { currentLocale } from './common/libs/SystemTools';
 import { RootStackParamList } from './common/navigation/Navigation';
 import { ColorSchema } from './common/ui/ColorSchema';
 import { messages } from './common/ui/Internationalization';
@@ -26,6 +26,7 @@ import MainScreen from './mainScreen/MainScreen';
 import EditMeasureScreen from './measures/edit/EditMeasureScreen';
 import { preferencesReducer, PreferencesState } from './preferences/PreferencesState';
 import { useMemo } from 'react';
+import { initializeMeasuresDatabase } from './measures/model/MeasuresRepository';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -38,7 +39,9 @@ export interface CombinedReducerState {
 }
 
 export default function App() {
-  const locale = useMemo(() => getLocale(), [])
+  const locale = useMemo(() => currentLocale(), [])
+
+  initializeMeasuresDatabase().then()
 
   return (
     <SafeAreaProvider >

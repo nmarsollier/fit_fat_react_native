@@ -48,7 +48,7 @@ test('PreferencesState update preferences data', () => {
     {
       isLoading: false,
       preferences: {
-        uid: "uuid",
+        id: "uuid",
         displayName: "Test Name",
         birthDate: '',
         weight: 70,
@@ -63,7 +63,7 @@ test('PreferencesState update preferences data', () => {
     {
       isLoading: false,
       preferences: {
-        uid: "uuid",
+        id: "uuid",
         displayName: '',
         birthDate: "2020-01-01",
         weight: 70,
@@ -92,7 +92,7 @@ test('PreferencesState update preferences data', () => {
     {
       isLoading: false,
       preferences: {
-        uid: "uuid",
+        id: "uuid",
         displayName: '',
         birthDate: '',
         weight: 35,
@@ -106,7 +106,7 @@ test('PreferencesState update preferences data', () => {
     {
       isLoading: false,
       preferences: {
-        uid: "uuid",
+        id: "uuid",
         displayName: '',
         birthDate: '',
         weight: 70,
@@ -120,7 +120,7 @@ test('PreferencesState update preferences data', () => {
     {
       isLoading: false,
       preferences: {
-        uid: "uuid",
+        id: "uuid",
         displayName: '',
         birthDate: '',
         weight: 70,
@@ -135,7 +135,7 @@ test('PreferencesState update preferences data', () => {
 test('PreferencesState loadPreferences', () => {
   mockGetIem = () => Promise.resolve(
     JSON.stringify({
-      uid: "uuid",
+      id: "uuid",
       displayName: '',
       birthDate: '',
       weight: 70,
@@ -157,7 +157,7 @@ test('PreferencesState loadPreferences', () => {
           payload: {
             isLoading: false,
             preferences: {
-              uid: "uuid",
+              id: "uuid",
               displayName: '',
               birthDate: '',
               weight: 70,
@@ -187,7 +187,7 @@ test('PreferencesState loadPreferences error', () => {
           payload: {
             isLoading: false,
             preferences: {
-              uid: actions[0].payload.preferences.uid,
+              id: actions[0].payload.preferences.uid,
               displayName: '',
               birthDate: '',
               weight: 70,

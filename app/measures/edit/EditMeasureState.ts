@@ -107,7 +107,7 @@ export function useEditMeasureState(measureIdParam: string | undefined) {
     if (last) {
       measure = {
         ...last,
-        uid: uuid(),
+        id: uuid(),
         date: datetimeToString(new Date()),
       };
     }
