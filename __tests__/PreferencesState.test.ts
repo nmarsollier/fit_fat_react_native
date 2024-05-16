@@ -10,7 +10,7 @@ const mockStore = configureStore(middlewares)
 const initialState: PreferencesState = {
   isLoading: false,
   preferences: {
-    uid: "uuid",
+    id: "uuid",
     displayName: '',
     birthDate: '',
     weight: 70,
@@ -78,7 +78,7 @@ test('PreferencesState update preferences data', () => {
     {
       isLoading: false,
       preferences: {
-        uid: "uuid",
+        id: "uuid",
         displayName: '',
         birthDate: '',
         weight: 70,
@@ -187,7 +187,7 @@ test('PreferencesState loadPreferences error', () => {
           payload: {
             isLoading: false,
             preferences: {
-              id: actions[0].payload.preferences.uid,
+              id: actions[0].payload.preferences.id,
               displayName: '',
               birthDate: '',
               weight: 70,

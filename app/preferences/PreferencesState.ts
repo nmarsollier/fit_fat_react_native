@@ -79,7 +79,7 @@ export const loadPreferences = () => {
         preferencesSlice.actions.update({
           isLoading: false,
           preferences: {
-            uid: uuid(),
+            id: uuid(),
             displayName: '',
             birthDate: '',
             weight: 70,

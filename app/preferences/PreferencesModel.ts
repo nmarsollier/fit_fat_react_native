@@ -1,5 +1,5 @@
 export interface PreferencesData {
-  uid: string;
+  id: string;
   displayName: string;
   birthDate: string;
   weight: number;

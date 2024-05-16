@@ -2,13 +2,15 @@ import { useFocusEffect } from '@react-navigation/native';
 import { Dispatch } from '@reduxjs/toolkit';
 import React, { useCallback, useState } from 'react';
 import { ScrollView, TouchableOpacity } from 'react-native';
-import DatePicker from 'react-native-date-picker';
 import { Text, TextInput } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { LabeledRadioButton } from '../common/components/LabeledRadioButton';
 import { ColumnLayout, RowLayout } from '../common/components/Layouts';
 import LoadingView from '../common/components/LoadingView';
 import Toolbar from '../common/components/Toolbar';
+
+import RNDateTimePicker from '@react-native-community/datetimepicker';
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
   dateToString,
   displayDate,
@@ -35,7 +37,6 @@ import {
   updateSex,
   updateWeight,
 } from './PreferencesState';
-import { FormattedMessage, useIntl } from 'react-intl';
 
 export default function PreferencesScreen() {
   const dispatch = useDispatch<Dispatch<any>>();
@@ -199,19 +200,18 @@ function PreferencesContent(props: {
         </RowLayout>
       </ColumnLayout>
 
-      <DatePicker
-        modal
-        open={openDatePicker}
-        date={stringToDate(props.userData.birthDate)}
-        mode="date"
-        onConfirm={date => {
-          setOpenDatePicker(false);
-          props.dispatch(updateBirthDate(dateToString(date)));
-        }}
-        onCancel={() => {
-          setOpenDatePicker(false);
-        }}
-      />
+      {openDatePicker &&
+        <RNDateTimePicker
+          value={stringToDate(props.userData.birthDate)}
+          mode="date"
+          onChange={date => {
+            setOpenDatePicker(false);
+            if (date.type === 'set') {
+              props.dispatch(updateBirthDate(dateToString(new Date(date.nativeEvent.timestamp))));
+            }
+          }}
+        />
+      }
     </ScrollView>
   );
 }

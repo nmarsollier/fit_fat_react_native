@@ -11,7 +11,7 @@
     "**/node_modules": true,
     "**/.bundle": true,
     "**/__tests__": false,
-    "**/android": true,
+    "**/android": false,
     "**/.expo": true,
     "**/ios": true
   },

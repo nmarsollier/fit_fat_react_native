@@ -1,7 +1,8 @@
+import RNDateTimePicker from '@react-native-community/datetimepicker';
+import Slider from '@react-native-community/slider';
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
-import DatePicker from 'react-native-date-picker';
 import { Dropdown } from 'react-native-element-dropdown';
 import { Text, TextInput } from 'react-native-paper';
 import ErrorView from '../../common/components/ErrorView';
@@ -12,7 +13,7 @@ import Toolbar from '../../common/components/Toolbar';
 import {
   datetimeToString,
   displayDatetime,
-  stringToDate,
+  stringToDatetime
 } from '../../common/libs/DateLibs';
 import { EditMeasureScreenProps } from '../../common/navigation/Navigation';
 import { ColorSchema } from '../../common/ui/ColorSchema';
@@ -29,7 +30,6 @@ import {
   MeasureValueData,
   useEditMeasureState,
 } from './EditMeasureState';
-import Slider from '@react-native-community/slider';
 
 export default function EditMeasureScreen(props: EditMeasureScreenProps) {
   const { state, onEvent, reducer } = useEditMeasureState(
@@ -58,6 +58,7 @@ function EditMeasureDetails(props: {
   reducer: EditMeasureReducer;
 }) {
   const { state, reducer } = props;
+  const [datePickerMode, setDatePickerMode] = useState<"date" | "time">("date");
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const intl = useIntl();
 
@@ -114,7 +115,11 @@ function EditMeasureDetails(props: {
         <RowLayout style={{ marginBottom: 16 }}>
           <TouchableOpacity
             disabled={!state.isNew}
-            onPress={() => setOpenDatePicker(true)}>
+            onPress={() => {
+              setDatePickerMode("date")
+              setOpenDatePicker(true)
+            }}
+          >
             <TextInput
               style={{
                 paddingHorizontal: 0,
@@ -177,19 +182,26 @@ function EditMeasureDetails(props: {
         })}
       </ScrollView>
 
-      <DatePicker
-        modal
-        open={openDatePicker}
-        date={stringToDate(state.measure.date)}
-        mode="datetime"
-        onConfirm={date => {
-          setOpenDatePicker(false);
-          reducer.updateMeasureDate(datetimeToString(date));
-        }}
-        onCancel={() => {
-          setOpenDatePicker(false);
-        }}
-      />
+      {openDatePicker &&
+        <RNDateTimePicker
+          value={stringToDatetime(state.measure.date)}
+          mode={datePickerMode}
+          onChange={date => {
+            console.log(JSON.stringify(date))
+            if (date.type === 'set') {
+              reducer.updateMeasureDate(datetimeToString(new Date(date.nativeEvent.timestamp)));
+
+              if (datePickerMode === 'date') {
+                setDatePickerMode("time")
+              } else {
+                setOpenDatePicker(false);
+              }
+            } else {
+              setOpenDatePicker(false);
+            }
+          }}
+        />
+      }
     </ColumnLayout>
   );
 }
