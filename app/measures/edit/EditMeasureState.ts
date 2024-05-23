@@ -6,7 +6,7 @@ import {
   currentMeasureValue,
   MeasuresData,
   newMeasuresData,
-  setMeasureValue,
+  updateMeasureValue,
 } from '../model/MeassuresModel';
 import { MeasureMethod } from '../model/MeasureMethod';
 import {
@@ -154,21 +154,22 @@ export function useEditMeasureState(measureId: string | undefined) {
         return s;
       }
 
-      const newState = {
-        ...s,
-      };
-
-      setMeasureValue({
-        measure: newState.measure,
+      const newMeasure = updateMeasureValue({
+        measure: s.measure,
         measureValue: measureValue,
         value: assignValue
       })
 
-      newState.measureValues = fillValues(
-        newState.measure,
-        getMeasureValuesForMethod(newState.measure.measureMethod),
+      const newMeasureValues = fillValues(
+        newMeasure,
+        getMeasureValuesForMethod(newMeasure.measureMethod),
       );
-      return newState;
+
+      return {
+        ...s,
+        measure: newMeasure,
+        measureValues: newMeasureValues
+      };
     });
   };
 

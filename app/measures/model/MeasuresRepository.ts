@@ -33,7 +33,7 @@ export async function initializeMeasuresDatabase() {
   );
 }
 
-export async function storeMeasure(measure: MeasuresData) {
+export async function storeMeasure(measure: Readonly<MeasuresData>) {
   try {
     if (!db) return
 

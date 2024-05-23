@@ -170,6 +170,6 @@ const MeasureValues: MeasureValue[] = [
     BodyFat,
 ];
 
-export function getMeasureValuesForMethod(method: MeasureMethod): MeasureValue[] {
+export function getMeasureValuesForMethod(method: Readonly<MeasureMethod>): MeasureValue[] {
     return MeasureValues.filter(value => value.requiredFor.some(e => e === method));
 }

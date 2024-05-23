@@ -49,8 +49,8 @@ export function newMeasuresData(): MeasuresData {
 }
 
 export function currentMeasureValue({ measure, measureValue }: {
-  measure: MeasuresData,
-  measureValue: MeasureValue,
+  measure: Readonly<MeasuresData>,
+  measureValue: Readonly<MeasureValue>,
 }) {
   switch (measureValue) {
     case BodyWeight:
@@ -80,67 +80,69 @@ export function currentMeasureValue({ measure, measureValue }: {
   }
 }
 
-export function setMeasureValue({ measure, measureValue, value: value }: {
-  measure: MeasuresData,
-  measureValue: MeasureValue,
+export function updateMeasureValue({ measure, measureValue, value: value }: {
+  measure: Readonly<MeasuresData>,
+  measureValue: Readonly<MeasureValue>,
   value: number,
-}) {
+}): MeasuresData {
+  const result = { ...measure }
   switch (measureValue) {
     case BodyWeight: {
-      measure.bodyWeight = value;
+      result.bodyWeight = value;
       break;
     }
     case Chest: {
-      measure.chest = value;
+      result.chest = value;
       break;
     }
     case Abdominal: {
-      measure.abdominal = value;
+      result.abdominal = value;
       break;
     }
     case Thigh: {
-      measure.thigh = value;
+      result.thigh = value;
       break;
     }
     case Triceps: {
-      measure.triceps = value;
+      result.triceps = value;
       break;
     }
     case Subscapular: {
-      measure.subscapular = value;
+      result.subscapular = value;
       break;
     }
     case Suprailiac: {
-      measure.suprailiac = value;
+      result.suprailiac = value;
       break;
     }
     case Midaxilarity: {
-      measure.midaxillary = value;
+      result.midaxillary = value;
       break;
     }
     case Bicep: {
-      measure.bicep = value;
+      result.bicep = value;
       break;
     }
     case LowerBack: {
-      measure.lowerBack = value;
+      result.lowerBack = value;
       break;
     }
     case Calf: {
-      measure.calf = value;
+      result.calf = value;
       break;
     }
     case BodyFat: {
-      measure.fatPercent = value;
+      result.fatPercent = value;
       break;
     }
   }
-  measure.fatPercent =
+  result.fatPercent =
     Math.round(calculateFatPercent(measure) * 100) / 100;
 
+  return result
 }
 
-export function bodyFatMass(measure: MeasuresData): number {
+export function bodyFatMass(measure: Readonly<MeasuresData>): number {
   if (measure.bodyWeight > 0 && measure.fatPercent > 0) {
     return measure.bodyWeight * (measure.fatPercent / 100);
   } else {
@@ -148,7 +150,7 @@ export function bodyFatMass(measure: MeasuresData): number {
   }
 }
 
-function leanWeight(measure: MeasuresData): number {
+function leanWeight(measure: Readonly<MeasuresData>): number {
   if (measure.bodyWeight > 0 && measure.fatPercent > 0) {
     return measure.bodyWeight * (1 - measure.fatPercent / 100);
   } else {
@@ -156,7 +158,7 @@ function leanWeight(measure: MeasuresData): number {
   }
 }
 
-export function freeFatMassIndex(measure: MeasuresData): number {
+export function freeFatMassIndex(measure: Readonly<MeasuresData>): number {
   const lw = leanWeight(measure);
   const bh = measure.bodyHeight;
   if (lw > 0 && bh > 0) {
@@ -166,7 +168,7 @@ export function freeFatMassIndex(measure: MeasuresData): number {
   }
 }
 
-export function calculateFatPercent(measureData: MeasuresData): number {
+export function calculateFatPercent(measureData: Readonly<MeasuresData>): number {
   switch (measureData.measureMethod) {
     case MeasureMethod.JACKSON_POLLOCK_7: {
       const sum =

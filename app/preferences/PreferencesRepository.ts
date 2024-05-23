@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PreferencesData } from './PreferencesModel';
 
-export async function storePreferences(preferences: PreferencesData) {
+export async function storePreferences(preferences: Readonly<PreferencesData>) {
   try {
     const jsonValue = JSON.stringify(preferences);
     await AsyncStorage.setItem('preferences', jsonValue);

@@ -9,7 +9,7 @@ export enum MeasureMethod {
     WEIGHT_ONLY = 'WEIGHT_ONLY',
 }
 
-export function methodStringId(method?: MeasureMethod): string {
+export function methodStringId(method?: Readonly<MeasureMethod>): string {
     switch (method) {
         case MeasureMethod.JACKSON_POLLOCK_7:
             return 'measureMethodJacksonPollock7';

@@ -28,10 +28,10 @@ export function displayDatetime(dateValue: string): string {
   return moment(dateValue, 'YYYY-MM-DD hh:mm:ss').format('LL hh:mm');
 }
 
-export function dateToString(date: Date): string {
+export function dateToString(date: Readonly<Date>): string {
   return moment(date).format('YYYY-MM-DD');
 }
 
-export function datetimeToString(date: Date): string {
+export function datetimeToString(date: Readonly<Date>): string {
   return moment(date).format('YYYY-MM-DD hh:mm:ss');
 }
