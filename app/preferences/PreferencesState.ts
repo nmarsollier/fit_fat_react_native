@@ -1,8 +1,8 @@
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
+import { CombinedReducerState } from '../App';
 import { uuid } from '../common/libs/UUID';
 import { MeasureType, PreferencesData, Sex } from './PreferencesModel';
 import { findPreferences, storePreferences } from './PreferencesRepository';
-import { CombinedReducerState } from '../App';
 
 export interface PreferencesState {
   isLoading: boolean;

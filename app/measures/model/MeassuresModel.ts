@@ -1,6 +1,8 @@
 import { datetimeToString } from '../../common/libs/DateLibs';
 import { uuid } from '../../common/libs/UUID';
 import { Sex } from '../../preferences/PreferencesModel';
+import { MeasureMethod } from './MeasureMethod';
+import { Abdominal, Bicep, BodyFat, BodyWeight, Calf, Chest, LowerBack, MeasureValue, Midaxilarity, Subscapular, Suprailiac, Thigh, Triceps, UnitType } from './MeasureValues';
 
 export interface MeasuresData {
   id: string;
@@ -46,54 +48,12 @@ export function newMeasuresData(): MeasuresData {
   };
 }
 
-export enum MeasureMethod {
-  JACKSON_POLLOCK_7 = 'JACKSON_POLLOCK_7',
-  JACKSON_POLLOCK_3 = 'JACKSON_POLLOCK_3',
-  JACKSON_POLLOCK_4 = 'JACKSON_POLLOCK_4',
-  PARRILLO = 'PARRILLO',
-  DURNIN_WOMERSLEY = 'DURNIN_WOMERSLEY',
-  FROM_SCALE = 'FROM_SCALE',
-  WEIGHT_ONLY = 'WEIGHT_ONLY',
-}
-
-export function methodMessageId(method?: MeasureMethod): string {
-  switch (method) {
-    case MeasureMethod.JACKSON_POLLOCK_7:
-      return 'measureMethodJacksonPollock7';
-    case MeasureMethod.JACKSON_POLLOCK_3:
-      return 'measureMethodJacksonPollock3';
-    case MeasureMethod.JACKSON_POLLOCK_4:
-      return 'measureMethodJacksonPollock4';
-    case MeasureMethod.PARRILLO:
-      return 'measureMethodParrillo';
-    case MeasureMethod.DURNIN_WOMERSLEY:
-      return 'measureMethodDurninWomersley';
-    case MeasureMethod.FROM_SCALE:
-      return 'measureMethodManualScale';
-    case MeasureMethod.WEIGHT_ONLY:
-      return 'measureMethodWeight';
-    default:
-      return 'measureMethodWeight';
-  }
-}
-
 export function isMeasureRequiredForMethod({ value, method }: {
   value: MeasureValue,
   method: MeasureMethod,
 }
 ): boolean {
   return value.requiredFor.some(e => e === method);
-}
-
-export enum InputType {
-  INT = 'INT',
-  DOUBLE = 'DOUBLE',
-}
-
-export enum UnitType {
-  PERCENT = 'PERCENT',
-  WEIGHT = 'WEIGHT',
-  WIDTH = 'WIDTH',
 }
 
 export function unitTypeLabel(unitType: UnitType): string {
@@ -110,8 +70,7 @@ export function unitTypeLabel(unitType: UnitType): string {
 export function currentValueForMeasure({ measure, value }: {
   measure: MeasuresData,
   value: MeasureValue,
-}
-) {
+}) {
   switch (value) {
     case BodyWeight:
       return measure.bodyWeight;
@@ -140,153 +99,91 @@ export function currentValueForMeasure({ measure, value }: {
   }
 }
 
-// Available Measure Values
-export interface MeasureValue {
-  title: string;
-  requiredFor: MeasureMethod[];
-  maxScale: number;
-  inputType: InputType;
-  unitType: UnitType;
+export function setValueForMethod({ measure, measureValue, value: value }: {
+  measure: MeasuresData,
+  measureValue: MeasureValue,
+  value: number,
+}) {
+  switch (measureValue) {
+    case BodyWeight: {
+      measure.bodyWeight = value;
+      break;
+    }
+    case Chest: {
+      measure.chest = value;
+      break;
+    }
+    case Abdominal: {
+      measure.abdominal = value;
+      break;
+    }
+    case Thigh: {
+      measure.thigh = value;
+      break;
+    }
+    case Triceps: {
+      measure.triceps = value;
+      break;
+    }
+    case Subscapular: {
+      measure.subscapular = value;
+      break;
+    }
+    case Suprailiac: {
+      measure.suprailiac = value;
+      break;
+    }
+    case Midaxilarity: {
+      measure.midaxillary = value;
+      break;
+    }
+    case Bicep: {
+      measure.bicep = value;
+      break;
+    }
+    case LowerBack: {
+      measure.lowerBack = value;
+      break;
+    }
+    case Calf: {
+      measure.calf = value;
+      break;
+    }
+    case BodyFat: {
+      measure.fatPercent = value;
+      break;
+    }
+  }
+  measure.fatPercent =
+    Math.round(calculateFatPercent(measure) * 100) / 100;
+
 }
 
-export const BodyWeight: MeasureValue = {
-  title: 'measureWeight',
-  requiredFor: [MeasureMethod.FROM_SCALE, MeasureMethod.WEIGHT_ONLY],
-  maxScale: 149,
-  inputType: InputType.DOUBLE,
-  unitType: UnitType.WEIGHT,
-};
+export function bodyFatMass(measure: MeasuresData): number {
+  if (measure.bodyWeight > 0 && measure.fatPercent > 0) {
+    return measure.bodyWeight * (measure.fatPercent / 100);
+  } else {
+    return 0.0;
+  }
+}
 
-export const Chest: MeasureValue = {
-  title: 'measureChest',
-  requiredFor: [
-    MeasureMethod.JACKSON_POLLOCK_7,
-    MeasureMethod.JACKSON_POLLOCK_3,
-    MeasureMethod.PARRILLO,
-  ],
-  maxScale: 30,
-  inputType: InputType.INT,
-  unitType: UnitType.WIDTH,
-};
+function leanWeight(measure: MeasuresData): number {
+  if (measure.bodyWeight > 0 && measure.fatPercent > 0) {
+    return measure.bodyWeight * (1 - measure.fatPercent / 100);
+  } else {
+    return 0.0;
+  }
+}
 
-export const Abdominal: MeasureValue = {
-  title: 'measureAbdominal',
-  requiredFor: [
-    MeasureMethod.JACKSON_POLLOCK_7,
-    MeasureMethod.JACKSON_POLLOCK_3,
-    MeasureMethod.JACKSON_POLLOCK_4,
-    MeasureMethod.PARRILLO,
-  ],
-  maxScale: 40,
-  inputType: InputType.INT,
-  unitType: UnitType.WIDTH,
-};
-
-export const Thigh: MeasureValue = {
-  title: 'measureThigh',
-  requiredFor: [
-    MeasureMethod.JACKSON_POLLOCK_7,
-    MeasureMethod.JACKSON_POLLOCK_3,
-    MeasureMethod.JACKSON_POLLOCK_4,
-    MeasureMethod.PARRILLO,
-  ],
-  maxScale: 40,
-  inputType: InputType.INT,
-  unitType: UnitType.WIDTH,
-};
-
-export const Triceps: MeasureValue = {
-  title: 'measureTricep',
-  requiredFor: [
-    MeasureMethod.JACKSON_POLLOCK_7,
-    MeasureMethod.DURNIN_WOMERSLEY,
-    MeasureMethod.JACKSON_POLLOCK_4,
-    MeasureMethod.PARRILLO,
-  ],
-  maxScale: 30,
-  inputType: InputType.INT,
-  unitType: UnitType.WIDTH,
-};
-
-export const Subscapular: MeasureValue = {
-  title: 'measureSubscapular',
-  requiredFor: [
-    MeasureMethod.JACKSON_POLLOCK_7,
-    MeasureMethod.DURNIN_WOMERSLEY,
-    MeasureMethod.PARRILLO,
-  ],
-  maxScale: 40,
-  inputType: InputType.INT,
-  unitType: UnitType.WIDTH,
-};
-
-export const Suprailiac: MeasureValue = {
-  title: 'measureSuprailiac',
-  requiredFor: [
-    MeasureMethod.JACKSON_POLLOCK_7,
-    MeasureMethod.DURNIN_WOMERSLEY,
-    MeasureMethod.JACKSON_POLLOCK_4,
-    MeasureMethod.PARRILLO,
-  ],
-  maxScale: 40,
-  inputType: InputType.INT,
-  unitType: UnitType.WIDTH,
-};
-
-export const Midaxilarity: MeasureValue = {
-  title: 'measureMidaxillary',
-  requiredFor: [MeasureMethod.JACKSON_POLLOCK_7],
-  maxScale: 40,
-  inputType: InputType.INT,
-  unitType: UnitType.WIDTH,
-};
-
-export const Bicep: MeasureValue = {
-  title: 'measureBicep',
-  requiredFor: [MeasureMethod.DURNIN_WOMERSLEY, MeasureMethod.PARRILLO],
-  maxScale: 30,
-  inputType: InputType.INT,
-  unitType: UnitType.WIDTH,
-};
-
-export const LowerBack: MeasureValue = {
-  title: 'measureLowerBack',
-  requiredFor: [MeasureMethod.PARRILLO],
-  maxScale: 40,
-  inputType: InputType.INT,
-  unitType: UnitType.WIDTH,
-};
-
-export const Calf: MeasureValue = {
-  title: 'measureCalf',
-  requiredFor: [MeasureMethod.PARRILLO],
-  maxScale: 30,
-  inputType: InputType.INT,
-  unitType: UnitType.WIDTH,
-};
-
-export const BodyFat: MeasureValue = {
-  title: 'measureFat',
-  requiredFor: [MeasureMethod.FROM_SCALE],
-  maxScale: 49,
-  inputType: InputType.DOUBLE,
-  unitType: UnitType.PERCENT,
-};
-
-export const MeasureValues: MeasureValue[] = [
-  BodyWeight,
-  Chest,
-  Abdominal,
-  Thigh,
-  Triceps,
-  Subscapular,
-  Suprailiac,
-  Midaxilarity,
-  Bicep,
-  LowerBack,
-  Calf,
-  BodyFat,
-];
+export function freeFatMassIndex(measure: MeasuresData): number {
+  const lw = leanWeight(measure);
+  const bh = measure.bodyHeight;
+  if (lw > 0 && bh > 0) {
+    return lw / ((bh / 100) * (bh / 100));
+  } else {
+    return 0.0;
+  }
+}
 
 export function calculateFatPercent(measureData: MeasuresData): number {
   switch (measureData.measureMethod) {
@@ -419,31 +316,5 @@ export function calculateFatPercent(measureData: MeasuresData): number {
     case MeasureMethod.WEIGHT_ONLY: {
       return 0;
     }
-  }
-}
-
-export function bodyFatMass(measure: MeasuresData): number {
-  if (measure.bodyWeight > 0 && measure.fatPercent > 0) {
-    return measure.bodyWeight * (measure.fatPercent / 100);
-  } else {
-    return 0.0;
-  }
-}
-
-function leanWeight(measure: MeasuresData): number {
-  if (measure.bodyWeight > 0 && measure.fatPercent > 0) {
-    return measure.bodyWeight * (1 - measure.fatPercent / 100);
-  } else {
-    return 0.0;
-  }
-}
-
-export function freeFatMassIndex(measure: MeasuresData): number {
-  const lw = leanWeight(measure);
-  const bh = measure.bodyHeight;
-  if (lw > 0 && bh > 0) {
-    return lw / ((bh / 100) * (bh / 100));
-  } else {
-    return 0.0;
   }
 }

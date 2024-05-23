@@ -21,8 +21,8 @@ import {
   bodyFatMass,
   freeFatMassIndex,
   MeasuresData,
-  methodMessageId,
 } from '../model/MeassuresModel';
+import { methodMessageId } from '../model/MeasureMethod';
 import {
   GoNewMeasure,
   GoViewMeasure,

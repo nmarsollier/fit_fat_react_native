@@ -10,6 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { StatusBar } from 'expo-status-bar';
+import { useMemo } from 'react';
 import { IntlProvider } from 'react-intl';
 import React, {
   View
@@ -24,9 +25,8 @@ import { messages } from './common/ui/Internationalization';
 import { AppTheme } from './common/ui/Themes';
 import MainScreen from './mainScreen/MainScreen';
 import EditMeasureScreen from './measures/edit/EditMeasureScreen';
-import { preferencesReducer, PreferencesState } from './preferences/PreferencesState';
-import { useMemo } from 'react';
 import { initializeMeasuresDatabase } from './measures/model/MeasuresRepository';
+import { preferencesReducer, PreferencesState } from './preferences/PreferencesState';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

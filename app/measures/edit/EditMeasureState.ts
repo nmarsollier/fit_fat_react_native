@@ -3,32 +3,19 @@ import { useOnStateEvent } from '../../common/components/OnStateEvent';
 import { datetimeToString } from '../../common/libs/DateLibs';
 import { uuid } from '../../common/libs/UUID';
 import {
-  Abdominal,
-  Bicep,
-  BodyFat,
-  BodyWeight,
-  calculateFatPercent,
-  Calf,
-  Chest,
-  isMeasureRequiredForMethod,
-  LowerBack,
-  MeasureMethod,
-  MeasuresData,
-  MeasureValue,
   currentValueForMeasure,
-  MeasureValues,
-  Midaxilarity,
+  isMeasureRequiredForMethod,
+  MeasuresData,
   newMeasuresData,
-  Subscapular,
-  Suprailiac,
-  Thigh,
-  Triceps,
+  setValueForMethod,
 } from '../model/MeassuresModel';
+import { MeasureMethod } from '../model/MeasureMethod';
 import {
   findLastMeasure,
   findMeasure,
   storeMeasure,
 } from '../model/MeasuresRepository';
+import { MeasureValue, MeasureValues } from '../model/MeasureValues';
 
 export interface EditMeasureState {
   isNew: boolean;
@@ -172,58 +159,11 @@ export function useEditMeasureState(measureId: string | undefined) {
         ...s,
       };
 
-      switch (measureValue) {
-        case BodyWeight: {
-          newState.measure.bodyWeight = assignValue;
-          break;
-        }
-        case Chest: {
-          newState.measure.chest = assignValue;
-          break;
-        }
-        case Abdominal: {
-          newState.measure.abdominal = assignValue;
-          break;
-        }
-        case Thigh: {
-          newState.measure.thigh = assignValue;
-          break;
-        }
-        case Triceps: {
-          newState.measure.triceps = assignValue;
-          break;
-        }
-        case Subscapular: {
-          newState.measure.subscapular = assignValue;
-          break;
-        }
-        case Suprailiac: {
-          newState.measure.suprailiac = assignValue;
-          break;
-        }
-        case Midaxilarity: {
-          newState.measure.midaxillary = assignValue;
-          break;
-        }
-        case Bicep: {
-          newState.measure.bicep = assignValue;
-          break;
-        }
-        case LowerBack: {
-          newState.measure.lowerBack = assignValue;
-          break;
-        }
-        case Calf: {
-          newState.measure.calf = assignValue;
-          break;
-        }
-        case BodyFat: {
-          newState.measure.fatPercent = assignValue;
-          break;
-        }
-      }
-      newState.measure.fatPercent =
-        Math.round(calculateFatPercent(newState.measure) * 100) / 100;
+      setValueForMethod({
+        measure: newState.measure,
+        measureValue: measureValue,
+        value: assignValue
+      })
 
       newState.measureValues = fillValues(
         newState.measure,

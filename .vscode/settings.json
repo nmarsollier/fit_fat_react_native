@@ -10,8 +10,8 @@
     "**/.vscode": true,
     "**/node_modules": true,
     "**/.bundle": true,
-    "**/__tests__": false,
-    "**/android": false,
+    "**/__tests__": true,
+    "**/android": true,
     "**/.expo": true,
     "**/ios": true
   },
