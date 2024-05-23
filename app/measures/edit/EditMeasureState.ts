@@ -3,11 +3,10 @@ import { useOnStateEvent } from '../../common/components/OnStateEvent';
 import { datetimeToString } from '../../common/libs/DateLibs';
 import { uuid } from '../../common/libs/UUID';
 import {
-  currentValueForMeasure,
-  isMeasureRequiredForMethod,
+  currentMeasureValue,
   MeasuresData,
   newMeasuresData,
-  setValueForMethod,
+  setMeasureValue,
 } from '../model/MeassuresModel';
 import { MeasureMethod } from '../model/MeasureMethod';
 import {
@@ -15,7 +14,7 @@ import {
   findMeasure,
   storeMeasure,
 } from '../model/MeasuresRepository';
-import { MeasureValue, MeasureValues } from '../model/MeasureValues';
+import { getMeasureValuesForMethod, MeasureValue } from '../model/MeasureValues';
 
 export interface EditMeasureState {
   isNew: boolean;
@@ -141,7 +140,7 @@ export function useEditMeasureState(measureId: string | undefined) {
     newValue: number,
   ) => {
     setState(s => {
-      let assignValue = currentValueForMeasure({ measure: s.measure, value: measureValue }) || 0;
+      let assignValue = currentMeasureValue({ measure: s.measure, measureValue: measureValue }) || 0;
       const currentValue = assignValue;
 
       const intPart = Math.trunc(newValue);
@@ -159,7 +158,7 @@ export function useEditMeasureState(measureId: string | undefined) {
         ...s,
       };
 
-      setValueForMethod({
+      setMeasureValue({
         measure: newState.measure,
         measureValue: measureValue,
         value: assignValue
@@ -187,16 +186,12 @@ export function useEditMeasureState(measureId: string | undefined) {
   return { state, onEvent, reducer };
 }
 
-function getMeasureValuesForMethod(method: MeasureMethod): MeasureValue[] {
-  return MeasureValues.filter(value => isMeasureRequiredForMethod({ value, method }));
-}
-
 function fillValues(
   data: MeasuresData,
   measuresValues: MeasureValue[],
 ): MeasureValueData[] {
   return measuresValues.map((measureValue) => {
-    const value = currentValueForMeasure({ measure: data, value: measureValue }) || 0;
+    const value = currentMeasureValue({ measure: data, measureValue: measureValue }) || 0;
     return {
       measureValue,
       value,

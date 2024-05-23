@@ -18,7 +18,7 @@ export enum MeasureType {
   IMPERIAL = 'IMPERIAL',
 }
 
-export function measureMessageId(measureType?: MeasureType) {
+export function measureWeightStringId(measureType?: MeasureType) {
   switch (measureType) {
     case MeasureType.IMPERIAL:
       return 'unitLb';
@@ -27,7 +27,7 @@ export function measureMessageId(measureType?: MeasureType) {
   }
 }
 
-export function measureHeight(measureType: MeasureType) {
+export function measureHeightStringId(measureType: MeasureType) {
   switch (measureType) {
     case MeasureType.IMPERIAL:
       return 'unitIn';
@@ -36,7 +36,7 @@ export function measureHeight(measureType: MeasureType) {
   }
 }
 
-export function measureTypeMessageId(measureType: MeasureType) {
+export function measureTypeStringId(measureType: MeasureType) {
   switch (measureType) {
     case MeasureType.IMPERIAL:
       return 'optionsSystemOfMeasurementImperial';
@@ -45,7 +45,7 @@ export function measureTypeMessageId(measureType: MeasureType) {
   }
 }
 
-export function sexMessageId(sex: Sex) {
+export function sexStringId(sex: Sex) {
   switch (sex) {
     case Sex.FEMALE:
       return 'optionsSexFemale';

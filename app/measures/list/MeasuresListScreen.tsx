@@ -14,7 +14,7 @@ import { ColorSchema } from '../../common/ui/ColorSchema';
 import { ImageAssets } from '../../common/ui/ImageAsets';
 import { LabelTheme } from '../../common/ui/Themes';
 import {
-  measureMessageId,
+  measureWeightStringId,
   PreferencesData,
 } from '../../preferences/PreferencesModel';
 import {
@@ -22,7 +22,7 @@ import {
   freeFatMassIndex,
   MeasuresData,
 } from '../model/MeassuresModel';
-import { methodMessageId } from '../model/MeasureMethod';
+import { methodStringId } from '../model/MeasureMethod';
 import {
   GoNewMeasure,
   GoViewMeasure,
@@ -154,7 +154,7 @@ function MeasureCard({ data, reducer, preferences }: {
               textAlign: 'center',
             }}>
             <FormattedMessage id={
-              methodMessageId(data.measureMethod)
+              methodStringId(data.measureMethod)
             } />
           </Text>
         </RowLayout>
@@ -176,7 +176,7 @@ function MeasureCard({ data, reducer, preferences }: {
             </Text>
             <Text theme={LabelTheme} variant="bodyMedium">
               <FormattedMessage
-                id={measureMessageId(preferences?.measureSystem)}
+                id={measureWeightStringId(preferences?.measureSystem)}
               />
             </Text>
           </View>
@@ -221,7 +221,7 @@ function MeasureCard({ data, reducer, preferences }: {
             </Text>
             <Text theme={LabelTheme} variant="bodyMedium">
               <FormattedMessage
-                id={measureMessageId(preferences?.measureSystem)}
+                id={measureWeightStringId(preferences?.measureSystem)}
               />
             </Text>
           </View>

@@ -2,7 +2,7 @@ import { datetimeToString } from '../../common/libs/DateLibs';
 import { uuid } from '../../common/libs/UUID';
 import { Sex } from '../../preferences/PreferencesModel';
 import { MeasureMethod } from './MeasureMethod';
-import { Abdominal, Bicep, BodyFat, BodyWeight, Calf, Chest, LowerBack, MeasureValue, Midaxilarity, Subscapular, Suprailiac, Thigh, Triceps, UnitType } from './MeasureValues';
+import { Abdominal, Bicep, BodyFat, BodyWeight, Calf, Chest, LowerBack, MeasureValue, Midaxilarity, Subscapular, Suprailiac, Thigh, Triceps } from './MeasureValues';
 
 export interface MeasuresData {
   id: string;
@@ -48,30 +48,11 @@ export function newMeasuresData(): MeasuresData {
   };
 }
 
-export function isMeasureRequiredForMethod({ value, method }: {
-  value: MeasureValue,
-  method: MeasureMethod,
-}
-): boolean {
-  return value.requiredFor.some(e => e === method);
-}
-
-export function unitTypeLabel(unitType: UnitType): string {
-  switch (unitType) {
-    case UnitType.PERCENT:
-      return '%';
-    case UnitType.WEIGHT:
-      return 'kg';
-    case UnitType.WIDTH:
-      return 'mm';
-  }
-}
-
-export function currentValueForMeasure({ measure, value }: {
+export function currentMeasureValue({ measure, measureValue }: {
   measure: MeasuresData,
-  value: MeasureValue,
+  measureValue: MeasureValue,
 }) {
-  switch (value) {
+  switch (measureValue) {
     case BodyWeight:
       return measure.bodyWeight;
     case Chest:
@@ -99,7 +80,7 @@ export function currentValueForMeasure({ measure, value }: {
   }
 }
 
-export function setValueForMethod({ measure, measureValue, value: value }: {
+export function setMeasureValue({ measure, measureValue, value: value }: {
   measure: MeasuresData,
   measureValue: MeasureValue,
   value: number,

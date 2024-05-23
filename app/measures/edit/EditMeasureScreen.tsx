@@ -18,11 +18,9 @@ import {
 import { EditMeasureScreenProps } from '../../common/navigation/Navigation';
 import { ColorSchema } from '../../common/ui/ColorSchema';
 import { LabelTheme, MenuTextTheme } from '../../common/ui/Themes';
-import {
-  unitTypeLabel,
-} from '../model/MeassuresModel';
-import { MeasureMethod, methodMessageId } from '../model/MeasureMethod';
-import { InputType } from '../model/MeasureValues';
+import { } from '../model/MeassuresModel';
+import { MeasureMethod, methodStringId } from '../model/MeasureMethod';
+import { InputType, unitTypeStringId } from '../model/MeasureValues';
 import {
   EditMeasureReducer,
   EditMeasureState,
@@ -231,7 +229,7 @@ function IntMeasureInput({ data, state, reducer }: {
         </Text>
 
         <Text theme={LabelTheme} variant="bodyMedium">
-          {unitTypeLabel(data.measureValue.unitType)}
+          <FormattedMessage id={unitTypeStringId(data.measureValue.unitType)} />
         </Text>
       </View>
 
@@ -278,7 +276,7 @@ function DoubleMeasureInput({ data, state, reducer }: {
         </Text>
 
         <Text theme={LabelTheme} variant="bodyMedium">
-          {unitTypeLabel(data.measureValue.unitType)}
+          <FormattedMessage id={unitTypeStringId(data.measureValue.unitType)} />
         </Text>
       </View>
 
@@ -327,31 +325,31 @@ function measureMethods(): MeasureMethodElement[] {
   return [
     {
       method: MeasureMethod.JACKSON_POLLOCK_7,
-      label: intl.formatMessage({ id: methodMessageId(MeasureMethod.JACKSON_POLLOCK_7) }),
+      label: intl.formatMessage({ id: methodStringId(MeasureMethod.JACKSON_POLLOCK_7) }),
     },
     {
       method: MeasureMethod.JACKSON_POLLOCK_3,
-      label: intl.formatMessage({ id: methodMessageId(MeasureMethod.JACKSON_POLLOCK_3) }),
+      label: intl.formatMessage({ id: methodStringId(MeasureMethod.JACKSON_POLLOCK_3) }),
     },
     {
       method: MeasureMethod.JACKSON_POLLOCK_4,
-      label: intl.formatMessage({ id: methodMessageId(MeasureMethod.JACKSON_POLLOCK_4) }),
+      label: intl.formatMessage({ id: methodStringId(MeasureMethod.JACKSON_POLLOCK_4) }),
     },
     {
       method: MeasureMethod.PARRILLO,
-      label: intl.formatMessage({ id: methodMessageId(MeasureMethod.PARRILLO) }),
+      label: intl.formatMessage({ id: methodStringId(MeasureMethod.PARRILLO) }),
     },
     {
       method: MeasureMethod.DURNIN_WOMERSLEY,
-      label: intl.formatMessage({ id: methodMessageId(MeasureMethod.DURNIN_WOMERSLEY) }),
+      label: intl.formatMessage({ id: methodStringId(MeasureMethod.DURNIN_WOMERSLEY) }),
     },
     {
       method: MeasureMethod.FROM_SCALE,
-      label: intl.formatMessage({ id: methodMessageId(MeasureMethod.FROM_SCALE) }),
+      label: intl.formatMessage({ id: methodStringId(MeasureMethod.FROM_SCALE) }),
     },
     {
       method: MeasureMethod.WEIGHT_ONLY,
-      label: intl.formatMessage({ id: methodMessageId(MeasureMethod.WEIGHT_ONLY) }),
+      label: intl.formatMessage({ id: methodStringId(MeasureMethod.WEIGHT_ONLY) }),
     },
   ];
 }

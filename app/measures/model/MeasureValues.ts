@@ -11,6 +11,17 @@ export enum UnitType {
     WIDTH = 'WIDTH',
 }
 
+export function unitTypeStringId(unitType: UnitType): string {
+    switch (unitType) {
+        case UnitType.PERCENT:
+            return 'unitPercent';
+        case UnitType.WEIGHT:
+            return 'unitKg';
+        case UnitType.WIDTH:
+            return 'unitMm';
+    }
+}
+
 // Available Measure Values
 export interface MeasureValue {
     title: string;
@@ -144,7 +155,7 @@ export const BodyFat: MeasureValue = {
     unitType: UnitType.PERCENT,
 };
 
-export const MeasureValues: MeasureValue[] = [
+const MeasureValues: MeasureValue[] = [
     BodyWeight,
     Chest,
     Abdominal,
@@ -158,3 +169,7 @@ export const MeasureValues: MeasureValue[] = [
     Calf,
     BodyFat,
 ];
+
+export function getMeasureValuesForMethod(method: MeasureMethod): MeasureValue[] {
+    return MeasureValues.filter(value => value.requiredFor.some(e => e === method));
+}

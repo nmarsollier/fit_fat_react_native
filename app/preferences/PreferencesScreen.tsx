@@ -18,13 +18,13 @@ import {
 } from '../common/libs/DateLibs';
 import { ColorSchema } from '../common/ui/ColorSchema';
 import {
-  measureHeight,
-  measureMessageId,
+  measureHeightStringId,
   MeasureType,
-  measureTypeMessageId,
+  measureTypeStringId,
+  measureWeightStringId,
   PreferencesData,
   Sex,
-  sexMessageId,
+  sexStringId,
 } from './PreferencesModel';
 import {
   loadPreferences,
@@ -121,10 +121,10 @@ function PreferencesContent({ dispatch, userData }: {
           label={intl.formatMessage({ id: 'optionsSystemOfMeasurement' })}
           labels={[
             intl.formatMessage({
-              id: measureTypeMessageId(MeasureType.METRIC),
+              id: measureTypeStringId(MeasureType.METRIC),
             }),
             intl.formatMessage({
-              id: measureTypeMessageId(MeasureType.IMPERIAL),
+              id: measureTypeStringId(MeasureType.IMPERIAL),
             }),
           ]}
           options={[MeasureType.METRIC, MeasureType.IMPERIAL]}
@@ -139,8 +139,8 @@ function PreferencesContent({ dispatch, userData }: {
         <LabeledRadioButton
           label={intl.formatMessage({ id: 'optionsSex' })}
           labels={[
-            intl.formatMessage({ id: sexMessageId(Sex.MALE) }),
-            intl.formatMessage({ id: sexMessageId(Sex.FEMALE) }),
+            intl.formatMessage({ id: sexStringId(Sex.MALE) }),
+            intl.formatMessage({ id: sexStringId(Sex.FEMALE) }),
           ]}
           options={[Sex.MALE, Sex.FEMALE]}
           selected={userData.sex}
@@ -169,7 +169,7 @@ function PreferencesContent({ dispatch, userData }: {
               alignSelf: 'flex-end',
             }}>
             <FormattedMessage
-              id={measureMessageId(userData.measureSystem)}
+              id={measureWeightStringId(userData.measureSystem)}
             />
           </Text>
         </RowLayout>
@@ -194,7 +194,7 @@ function PreferencesContent({ dispatch, userData }: {
               alignSelf: 'flex-end',
             }}>
             <FormattedMessage
-              id={measureHeight(userData.measureSystem)}
+              id={measureHeightStringId(userData.measureSystem)}
             />
           </Text>
         </RowLayout>
