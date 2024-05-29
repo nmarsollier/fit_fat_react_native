@@ -1,16 +1,29 @@
-import { CallbackWithResult } from "@react-native-async-storage/async-storage/lib/typescript/types";
-import configureStore from "redux-mock-store";
-import { thunk } from 'redux-thunk';
-import { MeasureType, Sex } from "../app/preferences/PreferencesModel";
-import { loadPreferences, preferencesReducer, PreferencesState, updateBirthDate, updateDisplayName, updateHeight, updateMeasureSystem, updateSex, updateWeight } from "../app/preferences/PreferencesState";
+import {CallbackWithResult} from '@react-native-async-storage/async-storage/lib/typescript/types';
+import configureStore from 'redux-mock-store';
+import {thunk} from 'redux-thunk';
+import {MeasureType, Sex} from '../app/preferences/PreferencesModel';
+import {
+  loadPreferences,
+  preferencesReducer,
+  PreferencesState,
+  updateBirthDate,
+  updateDisplayName,
+  updateHeight,
+  updateMeasureSystem,
+  updateSex,
+  updateWeight
+} from '../app/preferences/PreferencesState';
 
 const middlewares = [thunk]
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 const mockStore = configureStore(middlewares)
 
 const initialState: PreferencesState = {
   isLoading: false,
   preferences: {
-    id: "uuid",
+    id: 'uuid',
     displayName: '',
     birthDate: '',
     weight: 70,
@@ -24,7 +37,9 @@ let mockGetIem = () => Promise.reject<string>()
 jest.mock('@react-native-async-storage/async-storage', () => ({
   getItem: jest.fn(
     (
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       key: string,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       callback?: CallbackWithResult<string>
     ) => {
       return mockGetIem()
@@ -32,24 +47,24 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
 }));
 
 test('PreferencesState initial', () => {
-  expect(preferencesReducer(undefined, { type: 'unknown' })).toStrictEqual(
+  expect(preferencesReducer(undefined, {type: 'unknown'})).toStrictEqual(
     {
       isLoading: true
     }
   );
 
-  expect(preferencesReducer(initialState, { type: 'unknown' })).toStrictEqual(
+  expect(preferencesReducer(initialState, {type: 'unknown'})).toStrictEqual(
     initialState
   );
 })
 
 test('PreferencesState update preferences data', () => {
-  expect(preferencesReducer(initialState, updateDisplayName("Test Name"))).toStrictEqual(
+  expect(preferencesReducer(initialState, updateDisplayName('Test Name'))).toStrictEqual(
     {
       isLoading: false,
       preferences: {
-        id: "uuid",
-        displayName: "Test Name",
+        id: 'uuid',
+        displayName: 'Test Name',
         birthDate: '',
         weight: 70,
         height: 150,
@@ -59,13 +74,13 @@ test('PreferencesState update preferences data', () => {
     }
   );
 
-  expect(preferencesReducer(initialState, updateBirthDate("2020-01-01"))).toStrictEqual(
+  expect(preferencesReducer(initialState, updateBirthDate('2020-01-01'))).toStrictEqual(
     {
       isLoading: false,
       preferences: {
-        id: "uuid",
+        id: 'uuid',
         displayName: '',
-        birthDate: "2020-01-01",
+        birthDate: '2020-01-01',
         weight: 70,
         height: 150,
         sex: Sex.MALE,
@@ -78,7 +93,7 @@ test('PreferencesState update preferences data', () => {
     {
       isLoading: false,
       preferences: {
-        id: "uuid",
+        id: 'uuid',
         displayName: '',
         birthDate: '',
         weight: 70,
@@ -92,7 +107,7 @@ test('PreferencesState update preferences data', () => {
     {
       isLoading: false,
       preferences: {
-        id: "uuid",
+        id: 'uuid',
         displayName: '',
         birthDate: '',
         weight: 35,
@@ -106,7 +121,7 @@ test('PreferencesState update preferences data', () => {
     {
       isLoading: false,
       preferences: {
-        id: "uuid",
+        id: 'uuid',
         displayName: '',
         birthDate: '',
         weight: 70,
@@ -120,7 +135,7 @@ test('PreferencesState update preferences data', () => {
     {
       isLoading: false,
       preferences: {
-        id: "uuid",
+        id: 'uuid',
         displayName: '',
         birthDate: '',
         weight: 70,
@@ -135,18 +150,20 @@ test('PreferencesState update preferences data', () => {
 test('PreferencesState loadPreferences', () => {
   mockGetIem = () => Promise.resolve(
     JSON.stringify({
-      id: "uuid",
+      id: 'uuid',
       displayName: '',
       birthDate: '',
       weight: 70,
       height: 150,
-      sex: "MALE",
-      measureSystem: "METRIC",
+      sex: 'MALE',
+      measureSystem: 'METRIC',
     })
   );
 
   const store = mockStore(initialState)
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   store.dispatch(loadPreferences()).then(() => {
     const actions = store.getActions()
 
@@ -157,7 +174,7 @@ test('PreferencesState loadPreferences', () => {
           payload: {
             isLoading: false,
             preferences: {
-              id: "uuid",
+              id: 'uuid',
               displayName: '',
               birthDate: '',
               weight: 70,
@@ -177,6 +194,8 @@ test('PreferencesState loadPreferences error', () => {
 
   const store = mockStore(initialState)
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   store.dispatch(loadPreferences()).then(() => {
     const actions = store.getActions()
 

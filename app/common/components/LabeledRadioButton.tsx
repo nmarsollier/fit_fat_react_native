@@ -1,8 +1,8 @@
+import { ColorSchema } from '@/common/ui/ColorSchema';
+import { LabelTheme } from '@/common/ui/Themes';
 import * as React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { RadioButton, Text } from 'react-native-paper';
-import { ColorSchema } from '../ui/ColorSchema';
-import { LabelTheme } from '../ui/Themes';
 import { ColumnLayout, RowLayout } from './Layouts';
 
 export function LabeledRadioButton({ label, selected, options, labels, style, onChange }: {

@@ -1,6 +1,6 @@
+import { CombinedReducerState } from '@/App';
+import { uuid } from '@/common/libs/UUID';
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
-import { CombinedReducerState } from '../App';
-import { uuid } from '../common/libs/UUID';
 import { MeasureType, PreferencesData, Sex } from './PreferencesModel';
 import { findPreferences, storePreferences } from './PreferencesRepository';
 
@@ -59,10 +59,11 @@ const preferencesSlice = createSlice({
   },
 });
 
+
 export const loadPreferences = () => {
   return async (
     dispatch: (action: PayloadAction<PreferencesState>) => void,
-    // eslint-disable-next-line
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     getState: () => CombinedReducerState,
   ) => {
     const preferences = await findPreferences();
@@ -116,11 +117,9 @@ export const {
   updateMeasureSystem,
 } = preferencesSlice.actions;
 
-// eslint-disable-next-line
 export const preferencesSelector = createSelector<any, PreferencesState>(
   (state: CombinedReducerState) => state.preferencesReducer,
   reducer => {
-    // eslint-disable-next-line
     return { ...reducer };
   },
 );

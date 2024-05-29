@@ -8,5 +8,5 @@
 import { getLocales } from 'expo-localization';
 
 export function currentLocale() {
-  return getLocales()[0].languageCode ?? "en";
+  return getLocales()[0].languageCode ?? 'en';
 }

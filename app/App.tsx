@@ -6,6 +6,15 @@
  * @format
  */
 
+import { currentLocale } from '@/common/libs/SystemTools';
+import { RootStackParamList } from '@/common/navigation/Navigation';
+import { ColorSchema } from '@/common/ui/ColorSchema';
+import { messages } from '@/common/ui/Internationalization';
+import { AppTheme } from '@/common/ui/Themes';
+import MainScreen from '@/mainScreen/MainScreen';
+import EditMeasureScreen from '@/measures/edit/EditMeasureScreen';
+import { initializeMeasuresDatabase } from '@/measures/model/MeasuresRepository';
+import { preferencesReducer, PreferencesState } from '@/preferences/PreferencesState';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
@@ -18,15 +27,6 @@ import React, {
 import { PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
-import { currentLocale } from './common/libs/SystemTools';
-import { RootStackParamList } from './common/navigation/Navigation';
-import { ColorSchema } from './common/ui/ColorSchema';
-import { messages } from './common/ui/Internationalization';
-import { AppTheme } from './common/ui/Themes';
-import MainScreen from './mainScreen/MainScreen';
-import EditMeasureScreen from './measures/edit/EditMeasureScreen';
-import { initializeMeasuresDatabase } from './measures/model/MeasuresRepository';
-import { preferencesReducer, PreferencesState } from './preferences/PreferencesState';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

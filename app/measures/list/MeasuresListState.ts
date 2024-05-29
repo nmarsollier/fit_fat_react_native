@@ -1,11 +1,11 @@
+import { MeasuresData } from '@/measures/model/MeassuresModel';
+import { findMeasures } from '@/measures/model/MeasuresRepository';
+import { preferencesSelector } from '@/preferences/PreferencesState';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { preferencesSelector } from '../../preferences/PreferencesState';
-import { MeasuresData } from '../model/MeassuresModel';
-import { findMeasures } from '../model/MeasuresRepository';
 
-import { useOnStateEvent } from '../../common/components/OnStateEvent';
+import { useOnStateEvent } from '@/common/components/OnStateEvent';
 
 export interface MeasuresListState {
   isError: boolean;

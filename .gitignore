@@ -74,15 +74,12 @@ lint/intermediates/
 lint/generated/
 lint/outputs/
 lint/tmp/
-# lint/reports/
-
 .DS_Store
-
 /buildSrc/src/main/java/com/prismacolor/plus/codegenerator/generated/
 node_modules
-
+android
+ios
 .history
-# Expo
 .expo
 dist/
 web-build/

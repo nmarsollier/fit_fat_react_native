@@ -5,22 +5,18 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { Text, TextInput } from 'react-native-paper';
-import ErrorView from '../../common/components/ErrorView';
-import { ColumnLayout, RowLayout } from '../../common/components/Layouts';
-import LoadingView from '../../common/components/LoadingView';
-import { Stretch } from '../../common/components/Stretch';
-import Toolbar from '../../common/components/Toolbar';
-import {
-  datetimeToString,
-  displayDatetime,
-  stringToDatetime
-} from '../../common/libs/DateLibs';
-import { EditMeasureScreenProps } from '../../common/navigation/Navigation';
-import { ColorSchema } from '../../common/ui/ColorSchema';
-import { LabelTheme, MenuTextTheme } from '../../common/ui/Themes';
-import { } from '../model/MeassuresModel';
-import { MeasureMethod, methodStringId } from '../model/MeasureMethod';
-import { InputType, unitTypeStringId } from '../model/MeasureValues';
+
+import ErrorView from '@/common/components/ErrorView';
+import { ColumnLayout, RowLayout } from '@/common/components/Layouts';
+import LoadingView from '@/common/components/LoadingView';
+import { Stretch } from '@/common/components/Stretch';
+import Toolbar from '@/common/components/Toolbar';
+import { datetimeToString, displayDatetime, stringToDatetime } from '@/common/libs/DateLibs';
+import { EditMeasureScreenProps } from '@/common/navigation/Navigation';
+import { ColorSchema } from '@/common/ui/ColorSchema';
+import { LabelTheme, MenuTextTheme } from '@/common/ui/Themes';
+import { MeasureMethod, methodStringId } from '@/measures/model/MeasureMethod';
+import { InputType, unitTypeStringId } from '@/measures/model/MeasureValues';
 import {
   EditMeasureReducer,
   EditMeasureState,
@@ -55,7 +51,7 @@ function EditMeasureDetails({ state, reducer }: {
   state: EditMeasureState;
   reducer: EditMeasureReducer;
 }) {
-  const [datePickerMode, setDatePickerMode] = useState<"date" | "time">("date");
+  const [datePickerMode, setDatePickerMode] = useState<'date' | 'time'>('date');
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const intl = useIntl();
 
@@ -113,7 +109,7 @@ function EditMeasureDetails({ state, reducer }: {
           <TouchableOpacity
             disabled={!state.isNew}
             onPress={() => {
-              setDatePickerMode("date")
+              setDatePickerMode('date')
               setOpenDatePicker(true)
             }}
           >
@@ -188,7 +184,7 @@ function EditMeasureDetails({ state, reducer }: {
               reducer.updateMeasureDate(datetimeToString(new Date(date.nativeEvent.timestamp)));
 
               if (datePickerMode === 'date') {
-                setDatePickerMode("time")
+                setDatePickerMode('time')
               } else {
                 setOpenDatePicker(false);
               }

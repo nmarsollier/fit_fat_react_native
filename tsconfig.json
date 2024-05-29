@@ -12,7 +12,12 @@
     "strictFunctionTypes": true,
     "noImplicitThis": true,
     "alwaysStrict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": [
+        "./app/*"
+      ]
+    }
   },
   "extends": "expo/tsconfig.base"
 }

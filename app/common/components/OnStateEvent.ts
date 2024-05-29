@@ -9,7 +9,7 @@ interface LastSubscription {
 export function useOnStateEvent(): [
   onStateEvent: (event: any) => void,
   emitEvent: (e: any) => void,
-] {
+  ] {
   const subject = useMemo(() => new Subject<any>(), []);
   const subscription = useMemo<LastSubscription>(() => {
     return {} as LastSubscription;
