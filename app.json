@@ -23,7 +23,7 @@
       [
         "expo-router",
         {
-          "root": "./app/routes"
+          "root": "./routes"
         }
       ]
     ],

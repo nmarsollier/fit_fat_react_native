@@ -68,6 +68,10 @@ export function useMeasuresListState() {
     }, []),
   );
 
+  if (!state.isLoading && state.measures.length == 0 && state.isError == false) {
+    loadMeasures()
+  }
+
   return {
     state,
     onEvent,
