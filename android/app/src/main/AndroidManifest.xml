@@ -25,6 +25,7 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="com.nmarsollier.fitfat"/>
+        <data android:scheme="com.nmarsollier.fitfat"/>
         <data android:scheme="exp+fitfat"/>
       </intent-filter>
     </activity>

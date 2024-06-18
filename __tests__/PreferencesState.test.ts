@@ -1,7 +1,7 @@
-import {CallbackWithResult} from '@react-native-async-storage/async-storage/lib/typescript/types';
+import { CallbackWithResult } from '@react-native-async-storage/async-storage/lib/typescript/types';
 import configureStore from 'redux-mock-store';
-import {thunk} from 'redux-thunk';
-import {MeasureType, Sex} from '../app/preferences/PreferencesModel';
+import { thunk } from 'redux-thunk';
+import { MeasureType, Sex } from '../app/preferences/PreferencesModel';
 import {
   loadPreferences,
   preferencesReducer,
@@ -47,13 +47,13 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
 }));
 
 test('PreferencesState initial', () => {
-  expect(preferencesReducer(undefined, {type: 'unknown'})).toStrictEqual(
+  expect(preferencesReducer(undefined, { type: 'unknown' })).toStrictEqual(
     {
       isLoading: true
     }
   );
 
-  expect(preferencesReducer(initialState, {type: 'unknown'})).toStrictEqual(
+  expect(preferencesReducer(initialState, { type: 'unknown' })).toStrictEqual(
     initialState
   );
 })

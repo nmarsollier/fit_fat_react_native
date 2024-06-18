@@ -4,7 +4,6 @@ import LoadingView from '@/common/components/LoadingView';
 import { Stretch } from '@/common/components/Stretch';
 import Toolbar from '@/common/components/Toolbar';
 import { displayDatetime } from '@/common/libs/DateLibs';
-import { RootStackParamList } from '@/common/navigation/Navigation';
 import { ColorSchema } from '@/common/ui/ColorSchema';
 import { ImageAssets } from '@/common/ui/ImageAsets';
 import { LabelTheme } from '@/common/ui/Themes';
@@ -14,11 +13,8 @@ import {
   MeasuresData,
 } from '@/measures/model/MeassuresModel';
 import { methodStringId } from '@/measures/model/MeasureMethod';
-import {
-  measureWeightStringId,
-  PreferencesData,
-} from '@/preferences/PreferencesModel';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { measureWeightStringId, PreferencesData } from '@/preferences/PreferencesModel';
+import { router } from 'expo-router';
 import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { FlatList, Image, TouchableOpacity, View } from 'react-native';
@@ -28,11 +24,10 @@ import {
   GoViewMeasure,
   MeasuresListReducer,
   MeasuresListState,
-  useMeasuresListState,
+  useMeasuresListState
 } from './MeasuresListState';
 
 export default function MeasuresListScreen(
-  { navigation }: NativeStackScreenProps<RootStackParamList>,
 ) {
   const { state, onEvent, reducer, preferences } = useMeasuresListState();
 
@@ -40,24 +35,20 @@ export default function MeasuresListScreen(
     () =>
       onEvent((event: any) => {
         if (event === GoNewMeasure) {
-          navigation.navigate('EditMeasureScreen', {
-            measureId: undefined,
-          });
+          router.navigate('/measures/')
         } else if (event instanceof GoViewMeasure) {
-          navigation.navigate('EditMeasureScreen', {
-            measureId: event.uuid,
-          });
+          router.navigate(`/measures/{event.uuid}`)
         }
       }),
-    [],
+    [state],
   );
 
   if (!state || state.isLoading) {
-    return <LoadingView />;
+    return <LoadingView />
   }
 
   if (state.isError) {
-    return <ErrorView text="Error Loading Data" />;
+    return <ErrorView text="Error Loading Data" />
   }
 
   return (

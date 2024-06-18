@@ -1,11 +1,11 @@
 import { MeasuresData } from '@/measures/model/MeassuresModel';
 import { findMeasures } from '@/measures/model/MeasuresRepository';
 import { preferencesSelector } from '@/preferences/PreferencesState';
-import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { useOnStateEvent } from '@/common/components/OnStateEvent';
+import { useFocusEffect } from 'expo-router';
 
 export interface MeasuresListState {
   isError: boolean;

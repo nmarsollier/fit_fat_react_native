@@ -12,11 +12,11 @@ import LoadingView from '@/common/components/LoadingView';
 import { Stretch } from '@/common/components/Stretch';
 import Toolbar from '@/common/components/Toolbar';
 import { datetimeToString, displayDatetime, stringToDatetime } from '@/common/libs/DateLibs';
-import { EditMeasureScreenProps } from '@/common/navigation/Navigation';
 import { ColorSchema } from '@/common/ui/ColorSchema';
 import { LabelTheme, MenuTextTheme } from '@/common/ui/Themes';
 import { MeasureMethod, methodStringId } from '@/measures/model/MeasureMethod';
 import { InputType, unitTypeStringId } from '@/measures/model/MeasureValues';
+import { useRouter } from 'expo-router';
 import {
   EditMeasureReducer,
   EditMeasureState,
@@ -25,14 +25,15 @@ import {
   useEditMeasureState,
 } from './EditMeasureState';
 
-export default function EditMeasureScreen({ route, navigation }: EditMeasureScreenProps) {
+export default function EditMeasureScreen({ measureId }: { measureId: string | undefined }) {
+  const route = useRouter()
   const { state, onEvent, reducer } = useEditMeasureState(
-    route.params.measureId,
+    measureId,
   );
 
   onEvent((event: any) => {
     if (event === GoBack) {
-      navigation.goBack();
+      route.back();
     }
   });
 
@@ -158,7 +159,6 @@ function EditMeasureDetails({ state, reducer }: {
                   reducer={reducer}
                 />
               );
-              break;
             }
             case InputType.DOUBLE: {
               return (
@@ -169,7 +169,6 @@ function EditMeasureDetails({ state, reducer }: {
                   reducer={reducer}
                 />
               );
-              break;
             }
           }
         })}

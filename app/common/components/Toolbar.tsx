@@ -1,12 +1,12 @@
 import { ColorSchema } from '@/common/ui/ColorSchema';
 import { ImageAssets } from '@/common/ui/ImageAsets';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 import * as React from 'react';
 import { PropsWithChildren } from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
 
 export default function Toolbar({ children }: PropsWithChildren<object>) {
-  const navigation = useNavigation();
+  const router = useRouter();
 
   return (
     <View
@@ -19,10 +19,10 @@ export default function Toolbar({ children }: PropsWithChildren<object>) {
         flexDirection: 'row',
       }}
     >
-      {navigation.canGoBack() && (
+      {router.canGoBack() && (
         <TouchableOpacity
           onPress={() => {
-            navigation.goBack();
+            router.back();
           }}>
           <Image
             style={{ height: 24, width: 24, marginEnd: 10, marginBottom: 1 }}

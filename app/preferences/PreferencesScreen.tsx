@@ -1,4 +1,3 @@
-import { useFocusEffect } from '@react-navigation/native';
 import { Dispatch } from '@reduxjs/toolkit';
 import React, { useCallback, useState } from 'react';
 import { ScrollView, TouchableOpacity } from 'react-native';
@@ -13,6 +12,7 @@ import Toolbar from '@/common/components/Toolbar';
 import { dateToString, displayDate, stringToDate } from '@/common/libs/DateLibs';
 import { ColorSchema } from '@/common/ui/ColorSchema';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
+import { useFocusEffect } from 'expo-router';
 import { FormattedMessage, useIntl } from 'react-intl';
 import {
   measureHeightStringId,

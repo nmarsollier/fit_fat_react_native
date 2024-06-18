@@ -1,89 +1,77 @@
-import { ColorSchema } from '@/common/ui/ColorSchema';
-import { ImageAssets } from '@/common/ui/ImageAsets';
-import MeasuresListScreen from '@/measures/list/MeasuresListScreen';
-import PreferencesScreen from '@/preferences/PreferencesScreen';
-import StatsScreen from '@/stats/StatsScreen';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import * as SplashScreen from 'expo-splash-screen';
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { Image } from 'react-native';
-import { Text } from 'react-native-paper';
+import { useEffect } from 'react';
 
+import { currentLocale } from '@/common/libs/SystemTools';
+import { ColorSchema } from '@/common/ui/ColorSchema';
+import { messages } from '@/common/ui/Internationalization';
+import { AppTheme } from '@/common/ui/Themes';
+import { initializeMeasuresDatabase } from '@/measures/model/MeasuresRepository';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { StatusBar } from 'expo-status-bar';
+import { useMemo } from 'react';
+import { IntlProvider } from 'react-intl';
+import { View } from 'react-native';
+import { PaperProvider } from 'react-native-paper';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux';
+import { preferencesReducer, PreferencesState } from '../preferences/PreferencesState';
 
-const Tab = createBottomTabNavigator();
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync();
 
-export default function MainScreen() {
+const appStore = configureStore({
+  reducer: combineReducers({ preferencesReducer })
+})
+
+export interface CombinedReducerState {
+  preferencesReducer: PreferencesState
+}
+
+export function MainScreen({ children }: React.PropsWithChildren) {
+  const locale = useMemo(() => currentLocale(), [])
+
+  initializeMeasuresDatabase().then()
+
+  useEffect(() => {
+    SplashScreen.hideAsync();
+  }, []);
 
   return (
-    <Tab.Navigator
-      initialRouteName='Measures'
-      screenOptions={({ route }) => ({
-        headerShown: false,
-        tabBarActiveTintColor: ColorSchema.onSecondary,
-        tabBarInactiveTintColor: ColorSchema.secondaryVariant,
-        tabBarLabel: ({ focused }) => {
-          let textColor = ColorSchema.secondaryVariant;
-          if (focused) {
-            textColor = ColorSchema.onSecondary;
-          }
-
-          let textResource;
-
-          switch (route.name) {
-            case 'Options': {
-              textResource = 'homeMenuOptions';
-              break;
-            }
-            case 'Measures': {
-              textResource = 'homeMeasureTitle';
-              break;
-            }
-            case 'Stats': {
-              textResource = 'homeMenuProgress';
-              break;
-            }
-          }
-
-          return (
-            <Text
-              variant="bodySmall"
-              style={{
-                color: textColor,
-              }}>
-              <FormattedMessage id={textResource} />
-            </Text>
-          );
-        },
-        tabBarIcon: ({ color, size }) => {
-          let iconName;
-
-          switch (route.name) {
-            case 'Options': {
-              iconName = ImageAssets.settings;
-              break;
-            }
-            case 'Measures': {
-              iconName = ImageAssets.home;
-              break;
-            }
-            case 'Stats': {
-              iconName = ImageAssets.stats;
-              break;
-            }
-          }
-
-          return (
-            <Image
-              source={iconName}
-              style={{ height: size, width: size }}
-              tintColor={color}
-            />
-          );
-        },
-      })}>
-      <Tab.Screen name="Options" component={PreferencesScreen} />
-      <Tab.Screen name="Measures" component={MeasuresListScreen} />
-      <Tab.Screen name="Stats" component={StatsScreen} />
-    </Tab.Navigator>
+    <SafeAreaProvider >
+      <IntlProvider locale={locale} messages={messages.get(locale)} defaultLocale='en' >
+        <PaperProvider theme={AppTheme}>
+          <Provider store={appStore} >
+            <MainScreenContent children={children} />
+          </Provider>
+        </PaperProvider>
+      </IntlProvider>
+    </SafeAreaProvider>
   );
 }
+
+function MainScreenContent({ children }: React.PropsWithChildren) {
+  const insets = useSafeAreaInsets();
+  return (
+    <View style={{
+      flex: 1,
+      backgroundColor: ColorSchema.onSecondary,
+      paddingTop: insets.top
+    }}>
+      <StatusBar
+        style='light'
+        backgroundColor={ColorSchema.onSecondary}
+      />
+
+      {children}
+    </View>
+  )
+}
+
+
+/*
+      <StatusBar
+        style='light'
+        backgroundColor={ColorSchema.onSecondary}
+      />
+*/

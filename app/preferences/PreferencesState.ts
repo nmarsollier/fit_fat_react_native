@@ -1,5 +1,5 @@
-import { CombinedReducerState } from '@/App';
 import { uuid } from '@/common/libs/UUID';
+import { CombinedReducerState } from '@/mainScreen/MainScreen';
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import { MeasureType, PreferencesData, Sex } from './PreferencesModel';
 import { findPreferences, storePreferences } from './PreferencesRepository';

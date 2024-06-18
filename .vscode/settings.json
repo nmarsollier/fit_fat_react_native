@@ -16,5 +16,6 @@
     "**/ios": true,
     "**/.idea": true
   },
-  "explorerExclude.backup": {}
+  "explorerExclude.backup": {},
+  "git.ignoreLimitWarning": true
 }
