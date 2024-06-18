@@ -3,8 +3,15 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 # Getting Started
 
 ```
-npx expo start
+npx expo prebuild 
+npx expo run:android
 ```
+
+```
+npx expo prebuild --clean
+```
+
+
 ```
 npx run lint
 ```

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LabeledRadioButton } from '@/common/components/LabeledRadioButton';
 import { ColumnLayout, RowLayout } from '@/common/components/Layouts';
 import LoadingView from '@/common/components/LoadingView';
+import { Stretch } from '@/common/components/Stretch';
 import Toolbar from '@/common/components/Toolbar';
 import { dateToString, displayDate, stringToDate } from '@/common/libs/DateLibs';
 import { ColorSchema } from '@/common/ui/ColorSchema';
@@ -72,6 +73,9 @@ export default function PreferencesScreen() {
         dispatch={dispatch}
         userData={preferencesState.preferences}
       />
+
+      <Stretch />
+
     </ColumnLayout>
   );
 }

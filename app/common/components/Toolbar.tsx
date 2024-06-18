@@ -3,23 +3,22 @@ import { ImageAssets } from '@/common/ui/ImageAsets';
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { PropsWithChildren } from 'react';
-import { Image, TouchableOpacity } from 'react-native';
-import { RowLayout } from './Layouts';
+import { Image, TouchableOpacity, View } from 'react-native';
 
 export default function Toolbar({ children }: PropsWithChildren<object>) {
   const navigation = useNavigation();
 
   return (
-    <RowLayout
+    <View
       style={{
         backgroundColor: ColorSchema.onSecondary,
         paddingStart: 16,
         paddingBottom: 5,
         alignItems: 'center',
-        flexBasis: 35,
-        flexShrink: 1,
-        flexGrow: 0,
-      }}>
+        height: 40,
+        flexDirection: 'row',
+      }}
+    >
       {navigation.canGoBack() && (
         <TouchableOpacity
           onPress={() => {
@@ -33,6 +32,6 @@ export default function Toolbar({ children }: PropsWithChildren<object>) {
         </TouchableOpacity>
       )}
       {children}
-    </RowLayout>
+    </View>
   );
 }

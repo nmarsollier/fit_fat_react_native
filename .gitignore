@@ -77,8 +77,6 @@ lint/tmp/
 .DS_Store
 /buildSrc/src/main/java/com/prismacolor/plus/codegenerator/generated/
 node_modules
-android
-ios
 .history
 .expo
 dist/
