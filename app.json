@@ -4,12 +4,12 @@
     "displayName": "FitFat",
     "splash": {
       "image": "./assets/img/splash.png",
-      "resizeMode": "contain",
+      "icon": "./assets/img/launcher.png",
       "backgroundColor": "#ffffff"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/img/splash.png",
+        "foregroundImage": "./assets/img/launcher.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.nmarsollier.fitfat"
@@ -21,10 +21,7 @@
     "plugins": [
       "expo-localization",
       [
-        "expo-router",
-        {
-          "root": "./routes"
-        }
+        "expo-router"
       ]
     ],
     "ios": {

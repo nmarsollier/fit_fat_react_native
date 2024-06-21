@@ -1,20 +1,20 @@
-import { useOnStateEvent } from '@/common/components/OnStateEvent';
-import { datetimeToString } from '@/common/libs/DateLibs';
-import { uuid } from '@/common/libs/UUID';
+import { useEffect, useState } from 'react';
+import { useOnStateEvent } from '../../common/components/OnStateEvent';
+import { datetimeToString } from '../../common/libs/DateLibs';
+import { uuid } from '../../common/libs/UUID';
 import {
   currentMeasureValue,
   MeasuresData,
   newMeasuresData,
   updateMeasureValue,
-} from '@/measures/model/MeassuresModel';
-import { MeasureMethod } from '@/measures/model/MeasureMethod';
+} from '../model/MeassuresModel';
+import { MeasureMethod } from '../model/MeasureMethod';
 import {
   findLastMeasure,
   findMeasure,
   storeMeasure,
-} from '@/measures/model/MeasuresRepository';
-import { getMeasureValuesForMethod, MeasureValue } from '@/measures/model/MeasureValues';
-import { useEffect, useState } from 'react';
+} from '../model/MeasuresRepository';
+import { getMeasureValuesForMethod, MeasureValue } from '../model/MeasureValues';
 
 export interface EditMeasureState {
   isNew: boolean;

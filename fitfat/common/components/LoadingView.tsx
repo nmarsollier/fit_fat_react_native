@@ -1,6 +1,6 @@
-import { ColorSchema } from '@/common/ui/ColorSchema';
 import * as React from 'react';
 import { ActivityIndicator } from 'react-native';
+import { ColorSchema } from '../ui/ColorSchema';
 import { ColumnLayout } from './Layouts';
 import { Stretch } from './Stretch';
 

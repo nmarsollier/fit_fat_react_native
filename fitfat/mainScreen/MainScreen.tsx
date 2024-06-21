@@ -2,11 +2,6 @@ import * as SplashScreen from 'expo-splash-screen';
 import * as React from 'react';
 import { useEffect } from 'react';
 
-import { currentLocale } from '@/common/libs/SystemTools';
-import { ColorSchema } from '@/common/ui/ColorSchema';
-import { messages } from '@/common/ui/Internationalization';
-import { AppTheme } from '@/common/ui/Themes';
-import { initializeMeasuresDatabase } from '@/measures/model/MeasuresRepository';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { StatusBar } from 'expo-status-bar';
 import { useMemo } from 'react';
@@ -15,6 +10,11 @@ import { View } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
+import { currentLocale } from '../common/libs/SystemTools';
+import { ColorSchema } from '../common/ui/ColorSchema';
+import { messages } from '../common/ui/Internationalization';
+import { AppTheme } from '../common/ui/Themes';
+import { initializeMeasuresDatabase } from '../measures/model/MeasuresRepository';
 import { preferencesReducer, PreferencesState } from '../preferences/PreferencesState';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -67,11 +67,3 @@ function MainScreenContent({ children }: React.PropsWithChildren) {
     </View>
   )
 }
-
-
-/*
-      <StatusBar
-        style='light'
-        backgroundColor={ColorSchema.onSecondary}
-      />
-*/

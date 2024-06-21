@@ -1,6 +1,6 @@
-import { datetimeToString } from '@/common/libs/DateLibs';
-import { uuid } from '@/common/libs/UUID';
-import { Sex } from '@/preferences/PreferencesModel';
+import { datetimeToString } from '../../common/libs/DateLibs';
+import { uuid } from '../../common/libs/UUID';
+import { Sex } from '../../preferences/PreferencesModel';
 import { MeasureMethod } from './MeasureMethod';
 import { Abdominal, Bicep, BodyFat, BodyWeight, Calf, Chest, LowerBack, MeasureValue, Midaxilarity, Subscapular, Suprailiac, Thigh, Triceps } from './MeasureValues';
 

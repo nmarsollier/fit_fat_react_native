@@ -1,11 +1,11 @@
-import { MeasuresData } from '@/measures/model/MeassuresModel';
-import { findMeasures } from '@/measures/model/MeasuresRepository';
-import { preferencesSelector } from '@/preferences/PreferencesState';
 import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { preferencesSelector } from '../../preferences/PreferencesState';
+import { MeasuresData } from '../model/MeassuresModel';
+import { findMeasures } from '../model/MeasuresRepository';
 
-import { useOnStateEvent } from '@/common/components/OnStateEvent';
 import { useFocusEffect } from 'expo-router';
+import { useOnStateEvent } from '../../common/components/OnStateEvent';
 
 export interface MeasuresListState {
   isError: boolean;
@@ -44,14 +44,12 @@ export function useMeasuresListState() {
     });
 
     const measures = await findMeasures();
-    if (measures) {
-      setState({
-        isError: false,
-        isLoading: false,
-        measures,
-      });
-      return;
-    }
+    setState({
+      isError: false,
+      isLoading: false,
+      measures: measures || [],
+    });
+    return;
   };
 
   const openNewMeasure = () => {
@@ -67,10 +65,6 @@ export function useMeasuresListState() {
       void loadMeasures();
     }, []),
   );
-
-  if (!state.isLoading && state.measures.length == 0 && state.isError == false) {
-    loadMeasures()
-  }
 
   return {
     state,

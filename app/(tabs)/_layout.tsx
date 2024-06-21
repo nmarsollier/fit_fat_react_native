@@ -1,8 +1,8 @@
-import { ColorSchema } from '@/common/ui/ColorSchema';
-import { ImageAssets } from '@/common/ui/ImageAsets';
 import { Tabs } from 'expo-router';
 import * as React from 'react';
 import { Image } from 'react-native';
+import { ColorSchema } from '../../fitfat/common/ui/ColorSchema';
+import { ImageAssets } from '../../fitfat/common/ui/ImageAsets';
 
 export default function TabLayout() {
   return (

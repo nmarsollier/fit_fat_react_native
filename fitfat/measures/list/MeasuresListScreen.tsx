@@ -1,24 +1,24 @@
-import ErrorView from '@/common/components/ErrorView';
-import { ColumnLayout, RowLayout } from '@/common/components/Layouts';
-import LoadingView from '@/common/components/LoadingView';
-import { Stretch } from '@/common/components/Stretch';
-import Toolbar from '@/common/components/Toolbar';
-import { displayDatetime } from '@/common/libs/DateLibs';
-import { ColorSchema } from '@/common/ui/ColorSchema';
-import { ImageAssets } from '@/common/ui/ImageAsets';
-import { LabelTheme } from '@/common/ui/Themes';
-import {
-  bodyFatMass,
-  freeFatMassIndex,
-  MeasuresData,
-} from '@/measures/model/MeassuresModel';
-import { methodStringId } from '@/measures/model/MeasureMethod';
-import { measureWeightStringId, PreferencesData } from '@/preferences/PreferencesModel';
 import { router } from 'expo-router';
 import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { FlatList, Image, TouchableOpacity, View } from 'react-native';
 import { Divider, Text } from 'react-native-paper';
+import ErrorView from '../../common/components/ErrorView';
+import { ColumnLayout, RowLayout } from '../../common/components/Layouts';
+import LoadingView from '../../common/components/LoadingView';
+import { Stretch } from '../../common/components/Stretch';
+import Toolbar from '../../common/components/Toolbar';
+import { displayDatetime } from '../../common/libs/DateLibs';
+import { ColorSchema } from '../../common/ui/ColorSchema';
+import { ImageAssets } from '../../common/ui/ImageAsets';
+import { LabelTheme } from '../../common/ui/Themes';
+import { measureWeightStringId, PreferencesData } from '../../preferences/PreferencesModel';
+import {
+  bodyFatMass,
+  freeFatMassIndex,
+  MeasuresData,
+} from '../model/MeassuresModel';
+import { methodStringId } from '../model/MeasureMethod';
 import {
   GoNewMeasure,
   GoViewMeasure,

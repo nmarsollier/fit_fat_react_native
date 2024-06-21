@@ -6,17 +6,17 @@ import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { Text, TextInput } from 'react-native-paper';
 
-import ErrorView from '@/common/components/ErrorView';
-import { ColumnLayout, RowLayout } from '@/common/components/Layouts';
-import LoadingView from '@/common/components/LoadingView';
-import { Stretch } from '@/common/components/Stretch';
-import Toolbar from '@/common/components/Toolbar';
-import { datetimeToString, displayDatetime, stringToDatetime } from '@/common/libs/DateLibs';
-import { ColorSchema } from '@/common/ui/ColorSchema';
-import { LabelTheme, MenuTextTheme } from '@/common/ui/Themes';
-import { MeasureMethod, methodStringId } from '@/measures/model/MeasureMethod';
-import { InputType, unitTypeStringId } from '@/measures/model/MeasureValues';
 import { useRouter } from 'expo-router';
+import ErrorView from '../../common/components/ErrorView';
+import { ColumnLayout, RowLayout } from '../../common/components/Layouts';
+import LoadingView from '../../common/components/LoadingView';
+import { Stretch } from '../../common/components/Stretch';
+import Toolbar from '../../common/components/Toolbar';
+import { datetimeToString, displayDatetime, stringToDatetime } from '../../common/libs/DateLibs';
+import { ColorSchema } from '../../common/ui/ColorSchema';
+import { LabelTheme, MenuTextTheme } from '../../common/ui/Themes';
+import { MeasureMethod, methodStringId } from '../model/MeasureMethod';
+import { InputType, unitTypeStringId } from '../model/MeasureValues';
 import {
   EditMeasureReducer,
   EditMeasureState,

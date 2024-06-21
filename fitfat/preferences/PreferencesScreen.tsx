@@ -4,16 +4,16 @@ import { ScrollView, TouchableOpacity } from 'react-native';
 import { Text, TextInput } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { LabeledRadioButton } from '@/common/components/LabeledRadioButton';
-import { ColumnLayout, RowLayout } from '@/common/components/Layouts';
-import LoadingView from '@/common/components/LoadingView';
-import { Stretch } from '@/common/components/Stretch';
-import Toolbar from '@/common/components/Toolbar';
-import { dateToString, displayDate, stringToDate } from '@/common/libs/DateLibs';
-import { ColorSchema } from '@/common/ui/ColorSchema';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import { useFocusEffect } from 'expo-router';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { LabeledRadioButton } from '../common/components/LabeledRadioButton';
+import { ColumnLayout, RowLayout } from '../common/components/Layouts';
+import LoadingView from '../common/components/LoadingView';
+import { Stretch } from '../common/components/Stretch';
+import Toolbar from '../common/components/Toolbar';
+import { dateToString, displayDate, stringToDate } from '../common/libs/DateLibs';
+import { ColorSchema } from '../common/ui/ColorSchema';
 import {
   measureHeightStringId,
   MeasureType,

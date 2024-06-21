@@ -1,7 +1,7 @@
 import { CallbackWithResult } from '@react-native-async-storage/async-storage/lib/typescript/types';
 import configureStore from 'redux-mock-store';
 import { thunk } from 'redux-thunk';
-import { MeasureType, Sex } from '../app/preferences/PreferencesModel';
+import { MeasureType, Sex } from '../fitfat/preferences/PreferencesModel';
 import {
   loadPreferences,
   preferencesReducer,
@@ -12,7 +12,7 @@ import {
   updateMeasureSystem,
   updateSex,
   updateWeight
-} from '../app/preferences/PreferencesState';
+} from '../fitfat/preferences/PreferencesState';
 
 const middlewares = [thunk]
 

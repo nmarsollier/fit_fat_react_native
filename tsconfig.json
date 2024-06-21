@@ -15,7 +15,7 @@
     "skipLibCheck": true,
     "paths": {
       "@/*": [
-        "./app/*"
+        "./fitfat/*"
       ],
       "@assets/*": [
         "./assets/*"

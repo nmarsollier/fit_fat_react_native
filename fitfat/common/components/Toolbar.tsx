@@ -1,9 +1,9 @@
-import { ColorSchema } from '@/common/ui/ColorSchema';
-import { ImageAssets } from '@/common/ui/ImageAsets';
 import { useRouter } from 'expo-router';
 import * as React from 'react';
 import { PropsWithChildren } from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
+import { ColorSchema } from '../ui/ColorSchema';
+import { ImageAssets } from '../ui/ImageAsets';
 
 export default function Toolbar({ children }: PropsWithChildren<object>) {
   const router = useRouter();
