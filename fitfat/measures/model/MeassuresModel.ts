@@ -85,6 +85,7 @@ export function updateMeasureValue({ measure, measureValue, value: value }: {
   measureValue: Readonly<MeasureValue>,
   value: number,
 }): MeasuresData {
+  console.log(`updateMeasureValue ${measure} ${measureValue} ${value}`)
   const result = { ...measure }
   switch (measureValue) {
     case BodyWeight: {
@@ -136,8 +137,10 @@ export function updateMeasureValue({ measure, measureValue, value: value }: {
       break;
     }
   }
-  result.fatPercent =
-    Math.round(calculateFatPercent(measure) * 100) / 100;
+  if (measureValue != BodyFat) {
+    result.fatPercent =
+      Math.round(calculateFatPercent(measure) * 100) / 100;
+  }
 
   return result
 }
