@@ -6,9 +6,7 @@ import tseslint from 'typescript-eslint';
 
 export default [
   {
-    ignores: [
-      '.*/*'
-    ],
+    ignores: ['.*/*'],
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
@@ -20,16 +18,13 @@ export default [
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/brace-style': ['error', '1tbs', { allowSingleLine: true }],
-      'quotes': [
-        'error',
-        'single'
-      ],
-      'indent': ['error', 2, { 'SwitchCase': 1 }],
+      '@typescript-eslint/no-var-requires': 0,
+      quotes: ['error', 'single'],
     },
   },
   {
     languageOptions: {
-      globals: globals.browser
-    }
+      globals: globals.browser,
+    },
   },
 ];

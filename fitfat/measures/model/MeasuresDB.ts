@@ -1,8 +1,7 @@
-import * as SQLite from 'expo-sqlite';
-
+import * as SQLite from 'expo-sqlite'
 
 export async function initializeMeasuresDatabase() {
-  const db = await SQLite.openDatabaseAsync('measures');
+  const db = await SQLite.openDatabaseAsync('measures')
 
   await db.execAsync(
     `
@@ -28,6 +27,5 @@ export async function initializeMeasuresDatabase() {
       fatPercent REAL
     );
     `
-  );
+  )
 }
-

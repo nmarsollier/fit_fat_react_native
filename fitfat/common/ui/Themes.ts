@@ -4,8 +4,8 @@
  *
  * @format
  */
-import { DefaultTheme } from 'react-native-paper';
-import { ColorSchema } from './ColorSchema';
+import { DefaultTheme } from 'react-native-paper'
+import { ColorSchema } from './ColorSchema'
 
 export const AppTheme = {
   ...DefaultTheme,
@@ -13,26 +13,26 @@ export const AppTheme = {
     ...DefaultTheme.colors,
     surface: ColorSchema.secondary,
     surfaceDisabled: ColorSchema.secondary,
-    onSurfaceVariant: ColorSchema.primary,
-    inverseSurface: ColorSchema.primary,
-    inverseOnSurface: ColorSchema.primary,
+    onSurfaceVariant: ColorSchema.surface,
+    inverseSurface: ColorSchema.surface,
+    inverseOnSurface: ColorSchema.surface,
     surfaceVariant: ColorSchema.secondary,
-    onSurface: ColorSchema.primaryVariant,
+    onSurface: ColorSchema.primary
   }
-};
+}
 
 export const LabelTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    onSurface: ColorSchema.primary,
-  },
-};
+    onSurface: ColorSchema.surface
+  }
+}
 
 export const MenuTextTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    onSurface: ColorSchema.onPrimary,
-  },
-};
+    onSurface: ColorSchema.onPrimary
+  }
+}

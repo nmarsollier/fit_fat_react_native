@@ -1,6 +1,6 @@
-import { Stack } from 'expo-router';
-import * as React from 'react';
-import { Text } from 'react-native';
+import { Stack } from 'expo-router'
+import * as React from 'react'
+import { Text } from 'react-native'
 
 export default function NotFoundScreen() {
   return (
@@ -9,5 +9,5 @@ export default function NotFoundScreen() {
 
       <Text> Go to home screen!</Text>
     </>
-  );
+  )
 }

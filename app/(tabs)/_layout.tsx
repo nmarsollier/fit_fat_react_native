@@ -1,16 +1,16 @@
-import { Tabs } from 'expo-router';
-import * as React from 'react';
-import { Image } from 'react-native';
-import { ColorSchema } from '../../fitfat/common/ui/ColorSchema';
-import { ImageAssets } from '../../fitfat/common/ui/ImageAsets';
+import { Tabs } from 'expo-router'
+import * as React from 'react'
+import { Image } from 'react-native'
+import { ImageAssets } from '../../assets/img/ImageAsets'
+import { ColorSchema } from '../../fitfat/common/ui/ColorSchema'
 
 export default function TabLayout() {
   return (
     <Tabs
-      initialRouteName='index'
+      initialRouteName="index"
       screenOptions={{
         tabBarActiveTintColor: ColorSchema.onSecondary,
-        headerShown: false,
+        headerShown: false
       }}>
       <Tabs.Screen
         name="options"
@@ -22,7 +22,7 @@ export default function TabLayout() {
               style={{ height: 24, width: 24 }}
               tintColor={color}
             />
-          ),
+          )
         }}
       />
       <Tabs.Screen
@@ -30,12 +30,8 @@ export default function TabLayout() {
         options={{
           title: 'Measures',
           tabBarIcon: ({ color }) => (
-            <Image
-              source={ImageAssets.home}
-              style={{ height: 24, width: 24 }}
-              tintColor={color}
-            />
-          ),
+            <Image source={ImageAssets.home} style={{ height: 24, width: 24 }} tintColor={color} />
+          )
         }}
       />
       <Tabs.Screen
@@ -43,14 +39,10 @@ export default function TabLayout() {
         options={{
           title: 'Stats',
           tabBarIcon: ({ color }) => (
-            <Image
-              source={ImageAssets.stats}
-              style={{ height: 24, width: 24 }}
-              tintColor={color}
-            />
-          ),
+            <Image source={ImageAssets.stats} style={{ height: 24, width: 24 }} tintColor={color} />
+          )
         }}
       />
     </Tabs>
-  );
+  )
 }

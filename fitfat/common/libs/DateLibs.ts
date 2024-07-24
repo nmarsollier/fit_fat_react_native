@@ -1,37 +1,37 @@
-import moment from 'moment';
+import moment from 'moment'
 
 export function stringToDate(dateValue: string): Date {
   if (dateValue.length <= 0) {
-    return new Date();
+    return new Date()
   }
-  return moment(dateValue, 'YYYY-MM-DD').toDate();
+  return moment(dateValue, 'YYYY-MM-DD').toDate()
 }
 
 export function stringToDatetime(dateValue: string): Date {
   if (dateValue.length <= 0) {
-    return new Date();
+    return new Date()
   }
-  return moment(dateValue, 'YYYY-MM-DD hh:mm:ss').toDate();
+  return moment(dateValue, 'YYYY-MM-DD hh:mm:ss').toDate()
 }
 
 export function displayDate(dateValue: string): string {
   if (dateValue.length <= 0) {
-    return '';
+    return ''
   }
-  return moment(dateValue, 'YYYY-MM-DD').format('L');
+  return moment(dateValue, 'YYYY-MM-DD').format('L')
 }
 
 export function displayDatetime(dateValue: string): string {
   if (dateValue.length <= 0) {
-    return '';
+    return ''
   }
-  return moment(dateValue, 'YYYY-MM-DD hh:mm:ss').format('LL hh:mm');
+  return moment(dateValue, 'YYYY-MM-DD hh:mm:ss').format('LL hh:mm')
 }
 
 export function dateToString(date: Readonly<Date>): string {
-  return moment(date).format('YYYY-MM-DD');
+  return moment(date).format('YYYY-MM-DD')
 }
 
 export function datetimeToString(date: Readonly<Date>): string {
-  return moment(date).format('YYYY-MM-DD hh:mm:ss');
+  return moment(date).format('YYYY-MM-DD hh:mm:ss')
 }

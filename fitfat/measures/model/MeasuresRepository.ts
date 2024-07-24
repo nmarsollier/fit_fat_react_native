@@ -1,10 +1,10 @@
-import * as SQLite from 'expo-sqlite';
-import { MeasuresData } from './MeassuresModel';
+import * as SQLite from 'expo-sqlite'
+import { MeasuresData } from './MeassuresModel'
 
 let db: SQLite.SQLiteDatabase | undefined
 
 export async function initializeMeasuresDatabase() {
-  db = await SQLite.openDatabaseAsync('measures');
+  db = await SQLite.openDatabaseAsync('measures')
 
   await db.execAsync(
     `
@@ -30,51 +30,54 @@ export async function initializeMeasuresDatabase() {
       fatPercent REAL
     );
     `
-  );
+  )
 }
 
 export async function storeMeasure(measure: Readonly<MeasuresData>) {
   try {
     if (!db) return
 
-    await db.runAsync(`INSERT INTO measures (
+    await db.runAsync(
+      `INSERT INTO measures (
       id, date, bodyWeight, bodyHeight, age, sex, measureMethod, chest, abdominal, thigh, 
       triceps, subscapular, suprailiac, midaxillary, bicep, lowerBack, calf, fatPercent
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    measure.id,
-    measure.date,
-    measure.bodyWeight,
-    measure.bodyHeight,
-    measure.age,
-    measure.sex,
-    measure.measureMethod,
-    measure.chest,
-    measure.abdominal,
-    measure.thigh,
-    measure.triceps,
-    measure.subscapular,
-    measure.suprailiac,
-    measure.midaxillary,
-    measure.bicep,
-    measure.lowerBack,
-    measure.calf,
-    measure.fatPercent);
+      measure.id,
+      measure.date,
+      measure.bodyWeight,
+      measure.bodyHeight,
+      measure.age,
+      measure.sex,
+      measure.measureMethod,
+      measure.chest,
+      measure.abdominal,
+      measure.thigh,
+      measure.triceps,
+      measure.subscapular,
+      measure.suprailiac,
+      measure.midaxillary,
+      measure.bicep,
+      measure.lowerBack,
+      measure.calf,
+      measure.fatPercent
+    )
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
 }
 
-export async function findMeasure(
-  measureId: string,
-): Promise<MeasuresData | undefined> {
+export async function findMeasure(measureId: string): Promise<MeasuresData | undefined> {
   try {
     if (!db) return
 
-    const result = await db.getFirstAsync<MeasuresData>('SELECT * FROM measures WHERE id = ?', measureId);
-    return result || undefined;
+    const result = await db.getFirstAsync<MeasuresData>(
+      'SELECT * FROM measures WHERE id = ?',
+      measureId
+    )
+    return result || undefined
   } catch (e) {
-    console.log(e);
-    return undefined;
+    console.log(e)
+    return undefined
   }
 }
 
@@ -82,11 +85,11 @@ export async function findLastMeasure(): Promise<MeasuresData | undefined> {
   try {
     if (!db) return
 
-    const result = await db.getFirstAsync<MeasuresData>('SELECT * FROM measures ORDER BY date DESC');
-    return result || undefined;
+    const result = await db.getFirstAsync<MeasuresData>('SELECT * FROM measures ORDER BY date DESC')
+    return result || undefined
   } catch (e) {
-    console.log(e);
-    return undefined;
+    console.log(e)
+    return undefined
   }
 }
 
@@ -94,10 +97,10 @@ export async function findMeasures(): Promise<MeasuresData[]> {
   try {
     if (!db) return []
 
-    const result = await db.getAllAsync<MeasuresData>('SELECT * FROM measures ORDER BY date DESC');
-    return result || [];
+    const result = await db.getAllAsync<MeasuresData>('SELECT * FROM measures ORDER BY date DESC')
+    return result || []
   } catch (e) {
-    console.log(e);
-    return [];
+    console.log(e)
+    return []
   }
 }

@@ -1,64 +1,58 @@
-export interface StringResource {
-  appName: string,
-  fmmi: string,
-  freeFatMass: string,
-  googleError: string,
+import { useIntl } from 'react-intl'
 
-  homeMeasureTitle: string,
-  homeMenuMain: string,
-  homeMenuOptions: string,
-  homeMenuProgress: string,
-  homeOptionsTitle: string,
-  homeProgressTitle: string,
+export type StringResourceType =
+  | 'appName'
+  | 'fmmi'
+  | 'freeFatMass'
+  | 'googleError'
+  | 'homeMeasureTitle'
+  | 'homeMenuMain'
+  | 'homeMenuOptions'
+  | 'homeMenuProgress'
+  | 'homeOptionsTitle'
+  | 'homeProgressTitle'
+  | 'measureAbdominal'
+  | 'measureBicep'
+  | 'measureCalf'
+  | 'measureChest'
+  | 'measureFat'
+  | 'measureLowerBack'
+  | 'measureMethodManualScale'
+  | 'measureMethodDurninWomersley'
+  | 'measureMethodJacksonPollock3'
+  | 'measureMethodJacksonPollock4'
+  | 'measureMethodJacksonPollock7'
+  | 'measureMethodParrillo'
+  | 'measureMethodWeight'
+  | 'measureMidaxillary'
+  | 'measureSubscapular'
+  | 'measureSuprailiac'
+  | 'measureThigh'
+  | 'measureTricep'
+  | 'measureWeight'
+  | 'newMeasureDate'
+  | 'newMeasureError'
+  | 'newMeasureTitle'
+  | 'optionsBirthDate'
+  | 'optionsDisplayName'
+  | 'optionsHeight'
+  | 'optionsSex'
+  | 'optionsSexFemale'
+  | 'optionsSexMale'
+  | 'optionsSystemOfMeasurement'
+  | 'optionsSystemOfMeasurementMetric'
+  | 'optionsSystemOfMeasurementImperial'
+  | 'optionsWeight'
+  | 'saveDialogTitle'
+  | 'saveMyDataInCloud'
+  | 'unitCm'
+  | 'unitIn'
+  | 'unitKg'
+  | 'unitLb'
+  | 'unitMm'
+  | 'unitPercent'
 
-  measureAbdominal: string,
-  measureBicep: string,
-  measureCalf: string,
-  measureChest: string,
-  measureFat: string,
-  measureLowerBack: string,
-  measureMethodManualScale: string,
-  measureMethodDurninWomersley: string,
-  measureMethodJacksonPollock3: string,
-  measureMethodJacksonPollock4: string,
-  measureMethodJacksonPollock7: string,
-  measureMethodParrillo: string,
-  measureMethodWeight: string,
-  measureMidaxillary: string,
-  measureSubscapular: string,
-  measureSuprailiac: string,
-  measureThigh: string,
-  measureTricep: string,
-  measureWeight: string,
-
-  newMeasureDate: string,
-  newMeasureError: string,
-  newMeasureTitle: string,
-
-  optionsBirthDate: string,
-  optionsDisplayName: string,
-  optionsHeight: string,
-  optionsSex: string,
-  optionsSexFemale: string,
-  optionsSexMale: string,
-  optionsSystemOfMeasurement: string,
-  optionsSystemOfMeasurementMetric: string,
-  optionsSystemOfMeasurementImperial: string,
-  optionsWeight: string,
-
-  saveDialogTitle: string,
-  saveMyDataInCloud: string,
-
-  unitCm: string,
-  unitIn: string,
-  unitKg: string,
-  unitLb: string,
-  unitMm: string,
-  unitPercent: string,
-}
-
-
-export const messages = new Map<string, Record<string, string>>([
+export const messages = new Map<string, Record<StringResourceType, string>>([
   [
     'en',
     {
@@ -117,8 +111,8 @@ export const messages = new Map<string, Record<string, string>>([
       unitKg: 'kg',
       unitLb: 'lb',
       unitMm: 'mm',
-      unitPercent: '%',
-    },
+      unitPercent: '%'
+    }
   ],
   [
     'es',
@@ -176,7 +170,17 @@ export const messages = new Map<string, Record<string, string>>([
       unitKg: 'kg',
       unitLb: 'lb',
       unitMm: 'mm',
-      unitPercent: '%',
-    },
-  ],
-]);
+      unitPercent: '%'
+    }
+  ]
+])
+
+export function useI18n() {
+  const intl = useIntl()
+
+  return {
+    formatMessage: (res: StringResourceType) => {
+      return intl.formatMessage({ id: res })
+    }
+  }
+}

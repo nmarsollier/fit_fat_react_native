@@ -1,55 +1,57 @@
+import { StringResourceType } from '@/common/i18n/Internationalization'
+
 export interface PreferencesData {
-  id: string;
-  displayName: string;
-  birthDate: string;
-  weight: number;
-  height: number;
-  sex: Sex;
-  measureSystem: MeasureType;
+  id: string
+  displayName: string
+  birthDate: string
+  weight: number
+  height: number
+  sex: Sex
+  measureSystem: MeasureType
 }
 
 export enum Sex {
   MALE = 'MALE',
-  FEMALE = 'FEMALE',
+  FEMALE = 'FEMALE'
 }
 
 export enum MeasureType {
   METRIC = 'METRIC',
-  IMPERIAL = 'IMPERIAL',
+  IMPERIAL = 'IMPERIAL'
 }
 
-export function measureWeightStringId(measureType?: MeasureType) {
+export function measureWeightStringId(measureType?: MeasureType): StringResourceType {
   switch (measureType) {
     case MeasureType.IMPERIAL:
-      return 'unitLb';
+      return 'unitLb'
     default:
-      return 'unitKg';
+      return 'unitKg'
   }
 }
 
-export function measureHeightStringId(measureType: MeasureType) {
+export function measureHeightStringId(measureType: MeasureType): StringResourceType {
   switch (measureType) {
     case MeasureType.IMPERIAL:
-      return 'unitIn';
+      return 'unitIn'
     default:
-      return 'unitCm';
+      return 'unitCm'
   }
 }
 
-export function measureTypeStringId(measureType: MeasureType) {
+export function measureTypeStringId(measureType: MeasureType): StringResourceType {
   switch (measureType) {
     case MeasureType.IMPERIAL:
-      return 'optionsSystemOfMeasurementImperial';
+      return 'optionsSystemOfMeasurementImperial'
     default:
-      return 'optionsSystemOfMeasurementMetric';
+      return 'optionsSystemOfMeasurementMetric'
   }
 }
 
-export function sexStringId(sex: Sex) {
+export function sexStringId(sex: Sex): StringResourceType {
   switch (sex) {
     case Sex.FEMALE:
-      return 'optionsSexFemale';
+      return 'optionsSexFemale'
     default:
-      return 'optionsSexMale';
+      return 'optionsSexMale'
   }
 }

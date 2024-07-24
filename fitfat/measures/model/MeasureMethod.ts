@@ -1,3 +1,4 @@
+import { StringResourceType } from '@/common/i18n/Internationalization'
 
 export enum MeasureMethod {
   JACKSON_POLLOCK_7 = 'JACKSON_POLLOCK_7',
@@ -6,26 +7,26 @@ export enum MeasureMethod {
   PARRILLO = 'PARRILLO',
   DURNIN_WOMERSLEY = 'DURNIN_WOMERSLEY',
   FROM_SCALE = 'FROM_SCALE',
-  WEIGHT_ONLY = 'WEIGHT_ONLY',
+  WEIGHT_ONLY = 'WEIGHT_ONLY'
 }
 
-export function methodStringId(method?: Readonly<MeasureMethod>): string {
+export function methodStringId(method?: Readonly<MeasureMethod>): StringResourceType {
   switch (method) {
     case MeasureMethod.JACKSON_POLLOCK_7:
-      return 'measureMethodJacksonPollock7';
+      return 'measureMethodJacksonPollock7'
     case MeasureMethod.JACKSON_POLLOCK_3:
-      return 'measureMethodJacksonPollock3';
+      return 'measureMethodJacksonPollock3'
     case MeasureMethod.JACKSON_POLLOCK_4:
-      return 'measureMethodJacksonPollock4';
+      return 'measureMethodJacksonPollock4'
     case MeasureMethod.PARRILLO:
-      return 'measureMethodParrillo';
+      return 'measureMethodParrillo'
     case MeasureMethod.DURNIN_WOMERSLEY:
-      return 'measureMethodDurninWomersley';
+      return 'measureMethodDurninWomersley'
     case MeasureMethod.FROM_SCALE:
-      return 'measureMethodManualScale';
+      return 'measureMethodManualScale'
     case MeasureMethod.WEIGHT_ONLY:
-      return 'measureMethodWeight';
+      return 'measureMethodWeight'
     default:
-      return 'measureMethodWeight';
+      return 'measureMethodWeight'
   }
 }

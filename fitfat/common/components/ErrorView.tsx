@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { ColorSchema } from '../ui/ColorSchema';
+import * as React from 'react'
+import { Text, View } from 'react-native'
+import { ColorSchema } from '../ui/ColorSchema'
 
 export default function ErrorView({ text }: { text: string }) {
   return (
@@ -8,9 +8,9 @@ export default function ErrorView({ text }: { text: string }) {
       style={{
         flex: 1,
         backgroundColor: ColorSchema.secondary,
-        justifyContent: 'center',
+        justifyContent: 'center'
       }}>
       <Text>{text}</Text>
     </View>
-  );
+  )
 }

@@ -1,17 +1,24 @@
-import * as React from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
-import { RadioButton, Text } from 'react-native-paper';
-import { ColorSchema } from '../ui/ColorSchema';
-import { LabelTheme } from '../ui/Themes';
-import { ColumnLayout, RowLayout } from './Layouts';
+import * as React from 'react'
+import { StyleProp, ViewStyle } from 'react-native'
+import { RadioButton, Text } from 'react-native-paper'
+import { ColorSchema } from '../ui/ColorSchema'
+import { LabelTheme } from '../ui/Themes'
+import { ColumnLayout, RowLayout } from './Layouts'
 
-export function LabeledRadioButton({ label, selected, options, labels, style, onChange }: {
-  label: string;
-  selected: string;
-  options: string[];
-  labels: string[];
-  style?: StyleProp<ViewStyle>;
-  onChange: (newValue: string) => void;
+export function LabeledRadioButton({
+  label,
+  selected,
+  options,
+  labels,
+  style,
+  onChange
+}: {
+  label: string
+  selected: string
+  options: string[]
+  labels: string[]
+  style?: StyleProp<ViewStyle>
+  onChange: (newValue: string) => void
 }) {
   return (
     <ColumnLayout style={style}>
@@ -19,19 +26,17 @@ export function LabeledRadioButton({ label, selected, options, labels, style, on
         {label}
       </Text>
 
-      <RadioButton.Group
-        onValueChange={newValue => onChange(newValue)}
-        value={selected}>
+      <RadioButton.Group onValueChange={(newValue) => onChange(newValue)} value={selected}>
         <RowLayout
           style={{
-            paddingStart: 16,
+            paddingStart: 16
           }}>
           {options.map((_, index) => {
             return (
               <RowLayout key={index}>
                 <Text
                   style={{
-                    alignSelf: 'center',
+                    alignSelf: 'center'
                   }}>
                   {labels[index]}
                 </Text>
@@ -42,10 +47,10 @@ export function LabeledRadioButton({ label, selected, options, labels, style, on
                   value={options[index]}
                 />
               </RowLayout>
-            );
+            )
           })}
         </RowLayout>
       </RadioButton.Group>
     </ColumnLayout>
-  );
+  )
 }

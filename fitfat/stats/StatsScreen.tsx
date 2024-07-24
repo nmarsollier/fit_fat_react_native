@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { ColorSchema } from '../common/ui/ColorSchema';
+import * as React from 'react'
+import { Text, View } from 'react-native'
+import { ColorSchema } from '../common/ui/ColorSchema'
 
 export default function StatsScreen() {
   return (
@@ -8,9 +8,9 @@ export default function StatsScreen() {
       style={{
         flex: 1,
         backgroundColor: ColorSchema.secondary,
-        justifyContent: 'center',
+        justifyContent: 'center'
       }}>
       <Text>Stats</Text>
     </View>
-  );
+  )
 }
