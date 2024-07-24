@@ -42,7 +42,7 @@ export function MainScreen({ children }: React.PropsWithChildren) {
       <IntlProvider locale={locale} messages={messages.get(locale)} defaultLocale='en' >
         <PaperProvider theme={AppTheme}>
           <Provider store={appStore} >
-            <MainScreenContent children={children} />
+            <MainScreenContent>{children}</MainScreenContent>
           </Provider>
         </PaperProvider>
       </IntlProvider>

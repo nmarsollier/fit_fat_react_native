@@ -37,7 +37,7 @@ export default function MeasuresListScreen(
         if (event === GoNewMeasure) {
           router.navigate('/measures/')
         } else if (event instanceof GoViewMeasure) {
-          router.navigate(`/measures/{event.uuid}`)
+          router.navigate('/measures/{event.uuid}')
         }
       }),
     [state],

@@ -3,7 +3,7 @@ import * as React from 'react';
 import EditMeasureScreen from '../../fitfat/measures/edit/EditMeasureScreen';
 
 export default function Page() {
-  var { measureId } = useLocalSearchParams();
+  let { measureId } = useLocalSearchParams();
 
   if (measureId?.length == 0) {
     measureId = undefined
