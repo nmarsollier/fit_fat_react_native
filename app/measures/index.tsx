@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router'
 import * as React from 'react'
-import EditMeasureScreen from '../../fitfat/measures/edit/EditMeasureScreen'
+import EditMeasureScreen from '../../src/measures/edit/EditMeasureScreen'
 
 export default function Page() {
   return (

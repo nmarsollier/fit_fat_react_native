@@ -14,12 +14,8 @@
     "alwaysStrict": true,
     "skipLibCheck": true,
     "paths": {
-      "@/*": [
-        "./fitfat/*"
-      ],
-      "@assets/*": [
-        "./assets/*"
-      ]
+      "@/*": ["./*"],
+      "@assets/*": ["./assets/*"]
     }
   },
   "extends": "expo/tsconfig.base"

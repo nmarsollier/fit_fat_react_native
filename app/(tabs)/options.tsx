@@ -1,5 +1,5 @@
 import * as React from 'react'
-import PreferencesScreen from '../../fitfat/preferences/PreferencesScreen'
+import PreferencesScreen from '../../src/preferences/PreferencesScreen'
 
 export default function TabTwoScreen() {
   return <PreferencesScreen />

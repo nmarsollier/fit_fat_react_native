@@ -1,5 +1,5 @@
 import * as React from 'react'
-import MeasuresListScreen from '../../fitfat/measures/list/MeasuresListScreen'
+import MeasuresListScreen from '../../src/measures/list/MeasuresListScreen'
 
 export default function HomeScreen() {
   return <MeasuresListScreen />

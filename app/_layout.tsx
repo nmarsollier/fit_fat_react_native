@@ -1,7 +1,9 @@
+import { initI18next } from '@/src/localization/librarySetup'
+import { MainScreen } from '@/src/mainScreen/MainScreen'
 import { Stack } from 'expo-router'
 import * as React from 'react'
 
-import { MainScreen } from '../fitfat/mainScreen/MainScreen'
+void initI18next()
 
 export default function RootLayout() {
   return (

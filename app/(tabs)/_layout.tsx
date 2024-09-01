@@ -1,10 +1,12 @@
+import { ColorSchema } from '@/src/common/ui/ColorSchema'
+import { useLocalization } from '@/src/localization/useLocalization'
 import { Tabs } from 'expo-router'
 import * as React from 'react'
 import { Image } from 'react-native'
 import { ImageAssets } from '../../assets/img/ImageAsets'
-import { ColorSchema } from '../../fitfat/common/ui/ColorSchema'
 
 export default function TabLayout() {
+  const localize = useLocalization()
   return (
     <Tabs
       initialRouteName="index"
@@ -15,7 +17,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="options"
         options={{
-          title: 'Options',
+          title: localize('options'),
           tabBarIcon: ({ color }) => (
             <Image
               source={ImageAssets.settings}
@@ -28,7 +30,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Measures',
+          title: localize('measures'),
           tabBarIcon: ({ color }) => (
             <Image source={ImageAssets.home} style={{ height: 24, width: 24 }} tintColor={color} />
           )
@@ -37,7 +39,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="stats"
         options={{
-          title: 'Stats',
+          title: localize('stats'),
           tabBarIcon: ({ color }) => (
             <Image source={ImageAssets.stats} style={{ height: 24, width: 24 }} tintColor={color} />
           )

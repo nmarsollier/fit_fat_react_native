@@ -26,6 +26,18 @@
     ],
     "ios": {
       "bundleIdentifier": "com.nmarsollier.fitfat"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d27577cd-853a-4350-aca1-1d46bca012fc"
+      }
+    },
+    "runtimeVersion": "1.0.0",
+    "updates": {
+      "url": "https://u.expo.dev/d27577cd-853a-4350-aca1-1d46bca012fc"
     }
   }
 }
