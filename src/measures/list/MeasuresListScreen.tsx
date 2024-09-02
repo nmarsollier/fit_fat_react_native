@@ -1,19 +1,19 @@
+import { IcDelete, IcNew } from '@/assets/svg'
 import ErrorView from '@/src/common/components/ErrorView'
 import { ColumnLayout, RowLayout } from '@/src/common/components/Layouts'
 import LoadingView from '@/src/common/components/LoadingView'
 import { Stretch } from '@/src/common/components/Stretch'
 import Toolbar from '@/src/common/components/Toolbar'
-import { displayDatetime } from '@/src/common/libs/DateLibs'
+import { displayDateTime } from '@/src/common/libs/DateLibs'
 import { ColorSchema } from '@/src/common/ui/ColorSchema'
 import { LabelTheme } from '@/src/common/ui/Themes'
 import { useLocalization } from '@/src/localization/useLocalization'
 import { preferencesStore } from '@/src/preferences/PreferencesStore'
-import { router } from 'expo-router'
+import { router, useFocusEffect } from 'expo-router'
 import React, { useEffect } from 'react'
-import { FlatList, Image, TouchableOpacity, View } from 'react-native'
+import { FlatList, TouchableOpacity, View } from 'react-native'
 import { Swipeable } from 'react-native-gesture-handler'
 import { Divider, Text } from 'react-native-paper'
-import { ImageAssets } from '../../../assets/img/ImageAsets'
 import { measureWeightStringId, PreferencesData } from '../../preferences/PreferencesModel'
 import { bodyFatMass, freeFatMassIndex, MeasuresData } from '../model/MeassuresModel'
 import { methodStringId } from '../model/MeasureMethod'
@@ -46,6 +46,13 @@ export default function MeasuresListScreen() {
     void reducer.loadMeasures()
   }, [])
 
+  useFocusEffect(
+    React.useCallback(() => {
+      void reducer.loadMeasures()
+      return () => {}
+    }, [])
+  )
+
   if (!state || state.isLoading) {
     return <LoadingView />
   }
@@ -75,19 +82,13 @@ function MeasuresListDetails({
           reducer.deleteMeasure(id)
         }}
         style={{
-          backgroundColor: 'red',
+          backgroundColor: ColorSchema.background,
           justifyContent: 'center',
           alignItems: 'center',
           width: 80,
           height: '100%'
         }}>
-        <Text
-          style={{
-            color: 'white',
-            fontWeight: 'bold'
-          }}>
-          {localize('delete')}
-        </Text>
+        <IcDelete width={32} height={32} color={ColorSchema.error} />
       </TouchableOpacity>
     )
   }
@@ -95,7 +96,7 @@ function MeasuresListDetails({
   return (
     <ColumnLayout
       style={{
-        backgroundColor: ColorSchema.onPrimaryVariant
+        backgroundColor: ColorSchema.background
       }}>
       <Toolbar>
         <Text
@@ -112,11 +113,7 @@ function MeasuresListDetails({
           onPress={() => {
             reducer.openNewMeasure()
           }}>
-          <Image
-            source={ImageAssets.new}
-            style={{ height: 16, width: 16, marginEnd: 16 }}
-            tintColor={ColorSchema.secondary}
-          />
+          <IcNew width={24} height={24} color={ColorSchema.secondary} style={{ marginEnd: 16 }} />
         </TouchableOpacity>
       </Toolbar>
 
@@ -153,6 +150,7 @@ function MeasureCard({
       <ColumnLayout
         style={{
           backgroundColor: ColorSchema.secondary,
+          paddingHorizontal: 8,
           width: '100%'
         }}>
         <RowLayout
@@ -165,7 +163,7 @@ function MeasureCard({
               flex: 1,
               textAlign: 'center'
             }}>
-            {displayDatetime(data.date)}
+            {displayDateTime(data.date)}
           </Text>
 
           <Text
@@ -209,7 +207,7 @@ function MeasureCard({
               {data.fatPercent}
             </Text>
             <Text theme={LabelTheme} variant="bodyMedium">
-              %
+              {localize('unitPercent')}
             </Text>
           </View>
         </RowLayout>
@@ -231,7 +229,7 @@ function MeasureCard({
               {bodyFatMass(data).toFixed(2)}
             </Text>
             <Text theme={LabelTheme} variant="bodyMedium">
-              {localize(measureWeightStringId(preferences?.measureSystem))} :
+              {localize(measureWeightStringId(preferences?.measureSystem))}
             </Text>
           </View>
           <View

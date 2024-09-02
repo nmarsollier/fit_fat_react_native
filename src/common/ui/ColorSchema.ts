@@ -1,9 +1,11 @@
 export const ColorSchema = {
+  background: '#DDDDDD',
   primary: '#3746E6',
   onPrimary: '#FFFFFF',
-  onPrimaryVariant: '#DDDDDD',
+  onPrimaryVariant: '#AAAAAA',
   secondary: '#FFFFFF',
   onSecondary: '#5B68FF',
   secondaryVariant: '#AAAAAA',
-  surface: '#AAAAAA'
+  surface: '#AAAAAA',
+  error: 'red'
 }

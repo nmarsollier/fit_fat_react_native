@@ -7,6 +7,8 @@ export type StringResource =
   | 'googleError'
   | 'measures'
   | 'options'
+  | 'invalid'
+  | 'required'
   | 'saveDialogTitle'
   | 'saveMyDataInCloud'
   | 'stats'

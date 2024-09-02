@@ -7,7 +7,7 @@ export function stringToDate(dateValue: string): Date {
   return moment(dateValue, 'YYYY-MM-DD').toDate()
 }
 
-export function stringToDatetime(dateValue: string): Date {
+export function stringToDateTime(dateValue: string): Date {
   if (dateValue.length <= 0) {
     return new Date()
   }
@@ -21,17 +21,17 @@ export function displayDate(dateValue: string): string {
   return moment(dateValue, 'YYYY-MM-DD').format('L')
 }
 
-export function displayDatetime(dateValue: string): string {
+export function displayDateTime(dateValue: string): string {
   if (dateValue.length <= 0) {
     return ''
   }
-  return moment(dateValue, 'YYYY-MM-DD hh:mm:ss').format('LL hh:mm')
+  return moment(dateValue, 'YYYY-MM-DD hh:mm:ss').format('ll hh:mm')
 }
 
 export function dateToString(date: Readonly<Date>): string {
   return moment(date).format('YYYY-MM-DD')
 }
 
-export function datetimeToString(date: Readonly<Date>): string {
+export function dateTimeToString(date: Readonly<Date>): string {
   return moment(date).format('YYYY-MM-DD hh:mm:ss')
 }

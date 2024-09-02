@@ -13,7 +13,7 @@
     "**/.history": true,
     "**/android": true,
     "**/ios": true,
-    "**/.husky": true,
+    "**/.husky": false,
     "**/.bundle": true,
     "**/__tests__": true,
     "**/.idea": true

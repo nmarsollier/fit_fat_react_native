@@ -1,18 +1,19 @@
 import RNDateTimePicker from '@react-native-community/datetimepicker'
 import Slider from '@react-native-community/slider'
 import React, { useEffect, useState } from 'react'
-import { ScrollView, TouchableOpacity, View } from 'react-native'
+import { Platform, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Dropdown } from 'react-native-element-dropdown'
 import { Text, TextInput } from 'react-native-paper'
 
+import { IcCheck } from '@/assets/svg'
 import ErrorView from '@/src/common/components/ErrorView'
 import { ColumnLayout, RowLayout } from '@/src/common/components/Layouts'
 import LoadingView from '@/src/common/components/LoadingView'
 import { Stretch } from '@/src/common/components/Stretch'
 import Toolbar from '@/src/common/components/Toolbar'
-import { datetimeToString, displayDatetime, stringToDatetime } from '@/src/common/libs/DateLibs'
+import { dateTimeToString, displayDateTime, stringToDateTime } from '@/src/common/libs/DateLibs'
 import { ColorSchema } from '@/src/common/ui/ColorSchema'
-import { LabelTheme, MenuTextTheme } from '@/src/common/ui/Themes'
+import { LabelTheme } from '@/src/common/ui/Themes'
 import { useLocalization } from '@/src/localization/useLocalization'
 import { useRouter } from 'expo-router'
 import { MeasureMethod, methodStringId } from '../model/MeasureMethod'
@@ -61,6 +62,11 @@ function EditMeasureDetails({
   const [openDatePicker, setOpenDatePicker] = useState(false)
   const localize = useLocalization()
 
+  const handleOpenDatePicker = () => {
+    if (!state.isNew) return
+    setDatePickerMode('date')
+    setOpenDatePicker(true)
+  }
   return (
     <ColumnLayout
       style={{
@@ -82,9 +88,12 @@ function EditMeasureDetails({
             onPress={() => {
               reducer.save()
             }}>
-            <Text variant="bodyMedium" theme={MenuTextTheme} style={{ marginEnd: 24 }}>
-              {localize('saveDialogTitle')}
-            </Text>
+            <IcCheck
+              width={24}
+              height={24}
+              color={state.isSaveEnabled ? ColorSchema.onPrimary : ColorSchema.onPrimaryVariant}
+              style={{ marginEnd: 16 }}
+            />
           </TouchableOpacity>
         )}
       </Toolbar>
@@ -107,12 +116,7 @@ function EditMeasureDetails({
         </RowLayout>
 
         <RowLayout style={{ marginBottom: 16 }}>
-          <TouchableOpacity
-            disabled={!state.isNew}
-            onPress={() => {
-              setDatePickerMode('date')
-              setOpenDatePicker(true)
-            }}>
+          <TouchableOpacity onPress={() => setOpenDatePicker(true)}>
             <TextInput
               style={{
                 paddingHorizontal: 0,
@@ -120,7 +124,11 @@ function EditMeasureDetails({
               }}
               label={localize('newMeasureDate')}
               editable={false}
-              value={displayDatetime(state.measure.date)}
+              onPress={() => {
+                handleOpenDatePicker()
+              }}
+              error={state.errors.date !== undefined}
+              value={displayDateTime(state.measure.date)}
             />
           </TouchableOpacity>
 
@@ -140,7 +148,7 @@ function EditMeasureDetails({
             </Text>
 
             <Text theme={LabelTheme} variant="bodyMedium">
-              %
+              {localize('unitPercent')}
             </Text>
           </View>
         </RowLayout>
@@ -172,23 +180,37 @@ function EditMeasureDetails({
       </ScrollView>
 
       {openDatePicker && (
-        <RNDateTimePicker
-          value={stringToDatetime(state.measure.date)}
-          mode={datePickerMode}
-          onChange={(date) => {
-            if (date.type === 'set') {
-              reducer.updateMeasureDate(datetimeToString(new Date(date.nativeEvent.timestamp)))
+        <View
+          style={{
+            borderWidth: 2,
+            borderColor: ColorSchema.onPrimaryVariant,
+            backgroundColor: ColorSchema.secondary,
+            padding: 10,
+            margin: 16,
+            top: 100,
+            position: 'absolute',
+            alignSelf: 'center',
+            zIndex: 1000
+          }}>
+          <RNDateTimePicker
+            value={stringToDateTime(state.measure.date)}
+            mode={datePickerMode}
+            display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+            onChange={(date) => {
+              if (date.type === 'set') {
+                reducer.updateMeasureDate(dateTimeToString(new Date(date.nativeEvent.timestamp)))
 
-              if (datePickerMode === 'date') {
-                setDatePickerMode('time')
+                if (datePickerMode === 'date') {
+                  setDatePickerMode('time')
+                } else {
+                  setOpenDatePicker(false)
+                }
               } else {
                 setOpenDatePicker(false)
               }
-            } else {
-              setOpenDatePicker(false)
-            }
-          }}
-        />
+            }}
+          />
+        </View>
       )}
     </ColumnLayout>
   )

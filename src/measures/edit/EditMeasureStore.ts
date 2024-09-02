@@ -1,10 +1,11 @@
 import { OnStateEvent, useStateEvent } from '@/src/common/components/OnStateEvent'
-import { datetimeToString as dateTimeToString } from '@/src/common/libs/DateLibs'
+import { dateTimeToString } from '@/src/common/libs/DateLibs'
 import { uuid } from '@/src/common/libs/UUID'
+import { hasErrors, validatePartial } from '@/src/common/validation/validationTools'
+import { StringResource } from '@/src/localization/translations'
 import {
   currentMeasureValue,
   MeasuresData,
-  newMeasuresData,
   updateMeasureValue
 } from '@/src/measures/model/MeassuresModel'
 import { MeasureMethod } from '@/src/measures/model/MeasureMethod'
@@ -20,6 +21,8 @@ export interface EditMeasureState {
   isLoading: boolean
   measure: MeasuresData
   measureValues: MeasureValueData[]
+  errors: Record<string, StringResource | undefined>
+  isSaveEnabled: boolean
 }
 
 export interface MeasureValueData {
@@ -32,7 +35,10 @@ export interface MeasureValueData {
 // EVENTS
 export class GoBack {}
 
-// REDUCER
+/**
+ * EditMeasureReducer interface represents the reducer for editing measures.
+ * It provides methods for initializing, saving, and updating measure properties.
+ */
 export interface EditMeasureReducer {
   initialize: (measureId?: string) => void
   save: () => void
@@ -45,7 +51,9 @@ const initialState = {
   isNew: true,
   isError: false,
   isLoading: true,
-  measure: newMeasuresData(),
+  errors: {},
+  isSaveEnabled: false,
+  measure: new MeasuresData(),
   measureValues: []
 }
 
@@ -57,7 +65,7 @@ export function useEditMeasureStore() {
       state: EditMeasureState
       onEvent: OnStateEvent<GoBack>
       reducer: EditMeasureReducer
-    }>((set) => ({
+    }>((set, get) => ({
       state: initialState,
       onEvent: onEvent,
       reducer: {
@@ -67,11 +75,13 @@ export function useEditMeasureStore() {
             state.isLoading = true
             state.isNew = measureId === undefined
             state.isError = false
+            state.isSaveEnabled = false
+            state.errors = {}
             return { state }
           })
 
-          let measure = newMeasuresData()
-          console.log('measureId', measureId)
+          let measure = new MeasuresData()
+
           if (measureId) {
             try {
               const last = await findMeasure(measureId)
@@ -92,6 +102,7 @@ export function useEditMeasureStore() {
             }
           }
 
+          const err = validatePartial(MeasuresData, measure)
           set((s) => {
             const state = { ...s.state }
             state.isLoading = false
@@ -99,10 +110,29 @@ export function useEditMeasureStore() {
             state.isError = false
             state.measure = measure
             state.measureValues = fillValues(measure)
+            state.errors = err
+            state.isSaveEnabled = !hasErrors(err)
             return { state }
           })
         },
         save: () => {
+          const s = get()
+          if (!s.state.isSaveEnabled) {
+            return
+          }
+
+          const err = validatePartial(MeasuresData, s.state.measure)
+          if (hasErrors(err)) {
+            set((s) => {
+              const state = { ...s.state }
+              state.isLoading = false
+              state.errors = err
+              state.isSaveEnabled = !hasErrors(err)
+              return { state }
+            })
+            return
+          }
+
           set((s) => {
             const state = { ...s.state }
 
@@ -131,6 +161,10 @@ export function useEditMeasureStore() {
             const state = { ...s.state }
 
             state.measure.date = date
+
+            const err = validatePartial(MeasuresData, state.measure)
+            state.errors = err
+            state.isSaveEnabled = !hasErrors(err)
             return { state }
           })
         },
@@ -140,6 +174,10 @@ export function useEditMeasureStore() {
 
             state.measure.measureMethod = method
             state.measureValues = fillValues(s.state.measure)
+
+            const err = validatePartial(MeasuresData, state.measure)
+            state.errors = err
+            state.isSaveEnabled = !hasErrors(err)
             return { state }
           })
         },
@@ -163,12 +201,16 @@ export function useEditMeasureStore() {
             }
 
             state.measure = updateMeasureValue({
-              measure: s.state.measure,
+              measure: state.measure,
               measureValue: measureValue,
               value: assignValue
             })
 
-            state.measureValues = fillValues(s.state.measure)
+            state.measureValues = fillValues(state.measure)
+
+            const err = validatePartial(MeasuresData, state.measure)
+            state.errors = err
+            state.isSaveEnabled = !hasErrors(err)
 
             return { state }
           })

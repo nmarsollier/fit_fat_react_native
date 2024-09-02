@@ -16,7 +16,9 @@
     "paths": {
       "@/*": ["./*"],
       "@assets/*": ["./assets/*"]
-    }
+    },
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "extends": "expo/tsconfig.base"
 }

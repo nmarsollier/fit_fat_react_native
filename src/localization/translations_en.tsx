@@ -18,6 +18,8 @@ export const StringResourceEn: Record<StringResource, string> = {
   unitMm: 'mm',
   unitPercent: '%',
   delete: 'Delete',
+  invalid: 'Invalid',
+  required: 'Required',
 
   homeMeasureTitle: 'Measures',
   homeMenuMain: 'Measure',

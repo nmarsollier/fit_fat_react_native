@@ -1,5 +1,8 @@
-import { datetimeToString as dateTimeToString } from '@/src/common/libs/DateLibs'
+import { dateTimeToString } from '@/src/common/libs/DateLibs'
 import { uuid } from '@/src/common/libs/UUID'
+import { IsDateLowerThanCurrentDate } from '@/src/measures/model/IsDateLowerThanCurrentDate'
+import { IsValueRequired } from '@/src/measures/model/MeasureValueRequiredValidator'
+import { IsNotEmpty } from 'class-validator'
 import { Sex } from '../../preferences/PreferencesModel'
 import { MeasureMethod } from './MeasureMethod'
 import {
@@ -18,48 +21,57 @@ import {
   Triceps
 } from './MeasureValues'
 
-export interface MeasuresData {
-  id: string
-  date: string
-  bodyWeight: number
-  bodyHeight: number
-  age: number
-  sex: Sex
-  measureMethod: MeasureMethod
-  chest: number
-  abdominal: number
-  thigh: number
-  triceps: number
-  subscapular: number
-  suprailiac: number
-  midaxillary: number
-  bicep: number
-  lowerBack: number
-  calf: number
-  fatPercent: number
-}
+export class MeasuresData {
+  @IsNotEmpty()
+  id: string = uuid()
 
-export function newMeasuresData(): MeasuresData {
-  return {
-    id: uuid(),
-    date: dateTimeToString(new Date()),
-    bodyWeight: 0,
-    bodyHeight: 0,
-    age: 0,
-    sex: Sex.MALE,
-    measureMethod: MeasureMethod.FROM_SCALE,
-    chest: 0,
-    abdominal: 0,
-    thigh: 0,
-    triceps: 0,
-    subscapular: 0,
-    suprailiac: 0,
-    midaxillary: 0,
-    bicep: 0,
-    lowerBack: 0,
-    calf: 0,
-    fatPercent: 0
-  }
+  @IsNotEmpty()
+  @IsDateLowerThanCurrentDate()
+  date: string = dateTimeToString(new Date())
+
+  @IsValueRequired()
+  bodyWeight: number = 0
+
+  bodyHeight: number = 0
+
+  age: number = 0
+
+  sex: Sex = Sex.MALE
+
+  measureMethod: MeasureMethod = MeasureMethod.FROM_SCALE
+
+  @IsValueRequired()
+  chest: number = 0
+
+  @IsValueRequired()
+  abdominal: number = 0
+
+  @IsValueRequired()
+  thigh: number = 0
+
+  @IsValueRequired()
+  triceps: number = 0
+
+  @IsValueRequired()
+  subscapular: number = 0
+
+  @IsValueRequired()
+  suprailiac: number = 0
+
+  @IsValueRequired()
+  midaxillary: number = 0
+
+  @IsValueRequired()
+  bicep: number = 0
+
+  @IsValueRequired()
+  lowerBack: number = 0
+
+  @IsValueRequired()
+  calf: number = 0
+
+  @IsValueRequired()
+  fatPercent: number = 0
 }
 
 export function currentMeasureValue({

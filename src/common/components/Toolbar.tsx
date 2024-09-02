@@ -1,8 +1,9 @@
+import { IcBack } from '@/assets/svg'
 import { useRouter } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
 import * as React from 'react'
 import { PropsWithChildren } from 'react'
-import { Image, TouchableOpacity, View } from 'react-native'
-import { ImageAssets } from '../../../assets/img/ImageAsets'
+import { TouchableOpacity, View } from 'react-native'
 import { ColorSchema } from '../ui/ColorSchema'
 
 export default function Toolbar({ children }: PropsWithChildren<object>) {
@@ -18,16 +19,14 @@ export default function Toolbar({ children }: PropsWithChildren<object>) {
         height: 40,
         flexDirection: 'row'
       }}>
+      <StatusBar style="light" backgroundColor={ColorSchema.onSecondary} />
+
       {router.canGoBack() && (
         <TouchableOpacity
           onPress={() => {
             router.back()
           }}>
-          <Image
-            style={{ height: 24, width: 24, marginEnd: 10, marginBottom: 1 }}
-            source={ImageAssets.back}
-            tintColor={ColorSchema.secondary}
-          />
+          <IcBack width={24} height={24} style={{ marginEnd: 10 }} color={ColorSchema.secondary} />
         </TouchableOpacity>
       )}
       {children}

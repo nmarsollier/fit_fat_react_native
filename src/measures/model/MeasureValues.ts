@@ -1,4 +1,4 @@
-import { StringResourceType } from '@/common/i18n/Internationalization'
+import { StringResource } from '@/src/localization/translations'
 import { MeasureMethod } from './MeasureMethod'
 
 export enum InputType {
@@ -12,7 +12,7 @@ export enum UnitType {
   WIDTH = 'WIDTH'
 }
 
-export function unitTypeStringId(unitType: UnitType): StringResourceType {
+export function unitTypeStringId(unitType: UnitType): StringResource {
   switch (unitType) {
     case UnitType.PERCENT:
       return 'unitPercent'
@@ -25,7 +25,7 @@ export function unitTypeStringId(unitType: UnitType): StringResourceType {
 
 // Available Measure Values
 export interface MeasureValue {
-  title: StringResourceType
+  title: StringResource
   requiredFor: MeasureMethod[]
   maxScale: number
   inputType: InputType

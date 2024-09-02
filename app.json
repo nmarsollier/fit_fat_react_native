@@ -2,15 +2,19 @@
   "expo": {
     "name": "FitFat",
     "displayName": "FitFat",
+    "androidStatusBar": {
+      "backgroundColor": "#5B68FF",
+      "barStyle": "light-content"
+    },
     "splash": {
       "image": "./assets/img/splash.png",
       "icon": "./assets/img/launcher.png",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#5B68FF"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/img/launcher.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#5B68FF"
       },
       "package": "com.nmarsollier.fitfat"
     },
@@ -18,12 +22,7 @@
     "web": {
       "bundler": "metro"
     },
-    "plugins": [
-      "expo-localization",
-      [
-        "expo-router"
-      ]
-    ],
+    "plugins": ["expo-localization", ["expo-router"]],
     "ios": {
       "bundleIdentifier": "com.nmarsollier.fitfat"
     },

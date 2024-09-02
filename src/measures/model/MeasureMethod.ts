@@ -1,4 +1,4 @@
-import { StringResourceType } from '@/common/i18n/Internationalization'
+import { StringResource } from '@/src/localization/translations'
 
 export enum MeasureMethod {
   JACKSON_POLLOCK_7 = 'JACKSON_POLLOCK_7',
@@ -10,7 +10,7 @@ export enum MeasureMethod {
   WEIGHT_ONLY = 'WEIGHT_ONLY'
 }
 
-export function methodStringId(method?: Readonly<MeasureMethod>): StringResourceType {
+export function methodStringId(method?: Readonly<MeasureMethod>): StringResource {
   switch (method) {
     case MeasureMethod.JACKSON_POLLOCK_7:
       return 'measureMethodJacksonPollock7'

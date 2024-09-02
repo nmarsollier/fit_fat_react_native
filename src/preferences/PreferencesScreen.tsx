@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { ScrollView, TouchableOpacity } from 'react-native'
+import { Platform, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Text, TextInput } from 'react-native-paper'
 
 import RNDateTimePicker from '@react-native-community/datetimepicker'
@@ -99,6 +99,7 @@ function PreferencesContent({
             }}
             label={localize('optionsBirthDate')}
             editable={false}
+            onPress={() => setOpenDatePicker(true)}
             value={displayDate(userData.birthDate)}
           />
         </TouchableOpacity>
@@ -175,18 +176,32 @@ function PreferencesContent({
       </ColumnLayout>
 
       {openDatePicker && (
-        <RNDateTimePicker
-          value={stringToDate(userData.birthDate)}
-          mode="date"
-          onChange={(date) => {
-            setOpenDatePicker(false)
-            if (date.type === 'set') {
-              reducer.updatePartial({
-                birthDate: dateToString(new Date(date.nativeEvent.timestamp))
-              })
-            }
-          }}
-        />
+        <View
+          style={{
+            borderWidth: 2,
+            borderColor: ColorSchema.onPrimaryVariant,
+            backgroundColor: ColorSchema.secondary,
+            padding: 10,
+            margin: 16,
+            top: 100,
+            position: 'absolute',
+            alignSelf: 'center',
+            zIndex: 1000
+          }}>
+          <RNDateTimePicker
+            value={stringToDate(userData.birthDate)}
+            mode="date"
+            display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+            onChange={(date) => {
+              setOpenDatePicker(false)
+              if (date.type === 'set') {
+                reducer.updatePartial({
+                  birthDate: dateToString(new Date(date.nativeEvent.timestamp))
+                })
+              }
+            }}
+          />
+        </View>
       )}
     </ScrollView>
   )

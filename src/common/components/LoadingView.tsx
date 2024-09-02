@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar'
 import * as React from 'react'
 import { ActivityIndicator } from 'react-native'
 import { ColorSchema } from '../ui/ColorSchema'
@@ -10,6 +11,8 @@ export default function LoadingView() {
       style={{
         backgroundColor: ColorSchema.secondary
       }}>
+      <StatusBar style="light" backgroundColor={ColorSchema.onSecondary} />
+
       <ActivityIndicator size="large" style={{ flex: 1 }} />
 
       <Stretch />

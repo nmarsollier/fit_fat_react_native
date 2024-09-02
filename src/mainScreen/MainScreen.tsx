@@ -3,7 +3,6 @@ import * as React from 'react'
 import { useEffect } from 'react'
 
 import { preferencesStore } from '@/src/preferences/PreferencesStore'
-import { StatusBar } from 'expo-status-bar'
 import { View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { PaperProvider } from 'react-native-paper'
@@ -46,8 +45,6 @@ function MainScreenContent({ children }: React.PropsWithChildren) {
         backgroundColor: ColorScheme.onSecondary,
         paddingTop: insets.top
       }}>
-      <StatusBar style="light" backgroundColor={ColorScheme.onSecondary} />
-
       {children}
     </View>
   )
