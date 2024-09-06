@@ -1,5 +1,6 @@
 {
   "expo": {
+    "icon": "./assets/img/launcher.png",
     "name": "FitFat",
     "displayName": "FitFat",
     "androidStatusBar": {
@@ -24,6 +25,7 @@
     },
     "plugins": ["expo-localization", ["expo-router"]],
     "ios": {
+      "icon": "./assets/img/launcher.png",
       "bundleIdentifier": "com.nmarsollier.fitfat"
     },
     "extra": {
