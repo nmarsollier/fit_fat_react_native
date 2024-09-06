@@ -6,7 +6,8 @@
     "lint": "npx eslint --fix ./app ./src",
     "start": "npx expo start",
     "ios:build:dev": "eas build -e development:simulator -p ios --no-wait --local",
-    "android:build:dev": "eas build -e development -p android --no-wait --local"
+    "android:build:dev": "eas build -e development -p android --no-wait --local",
+    "tsc": "npx tsc --noEmit"
   },
   "dependencies": {
     "@expo/metro-runtime": "~3.2.3",

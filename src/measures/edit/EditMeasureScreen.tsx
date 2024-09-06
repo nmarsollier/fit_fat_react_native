@@ -23,22 +23,25 @@ import {
   EditMeasureState,
   GoBack,
   MeasureValueData,
+  onEditMeasureEvent,
   useEditMeasureStore
 } from './EditMeasureStore'
 
 export default function EditMeasureScreen({ measureId }: { measureId: string | undefined }) {
   const route = useRouter()
-  const { state, onEvent, reducer } = useEditMeasureStore()((state) => state)
+  const { state, reducer } = useEditMeasureStore()((state) => state)
 
   useEffect(() => {
     reducer.initialize(measureId)
   }, [measureId])
 
-  onEvent((event) => {
-    if (event === GoBack) {
-      route.back()
-    }
-  })
+  useEffect(() => {
+    onEditMeasureEvent((event) => {
+      if (event === GoBack) {
+        route.back()
+      }
+    })
+  }, [])
 
   if (!state || state.isLoading) {
     return <LoadingView />

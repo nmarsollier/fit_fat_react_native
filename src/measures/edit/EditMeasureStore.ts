@@ -1,4 +1,4 @@
-import { OnStateEvent, useStateEvent } from '@/src/common/components/OnStateEvent'
+import { newStateEventHandler } from '@/src/common/components/OnStateEvent'
 import { dateTimeToString } from '@/src/common/libs/DateLibs'
 import { uuid } from '@/src/common/libs/UUID'
 import { hasErrors, validatePartial } from '@/src/common/validation/validationTools'
@@ -57,17 +57,17 @@ const initialState = {
   measureValues: []
 }
 
-export function useEditMeasureStore() {
-  const [onEvent, emitEvent] = useStateEvent<GoBack>()
+const [onEvent, emitEvent] = newStateEventHandler<GoBack>()
 
+export { onEvent as onEditMeasureEvent }
+
+export function useEditMeasureStore() {
   const storeRef = useRef(
     create<{
       state: EditMeasureState
-      onEvent: OnStateEvent<GoBack>
       reducer: EditMeasureReducer
     }>((set, get) => ({
       state: initialState,
-      onEvent: onEvent,
       reducer: {
         initialize: async (measureId?: string) => {
           set((s) => {

@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { MeasuresData } from '../model/MeassuresModel'
 import { deleteMeasure, findMeasures } from '../model/MeasuresRepository'
 
-import { OnStateEvent, useStateEvent } from '@/src/common/components/OnStateEvent'
+import { newStateEventHandler } from '@/src/common/components/OnStateEvent'
 import { create } from 'zustand'
 
 export interface MeasuresListState {
@@ -24,13 +24,14 @@ export class GoViewMeasure {
   constructor(public uuid: string) {}
 }
 
-export function useMeasuresListSore() {
-  const [onEvent, emitEvent] = useStateEvent<GoNewMeasure | GoViewMeasure>()
+const [onEvent, emitEvent] = newStateEventHandler<GoNewMeasure | GoViewMeasure>()
 
+export { onEvent as onMeasureListEvent }
+
+export function useMeasuresListSore() {
   const storeRef = useRef(
     create<{
       state: MeasuresListState
-      onEvent: OnStateEvent<GoNewMeasure | GoViewMeasure>
       reducer: MeasuresListReducer
     }>((set, get) => ({
       state: {
@@ -38,7 +39,6 @@ export function useMeasuresListSore() {
         isLoading: true,
         measures: []
       },
-      onEvent: onEvent,
       reducer: {
         loadMeasures: async () => {
           set((s) => {

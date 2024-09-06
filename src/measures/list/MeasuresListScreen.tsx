@@ -2,7 +2,6 @@ import { IcDelete, IcNew } from '@/assets/svg'
 import ErrorView from '@/src/common/components/ErrorView'
 import { ColumnLayout, RowLayout } from '@/src/common/components/Layouts'
 import LoadingView from '@/src/common/components/LoadingView'
-import { Stretch } from '@/src/common/components/Stretch'
 import Toolbar from '@/src/common/components/Toolbar'
 import { displayDateTime } from '@/src/common/libs/DateLibs'
 import { ColorSchema } from '@/src/common/ui/ColorSchema'
@@ -13,7 +12,7 @@ import { router, useFocusEffect } from 'expo-router'
 import React, { useEffect } from 'react'
 import { FlatList, TouchableOpacity, View } from 'react-native'
 import { Swipeable } from 'react-native-gesture-handler'
-import { Divider, Text } from 'react-native-paper'
+import { Divider, FAB, Text } from 'react-native-paper'
 import { measureWeightStringId, PreferencesData } from '../../preferences/PreferencesModel'
 import { bodyFatMass, freeFatMassIndex, MeasuresData } from '../model/MeassuresModel'
 import { methodStringId } from '../model/MeasureMethod'
@@ -22,25 +21,24 @@ import {
   GoViewMeasure,
   MeasuresListReducer,
   MeasuresListState,
+  onMeasureListEvent,
   useMeasuresListSore
 } from './MeasuresListStore'
 
 export default function MeasuresListScreen() {
-  const { state, onEvent, reducer } = useMeasuresListSore()((state) => state)
+  const { state, reducer } = useMeasuresListSore()((state) => state)
   const preferences = preferencesStore((state) => state.state.preferences)
   const localize = useLocalization()
 
-  useEffect(
-    () =>
-      onEvent((event: any) => {
-        if (event instanceof GoNewMeasure) {
-          router.navigate('/measures/')
-        } else if (event instanceof GoViewMeasure) {
-          router.navigate(`/measures/${event.uuid}`)
-        }
-      }),
-    [onEvent]
-  )
+  useEffect(() => {
+    onMeasureListEvent((event: any) => {
+      if (event instanceof GoNewMeasure) {
+        router.navigate('/measures/')
+      } else if (event instanceof GoViewMeasure) {
+        router.navigate(`/measures/${event.uuid}`)
+      }
+    })
+  }, [])
 
   useEffect(() => {
     void reducer.loadMeasures()
@@ -106,15 +104,6 @@ function MeasuresListDetails({
           }}>
           {localize('homeMeasureTitle')}
         </Text>
-
-        <Stretch />
-
-        <TouchableOpacity
-          onPress={() => {
-            reducer.openNewMeasure()
-          }}>
-          <IcNew width={24} height={24} color={ColorSchema.secondary} style={{ marginEnd: 16 }} />
-        </TouchableOpacity>
       </Toolbar>
 
       <FlatList
@@ -127,6 +116,21 @@ function MeasuresListDetails({
             <MeasureCard data={item} preferences={preferences} reducer={reducer} />
           </Swipeable>
         )}
+      />
+
+      <FAB
+        style={{
+          position: 'absolute',
+          borderRadius: 28,
+          padding: 0,
+          right: 16,
+          bottom: 16,
+          backgroundColor: ColorSchema.onSecondary
+        }}
+        icon={({ size }) => <IcNew width={size} height={size} color={ColorSchema.secondary} />}
+        onPress={() => {
+          reducer.openNewMeasure()
+        }}
       />
     </ColumnLayout>
   )

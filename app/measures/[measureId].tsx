@@ -3,16 +3,17 @@ import * as React from 'react'
 import EditMeasureScreen from '../../src/measures/edit/EditMeasureScreen'
 
 export default function Page() {
-  let { measureId } = useLocalSearchParams()
+  const { measureId } = useLocalSearchParams()
 
-  if (measureId?.length == 0) {
-    measureId = undefined
+  let id: string | undefined = measureId?.toString()
+  if (id?.length == 0) {
+    id = undefined
   }
 
   return (
     <>
       <Stack.Screen options={{ headerShown: false }} />
-      <EditMeasureScreen measureId={measureId?.toString()} />
+      <EditMeasureScreen measureId={id} />
     </>
   )
 }
